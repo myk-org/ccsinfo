@@ -357,31 +357,6 @@ curl http://localhost:8080/stats
 curl http://localhost:8080/health
 ```
 
-## Docker
-
-Run ccsinfo using Docker Compose:
-
-```bash
-docker compose up
-```
-
-The container mounts `~/.claude` as read-only to access session data.
-
-**docker-compose.yml:**
-
-```yaml
-services:
-  ccsinfo:
-    build: .
-    ports:
-      - "8080:8080"
-    volumes:
-      - ~/.claude:/root/.claude:ro
-    environment:
-      - CCSESSIONCTL_LOG_LEVEL=INFO
-    restart: unless-stopped
-```
-
 ## Development
 
 ### Setup

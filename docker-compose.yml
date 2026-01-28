@@ -1,0 +1,10 @@
+services:
+  ccsinfo:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ~/.claude:/root/.claude:ro
+    environment:
+      - CCSESSIONCTL_LOG_LEVEL=INFO
+    restart: unless-stopped

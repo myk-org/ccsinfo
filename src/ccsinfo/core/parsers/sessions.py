@@ -282,6 +282,19 @@ def _get_active_session_ids() -> set[str]:
                 if environ_path.exists():
                     environ = environ_path.read_text()
                     active_ids.update(uuid_pattern.findall(environ))
+
+                # Check file descriptors for session UUIDs
+                fd_dir = Path(f"/proc/{pid}/fd")
+                if fd_dir.exists():
+                    for fd_link in fd_dir.iterdir():
+                        try:
+                            target = fd_link.resolve()
+                            target_str = str(target)
+                            # Look for ~/.claude/tasks/{UUID} or ~/.claude/projects/*/{UUID}.jsonl
+                            if ".claude/tasks/" in target_str or ".claude/projects/" in target_str:
+                                active_ids.update(uuid_pattern.findall(target_str))
+                        except (OSError, PermissionError):
+                            continue
             except (PermissionError, FileNotFoundError, OSError):
                 continue
 

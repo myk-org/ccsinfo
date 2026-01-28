@@ -357,6 +357,30 @@ curl http://localhost:8080/stats
 curl http://localhost:8080/health
 ```
 
+## Moltbot Skill
+
+A Moltbot skill is available for AI assistants to query Claude Code sessions remotely.
+
+**Install via ClawdHub:**
+
+```bash
+clawdhub install ccsinfo
+```
+
+**Skill page:** https://clawdhub.com/myakove/ccsinfo
+
+The skill allows AI assistants running in Moltbot to:
+- Query and analyze Claude Code session data via the ccsinfo REST API
+- View conversation history, tool calls, and tasks
+- Search sessions and track project statistics
+- Monitor active sessions and progress
+
+**Requirements:**
+- ccsinfo server running (see Server Mode above)
+- `CCSINFO_SERVER_URL` environment variable set to your server
+
+**Example usage:** Ask your Moltbot assistant: *"Show my active Claude Code sessions"* or *"What were the recent tasks in my main project?"*
+
 ## Development
 
 ### Setup

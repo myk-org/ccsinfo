@@ -14,25 +14,30 @@ A CLI and REST API for viewing and analyzing Claude Code session data.
 
 ## Installation
 
+### From PyPI
+
 ```bash
 # Install as a CLI tool
-uv tool install .
+uv tool install ccsinfo
+
+# With chart support (terminal charts)
+uv tool install ccsinfo[charts]
 ```
 
-### With Chart Support
+### From Source
 
 ```bash
-# Install with charts extras (for terminal charts)
-uv tool install ".[charts]"
+git clone https://github.com/myk-org/ccsinfo.git
+cd ccsinfo
+uv tool install .
 ```
 
 ### Development Installation
 
 ```bash
-# Clone and install in development mode
+git clone https://github.com/myk-org/ccsinfo.git
+cd ccsinfo
 uv pip install -e ".[dev]"
-
-# Install pre-commit hooks
 pre-commit install
 ```
 

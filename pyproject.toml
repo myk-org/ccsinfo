@@ -35,7 +35,8 @@ description = "Claude Code Session Info CLI and Server"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12"
-authors = [{ name = "ccsinfo authors" }]
+authors = [{ name = "Meni Yakove", email = "myakove@gmail.com" }]
+keywords = ["claude", "claude-code", "cli", "sessions", "api"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",

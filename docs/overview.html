@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link active" aria-current="page">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="overview">Overview</h1>
+<p><code>ccsinfo</code> is a Python CLI and FastAPI service for exploring Claude Code activity from the data Claude already writes to disk. Instead of manually opening session JSONL files and task JSON files, you get a cleaner view of sessions, projects, tasks, search results, and usage statistics.</p>
+<p>It is built for developers and maintainers who want to understand what Claude Code has been doing in a project or on a machine. If you need answers to questions like "What sessions are active?", "What did Claude say in that conversation?", "Which tools were used?", "What tasks are still pending?", or "Which projects were busiest lately?", <code>ccsinfo</code> gives you that visibility without forcing you to read raw artifacts by hand.</p>
+<blockquote>
+<p><strong>Note:</strong> <code>ccsinfo</code> works with Claude Code's existing local artifacts. It does not require a separate export step before it becomes useful.</p>
+</blockquote>
+<h2 id="what-it-helps-you-do">What it helps you do</h2>
+<ul>
+<li>Browse Claude activity as <code>sessions</code>, <code>projects</code>, <code>tasks</code>, <code>search</code>, and <code>stats</code> instead of raw files.</li>
+<li>Move from a summary view to the exact messages and tool calls behind it.</li>
+<li>Use the same mental model locally or over HTTP from a remote machine.</li>
+<li>Switch between human-friendly terminal output and JSON output for automation.</li>
+</ul>
+<h2 id="local-or-remote-same-model">Local or remote, same model</h2>
+<p><code>Local mode:</code> Run <code>ccsinfo</code> on the same machine as Claude Code and it reads the local Claude data directly.</p>
+<p><code>Remote mode:</code> Run <code>ccsinfo serve</code> where the Claude data lives, then point your CLI at it with <code>--server-url</code> or <code>CCSINFO_SERVER_URL</code>. The API exposes the same core domains over FastAPI: sessions, projects, tasks, stats, search, plus basic <code>health</code> and <code>info</code> endpoints.</p>
+<div class="highlight"><pre><span></span><code>flowchart LR
+    Data[&quot;Claude Code data&lt;br/&gt;`~/.claude/projects`&lt;br/&gt;`~/.claude/tasks`&quot;] --&gt; Parsers[&quot;Parsers&quot;]
+    Parsers --&gt; Services[&quot;Services&lt;br/&gt;sessions, projects, tasks, search, stats&quot;]
+    Services --&gt; LocalCLI[&quot;`ccsinfo` CLI&lt;br/&gt;local mode&quot;]
+    Services --&gt; API[&quot;FastAPI server&quot;]
+    RemoteCLI[&quot;`ccsinfo` CLI&lt;br/&gt;with `--server-url`&quot;] --&gt; API
+</code></pre></div>
+
+<p>The server entrypoint is built into the CLI:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Remote access is configured through the CLI option and environment variable:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main_callback</span><span class="p">(</span>
+    <span class="n">_version</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;--version&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show version information.&quot;</span><span class="p">,</span>
+        <span class="n">callback</span><span class="o">=</span><span class="n">version_callback</span><span class="p">,</span>
+        <span class="n">is_eager</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">server_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;--server-url&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+        <span class="n">envvar</span><span class="o">=</span><span class="s2">&quot;CCSINFO_SERVER_URL&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remote server URL (e.g., http://localhost:8080). If not set, reads local files.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Claude Code Session Info CLI.&quot;&quot;&quot;</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">server_url</span> <span class="o">=</span> <span class="n">server_url</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Tip:</strong> Start with local mode when you already have access to the machine that ran Claude Code. Use remote mode when the data lives on another workstation, container, or VM and you want the same workflow without direct filesystem access.</p>
+<p><strong>Warning:</strong> This repo does not define a built-in authentication or authorization layer for the API. Treat remote mode as a trusted-network tool unless you put it behind your own access controls.</p>
+</blockquote>
+<h2 id="where-the-data-comes-from">Where the data comes from</h2>
+<p><code>ccsinfo</code> reads the same Claude Code directories you would inspect manually, then parses them into higher-level models. The main storage locations are defined directly in the path helpers:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_claude_base_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the base Claude Code directory (~/.claude).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_projects_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the projects directory (~/.claude/projects).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tasks_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the tasks directory (~/.claude/tasks).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+</code></pre></div>
+
+<p>From there, <code>ccsinfo</code> reads:</p>
+<ul>
+<li>Session transcripts from JSONL files under <code>~/.claude/projects/...</code>.</li>
+<li>Prompt history from per-project <code>.history.jsonl</code> files.</li>
+<li>Task JSON files from <code>~/.claude/tasks/&lt;session-id&gt;/</code>.</li>
+</ul>
+<p>The test fixtures in the repo show the kind of local data the parser expects:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sample_session_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sample session JSONL data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">}],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:00:00Z&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-002&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parentMessageUuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi there!&quot;</span><span class="p">}],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:00:01Z&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_task_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sample task JSON data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;Test task&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A test task&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;blockedBy&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> The JSONL parser is intentionally tolerant and skips malformed or invalid lines by default, so one bad entry does not make an entire session unreadable.</p>
+<p><strong>Warning:</strong> Project IDs come from Claude Code's encoded project directory names. They are useful identifiers, but decoded filesystem paths should be treated as approximate when dots and dashes are involved.</p>
+</blockquote>
+<h2 id="what-you-can-explore">What you can explore</h2>
+<ul>
+<li><code>sessions</code> for recent and active sessions, full message streams, and assistant tool calls.</li>
+<li><code>projects</code> for project-level activity, session counts, and last activity.</li>
+<li><code>tasks</code> for Claude task files, including status, owner, blockers, and dependencies.</li>
+<li><code>search</code> for session metadata, message text, and saved prompt history.</li>
+<li><code>stats</code> for totals, daily activity, recent trends, most active projects, most-used tools, and average session length.</li>
+</ul>
+<p>In practice, that means you can start broad and then zoom in. Begin with overall activity, identify an interesting project or session, inspect the exact conversation and tool calls behind it, and then jump back out to trends or cross-project search when you need more context.</p>
+<p>The search side is broader than just IDs. It looks across session metadata such as slug, working directory, git branch, and project path, and it also searches full message text and prompt history. The analytics side aggregates total sessions, projects, messages, and tool calls, then adds daily views and recent trend summaries.</p>
+<h2 id="why-this-matters">Why this matters</h2>
+<p>The core value of <code>ccsinfo</code> is that it makes Claude Code activity explorable at the level humans actually care about. You can work directly from local data when you are on the right machine, or move the same workflow behind a remote service when the data lives somewhere else. Either way, <code>ccsinfo</code> turns Claude Code's raw artifacts into something you can query, skim, and understand quickly.</p>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Installation</a></li>
+<li><a href="#">Quickstart: Local CLI Mode</a></li>
+<li><a href="#">Quickstart: Remote Server Mode</a></li>
+<li><a href="#">Architecture and Project Structure</a></li>
+<li><a href="#">API Overview</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <div></div>
+                
+                
+                <a href="architecture-and-project-structure.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Architecture and Project Structure</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#what-it-helps-you-do">What it helps you do</a></li>
+<li><a href="#local-or-remote-same-model">Local or remote, same model</a></li>
+<li><a href="#where-the-data-comes-from">Where the data comes from</a></li>
+<li><a href="#what-you-can-explore">What you can explore</a></li>
+<li><a href="#why-this-matters">Why this matters</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

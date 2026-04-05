@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Output and Automation - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link active" aria-current="page">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="json-output-and-automation">JSON Output and Automation</h1>
+<p><code>ccsinfo</code> has two output styles: human-friendly terminal views and machine-friendly JSON. For scripts, CI jobs, dashboards, or other tooling, add <code>--json</code> (or <code>-j</code>) so you can consume structured data instead of parsing Rich tables and panels.</p>
+<h2 id="json-first-workflow">JSON-First Workflow</h2>
+<p>The same CLI commands work in both local and remote modes. By default, <code>ccsinfo</code> reads Claude Code data from the local machine. If you set <code>CCSINFO_SERVER_URL</code> or pass <code>--server-url</code>, it switches to HTTP and reads from a <code>ccsinfo</code> server instead. You can start that server with <code>ccsinfo serve</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+
+<span class="c1"># ... other callback options omitted ...</span>
+
+<span class="n">server_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+    <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">&quot;--server-url&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+    <span class="n">envvar</span><span class="o">=</span><span class="s2">&quot;CCSINFO_SERVER_URL&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remote server URL (e.g., http://localhost:8080). If not set, reads local files.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<div class="mermaid-diagram"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1920.02px; background-color: transparent;" viewBox="0 0 1920.015625 197.328125" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePath .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M215.578,98.664L219.745,98.664C223.911,98.664,232.245,98.664,239.911,98.664C247.578,98.664,254.578,98.664,258.078,98.664L261.578,98.664" id="my-svg-L_A_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_B_0" data-points="W3sieCI6MjE1LjU3ODEyNSwieSI6OTguNjY0MDYyNX0seyJ4IjoyNDAuNTc4MTI1LCJ5Ijo5OC42NjQwNjI1fSx7IngiOjI2NS41NzgxMjUsInkiOjk4LjY2NDA2MjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M525.578,98.664L529.745,98.664C533.911,98.664,542.245,98.664,549.911,98.664C557.578,98.664,564.578,98.664,568.078,98.664L571.578,98.664" id="my-svg-L_B_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_C_0" data-points="W3sieCI6NTI1LjU3ODEyNSwieSI6OTguNjY0MDYyNX0seyJ4Ijo1NTAuNTc4MTI1LCJ5Ijo5OC42NjQwNjI1fSx7IngiOjU3NS41NzgxMjUsInkiOjk4LjY2NDA2MjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M734.986,76.744L744.958,73.564C754.931,70.384,774.875,64.024,810.685,60.844C846.495,57.664,898.169,57.664,947.691,57.664C997.214,57.664,1044.583,57.664,1071.77,57.901C1098.956,58.137,1105.959,58.611,1109.461,58.847L1112.962,59.084" id="my-svg-L_C_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_D_0" data-points="W3sieCI6NzM0Ljk4NTgxMzI1NDM5OTcsInkiOjc2Ljc0MzYyNTc1NDM5OTd9LHsieCI6Nzk0LjgyMDMxMjUsInkiOjU3LjY2NDA2MjV9LHsieCI6OTQ5Ljg0Mzc1LCJ5Ijo1Ny42NjQwNjI1fSx7IngiOjEwOTEuOTUzMTI1LCJ5Ijo1Ny42NjQwNjI1fSx7IngiOjExMTYuOTUzMTI1LCJ5Ijo1OS4zNTM1MTkyMzQwNjg5NTV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M736.647,118.924L746.342,121.714C756.038,124.504,775.429,130.084,790.777,132.874C806.125,135.664,817.43,135.664,823.082,135.664L828.734,135.664" id="my-svg-L_C_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_E_0" data-points="W3sieCI6NzM2LjY0NjUwNjY3NjQxNzksInkiOjExOC45MjM4MDU4MjM1ODIxNH0seyJ4Ijo3OTQuODIwMzEyNSwieSI6MTM1LjY2NDA2MjV9LHsieCI6ODMyLjczNDM3NSwieSI6MTM1LjY2NDA2MjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1066.953,110.118L1071.12,109.209C1075.286,108.3,1083.62,106.482,1093.805,104.068C1103.991,101.654,1116.029,98.644,1122.047,97.139L1128.066,95.634" id="my-svg-L_E_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_E_D_0" data-points="W3sieCI6MTA2Ni45NTMxMjUsInkiOjExMC4xMTc2MDg0MDQzNDMwNH0seyJ4IjoxMDkxLjk1MzEyNSwieSI6MTA0LjY2NDA2MjV9LHsieCI6MTEzMS45NDY3OTA1NDA1NDA2LCJ5Ijo5NC42NjQwNjI1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1362.906,67.664L1367.073,67.664C1371.24,67.664,1379.573,67.664,1387.261,68.577C1394.949,69.49,1401.992,71.316,1405.513,72.229L1409.034,73.142" id="my-svg-L_D_F_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_D_F_0" data-points="W3sieCI6MTM2Mi45MDYyNSwieSI6NjcuNjY0MDYyNX0seyJ4IjoxMzg3LjkwNjI1LCJ5Ijo2Ny42NjQwNjI1fSx7IngiOjE0MTIuOTA2MjUsInkiOjc0LjE0NjQ1MTU3NDAzNzc3fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1066.953,143.905L1071.12,144.198C1075.286,144.491,1083.62,145.078,1112.449,145.371C1141.279,145.664,1190.604,145.664,1239.93,145.664C1289.255,145.664,1338.581,145.664,1371.102,142.575C1403.623,139.485,1419.341,133.306,1427.199,130.217L1435.058,127.128" id="my-svg-L_E_F_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_E_F_0" data-points="W3sieCI6MTA2Ni45NTMxMjUsInkiOjE0My45MDQ4NTQxNDM3NjAzfSx7IngiOjEwOTEuOTUzMTI1LCJ5IjoxNDUuNjY0MDYyNX0seyJ4IjoxMjM5LjkyOTY4NzUsInkiOjE0NS42NjQwNjI1fSx7IngiOjEzODcuOTA2MjUsInkiOjE0NS42NjQwNjI1fSx7IngiOjE0MzguNzgwNTg1MTA2MzgzLCJ5IjoxMjUuNjY0MDYyNX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1602.016,98.664L1606.182,98.664C1610.349,98.664,1618.682,98.664,1626.349,98.664C1634.016,98.664,1641.016,98.664,1644.516,98.664L1648.016,98.664" id="my-svg-L_F_G_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_G_0" data-points="W3sieCI6MTYwMi4wMTU2MjUsInkiOjk4LjY2NDA2MjV9LHsieCI6MTYyNy4wMTU2MjUsInkiOjk4LjY2NDA2MjV9LHsieCI6MTY1Mi4wMTU2MjUsInkiOjk4LjY2NDA2MjV9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_A_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_C_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(949.84375, 57.6640625)"><g class="label" data-id="L_C_D_0" transform="translate(-10.8828125, -12)"><foreignObject width="21.765625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(794.8203125, 135.6640625)"><g class="label" data-id="L_C_E_0" transform="translate(-12.9140625, -12)"><foreignObject width="25.828125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_E_D_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_D_F_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_E_F_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_F_G_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-A-0" data-look="classic" transform="translate(111.7890625, 98.6640625)"><rect class="basic label-container" style="" x="-103.7890625" y="-27" width="207.578125" height="54"/><g class="label" style="" transform="translate(-73.7890625, -12)"><rect/><foreignObject width="147.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Your script or shell</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B-1" data-look="classic" transform="translate(395.578125, 98.6640625)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>ccsinfo command with --json</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-C-3" data-look="classic" transform="translate(666.2421875, 98.6640625)"><polygon points="90.6640625,0 181.328125,-90.6640625 90.6640625,-181.328125 0,-90.6640625" class="label-container" transform="translate(-90.1640625, 90.6640625)"/><g class="label" style="" transform="translate(-63.6640625, -12)"><rect/><foreignObject width="127.328125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Server URL set?</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-D-5" data-look="classic" transform="translate(1239.9296875, 67.6640625)"><rect class="basic label-container" style="" x="-122.9765625" y="-27" width="245.953125" height="54"/><g class="label" style="" transform="translate(-92.9765625, -12)"><rect/><foreignObject width="185.953125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Local Claude Code files</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-E-7" data-look="classic" transform="translate(949.84375, 135.6640625)"><rect class="basic label-container" style="" x="-117.109375" y="-27" width="234.21875" height="54"/><g class="label" style="" transform="translate(-87.109375, -12)"><rect/><foreignObject width="174.21875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>ccsinfo FastAPI server</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-F-11" data-look="classic" transform="translate(1507.4609375, 98.6640625)"><rect class="basic label-container" style="" x="-94.5546875" y="-27" width="189.109375" height="54"/><g class="label" style="" transform="translate(-64.5546875, -12)"><rect/><foreignObject width="129.109375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Structured JSON</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-G-15" data-look="classic" transform="translate(1782.015625, 98.6640625)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>jq, Python, CI, dashboards, other tools</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div>
+
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>serve<span class="w"> </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">CCSINFO_SERVER_URL</span><span class="o">=</span>http://127.0.0.1:8080
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list<span class="w"> </span>--json
+ccsinfo<span class="w"> </span>stats<span class="w"> </span>global<span class="w"> </span>--json
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> Most list and search commands default to <code>50</code> results. <code>stats daily</code> defaults to <code>30</code> days. If you call the HTTP API directly, <code>limit</code> is capped at <code>500</code> and <code>days</code> at <code>365</code>.</p>
+</blockquote>
+<h2 id="local-data-sources">Local Data Sources</h2>
+<p>In local mode, <code>ccsinfo</code> reads from the Claude Code data directory under your home folder.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_claude_base_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the base Claude Code directory (~/.claude).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_projects_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the projects directory (~/.claude/projects).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tasks_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the tasks directory (~/.claude/tasks).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+</code></pre></div>
+
+<p>That resolves to a layout like this:</p>
+<div class="highlight"><pre><span></span><code>~/.claude/
+  projects/
+    &lt;encoded-project-id&gt;/
+      &lt;session-id&gt;.jsonl
+      .history.jsonl
+  tasks/
+    &lt;session-id&gt;/
+      &lt;task-id&gt;.json
+</code></pre></div>
+
+<ul>
+<li>Session transcripts come from <code>~/.claude/projects/&lt;encoded-project-id&gt;/*.jsonl</code></li>
+<li>Prompt history comes from <code>~/.claude/projects/&lt;encoded-project-id&gt;/.history.jsonl</code></li>
+<li>Tasks come from <code>~/.claude/tasks/&lt;session-id&gt;/*.json</code></li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> Use the <code>id</code> values returned by <code>projects list --json</code> instead of trying to build project IDs yourself. Claude's project path encoding is lossy, so the returned ID is the safest thing to feed back into later commands.</p>
+</blockquote>
+<h2 id="commands-that-support-json">Commands That Support <code>--json</code></h2>
+<p>All of the major command families expose JSON output.</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>JSON-enabled commands</th>
+<th>Useful flags</th>
+<th>Typical data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sessions</td>
+<td><code>sessions list</code>, <code>sessions show</code>, <code>sessions messages</code>, <code>sessions tools</code>, <code>sessions active</code></td>
+<td><code>--project</code>, <code>--active</code>, <code>--limit</code>, <code>--role</code></td>
+<td>session summaries, session details, message objects, tool-call objects</td>
+</tr>
+<tr>
+<td>Projects</td>
+<td><code>projects list</code>, <code>projects show</code>, <code>projects stats</code></td>
+<td>none beyond <code>--json</code></td>
+<td>project objects and per-project stats</td>
+</tr>
+<tr>
+<td>Tasks</td>
+<td><code>tasks list</code>, <code>tasks show</code>, <code>tasks pending</code></td>
+<td><code>--session</code>, <code>--status</code></td>
+<td>task objects and filtered task lists</td>
+</tr>
+<tr>
+<td>Stats</td>
+<td><code>stats global</code>, <code>stats daily</code>, <code>stats trends</code></td>
+<td><code>--days</code></td>
+<td>totals, day-by-day activity, trend summaries</td>
+</tr>
+<tr>
+<td>Search</td>
+<td><code>search sessions</code>, <code>search messages</code>, <code>search history</code></td>
+<td><code>--limit</code></td>
+<td>matching sessions, message snippets, prompt history hits</td>
+</tr>
+</tbody>
+</table>
+<p>Representative commands:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list<span class="w"> </span>--active<span class="w"> </span>--json
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>messages<span class="w"> </span>&lt;session_id&gt;<span class="w"> </span>--role<span class="w"> </span>user<span class="w"> </span>--json
+ccsinfo<span class="w"> </span>projects<span class="w"> </span>stats<span class="w"> </span>&lt;project_id&gt;<span class="w"> </span>--json
+ccsinfo<span class="w"> </span>tasks<span class="w"> </span>show<span class="w"> </span>&lt;task_id&gt;<span class="w"> </span>--session<span class="w"> </span>&lt;session_id&gt;<span class="w"> </span>--json
+ccsinfo<span class="w"> </span>stats<span class="w"> </span>daily<span class="w"> </span>--days<span class="w"> </span><span class="m">14</span><span class="w"> </span>--json
+ccsinfo<span class="w"> </span>search<span class="w"> </span>messages<span class="w"> </span><span class="s2">&quot;timeout&quot;</span><span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span><span class="w"> </span>--json
+</code></pre></div>
+
+<h2 id="what-each-json-command-returns">What Each JSON Command Returns</h2>
+<ul>
+<li><code>sessions list</code>, <code>sessions active</code>, and <code>search sessions</code> return session summary objects with <code>id</code>, <code>project_path</code>, <code>project_name</code>, <code>created_at</code>, <code>updated_at</code>, <code>message_count</code>, and <code>is_active</code>.</li>
+<li><code>sessions show</code> returns the same core session metadata plus <code>file_path</code>.</li>
+<li><code>sessions messages</code> returns message objects with <code>uuid</code>, <code>parent_message_uuid</code>, <code>timestamp</code>, <code>type</code>, and nested <code>message.content</code> blocks.</li>
+<li><code>sessions tools</code> returns normalized tool-call objects with just <code>id</code>, <code>name</code>, and <code>input</code>, which is usually easier to automate against than parsing message content yourself.</li>
+<li><code>projects list</code> and <code>projects show</code> return <code>id</code>, <code>name</code>, <code>path</code>, <code>session_count</code>, and <code>last_activity</code>.</li>
+<li><code>projects stats</code> returns <code>project_id</code>, <code>project_name</code>, <code>session_count</code>, <code>message_count</code>, and <code>last_activity</code>.</li>
+<li><code>tasks list</code>, <code>tasks show</code>, and <code>tasks pending</code> return task objects with <code>id</code>, <code>subject</code>, <code>description</code>, <code>status</code>, <code>owner</code>, <code>blocked_by</code>, <code>blocks</code>, <code>active_form</code>, <code>metadata</code>, and <code>created_at</code>.</li>
+<li><code>stats global</code> returns <code>total_projects</code>, <code>total_sessions</code>, <code>total_messages</code>, and <code>total_tool_calls</code>.</li>
+<li><code>stats daily</code> returns a list of <code>{date, session_count, message_count}</code> objects.</li>
+<li><code>stats trends</code> returns <code>sessions_last_7_days</code>, <code>sessions_last_30_days</code>, <code>messages_last_7_days</code>, <code>messages_last_30_days</code>, <code>most_active_projects</code>, <code>most_used_tools</code>, and <code>average_session_length</code>.</li>
+<li><code>search messages</code> returns <code>session_id</code>, <code>project_path</code>, <code>message_uuid</code>, <code>message_type</code>, <code>timestamp</code>, and a matched <code>snippet</code>.</li>
+<li><code>search history</code> returns <code>project_path</code>, <code>prompt</code>, <code>session_id</code>, and <code>timestamp</code>.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> <code>search sessions</code> is broader than its name suggests. It searches session ID, slug, working directory, git branch, and project path, so it is often the fastest way to find a session before following up with <code>sessions show</code> or <code>sessions messages</code>.</p>
+<p><strong>Note:</strong> <code>tasks show</code> requires <code>--session</code>, because task IDs are only unique within a session.</p>
+</blockquote>
+<h2 id="shell-automation">Shell Automation</h2>
+<p>For shell pipelines, <code>--json</code> works especially well with <code>jq</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># List active session IDs</span>
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>active<span class="w"> </span>--json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[].id&#39;</span>
+
+<span class="c1"># Build a compact 14-day activity report</span>
+ccsinfo<span class="w"> </span>stats<span class="w"> </span>daily<span class="w"> </span>--days<span class="w"> </span><span class="m">14</span><span class="w"> </span>--json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;[.[] | {date, sessions: .session_count, messages: .message_count}]&#39;</span>
+
+<span class="c1"># Fetch stats for the first project in the list</span>
+<span class="nv">PROJECT_ID</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>ccsinfo<span class="w"> </span>projects<span class="w"> </span>list<span class="w"> </span>--json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[0].id&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+ccsinfo<span class="w"> </span>projects<span class="w"> </span>stats<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PROJECT_ID</span><span class="s2">&quot;</span><span class="w"> </span>--json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;{project_name, session_count, message_count}&#39;</span>
+</code></pre></div>
+
+<p>If you are scripting in Python, you can call the CLI directly and decode the JSON result:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;ccsinfo&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="s2">&quot;history&quot;</span><span class="p">,</span> <span class="s2">&quot;automation&quot;</span><span class="p">,</span> <span class="s2">&quot;--json&quot;</span><span class="p">],</span>
+    <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">entries</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;session_id&quot;</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Tip:</strong> For tool usage automation, prefer <code>sessions tools --json</code> over scanning raw session JSONL files yourself. It gives you a clean list of <code>{id, name, input}</code> objects.</p>
+</blockquote>
+<h2 id="using-the-http-api-directly">Using the HTTP API Directly</h2>
+<p>If you do not want to shell out to the CLI, <code>ccsinfo serve</code> exposes a FastAPI application. The CLI's remote mode is a thin HTTP client on top of that API.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_global_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_dict</span><span class="p">(</span><span class="s2">&quot;/stats&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_daily_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="s2">&quot;/stats/daily&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;days&quot;</span><span class="p">:</span> <span class="n">days</span><span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">search_sessions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="s2">&quot;/search&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span> <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">limit</span><span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">search_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="s2">&quot;/search/messages&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span> <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">limit</span><span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">search_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="s2">&quot;/search/history&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span> <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">limit</span><span class="p">})</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> The HTTP paths are close to the CLI names, but not identical. <code>stats global</code> maps to <code>GET /stats</code>, and <code>search sessions</code> maps to <code>GET /search</code>.</p>
+</blockquote>
+<p>Common mappings:</p>
+<table>
+<thead>
+<tr>
+<th>CLI command</th>
+<th>HTTP endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ccsinfo sessions list --json</code></td>
+<td><code>GET /sessions</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo sessions active --json</code></td>
+<td><code>GET /sessions/active</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo sessions show &lt;id&gt; --json</code></td>
+<td><code>GET /sessions/{id}</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo sessions messages &lt;id&gt; --json</code></td>
+<td><code>GET /sessions/{id}/messages</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo sessions tools &lt;id&gt; --json</code></td>
+<td><code>GET /sessions/{id}/tools</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo projects list --json</code></td>
+<td><code>GET /projects</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo projects stats &lt;id&gt; --json</code></td>
+<td><code>GET /projects/{id}/stats</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo tasks list --json</code></td>
+<td><code>GET /tasks</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo tasks show &lt;id&gt; --session &lt;sid&gt; --json</code></td>
+<td><code>GET /tasks/{id}?session_id=&lt;sid&gt;</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo stats global --json</code></td>
+<td><code>GET /stats</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo stats daily --days 30 --json</code></td>
+<td><code>GET /stats/daily?days=30</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo stats trends --json</code></td>
+<td><code>GET /stats/trends</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo search sessions "foo" --json</code></td>
+<td><code>GET /search?q=foo</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo search messages "foo" --json</code></td>
+<td><code>GET /search/messages?q=foo</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo search history "foo" --json</code></td>
+<td><code>GET /search/history?q=foo</code></td>
+</tr>
+</tbody>
+</table>
+<p>A few direct <code>curl</code> examples:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://127.0.0.1:8080/health
+curl<span class="w"> </span>http://127.0.0.1:8080/info
+curl<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:8080/sessions?active_only=true&amp;limit=10&quot;</span>
+curl<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:8080/search/messages?q=timeout&amp;limit=10&quot;</span>
+</code></pre></div>
+
+<p>The server also exposes a few JSON endpoints that are useful for dashboards or services even though they are not first-class CLI commands:</p>
+<ul>
+<li><code>GET /sessions/{session_id}/tasks</code></li>
+<li><code>GET /sessions/{session_id}/progress</code></li>
+<li><code>GET /sessions/{session_id}/summary</code></li>
+<li><code>GET /projects/{project_id}/sessions</code></li>
+<li><code>GET /projects/{project_id}/sessions/active</code></li>
+<li><code>GET /health</code></li>
+<li><code>GET /info</code></li>
+</ul>
+<h2 id="caveats-for-automation">Caveats for Automation</h2>
+<blockquote>
+<p><strong>Warning:</strong> <code>ccsinfo sessions messages --json</code> and <code>ccsinfo sessions tools --json</code> are not strict JSON when a session exists but has no matching data. In that case the CLI prints a human message instead of <code>[]</code>. If you need guaranteed JSON for empty results, call the HTTP API directly.</p>
+<p><strong>Tip:</strong> Treat <code>show</code> commands as assertions in scripts. <code>sessions show</code>, <code>projects show</code>, <code>projects stats</code>, and <code>tasks show</code> exit with a non-zero status when the requested item does not exist.</p>
+<p><strong>Note:</strong> <code>search messages --json</code> returns snippets around the match, not the full message body. If you need the complete stored message content, follow up with <code>sessions messages &lt;session_id&gt; --json</code>.</p>
+<p><strong>Note:</strong> <code>stats daily --json</code> returns only dates that had activity. If you need a gap-free time series, fill missing dates in your own script.</p>
+<p><strong>Note:</strong> In <code>stats trends --json</code>, <code>most_used_tools</code> counts whether a tool appeared in a session, not the raw number of tool invocations.</p>
+<p><strong>Note:</strong> <code>is_active</code> is computed on the machine that reads the data. In local mode that is your machine; in server mode it is the server host.</p>
+</blockquote>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">API Overview</a></li>
+<li><a href="#">Searching Sessions, Messages, and History</a></li>
+<li><a href="#">Using Statistics and Trends</a></li>
+<li><a href="#">Configuration</a></li>
+<li><a href="#">Quickstart: Remote Server Mode</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="statistics-guide.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Using Statistics and Trends</span>
+                </a>
+                
+                
+                <a href="api-overview.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">API Overview</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#json-first-workflow">JSON-First Workflow</a></li>
+<li><a href="#local-data-sources">Local Data Sources</a></li>
+<li><a href="#commands-that-support-json">Commands That Support --json</a></li>
+<li><a href="#what-each-json-command-returns">What Each JSON Command Returns</a></li>
+<li><a href="#shell-automation">Shell Automation</a></li>
+<li><a href="#using-the-http-api-directly">Using the HTTP API Directly</a></li>
+<li><a href="#caveats-for-automation">Caveats for Automation</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

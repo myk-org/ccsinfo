@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Setup - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link active" aria-current="page">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="development-setup">Development Setup</h1>
+<p><code>ccsinfo</code> is a single Python project with a <code>src/</code> layout. The same package powers both the Typer CLI and the optional FastAPI server, and both are designed to work directly with Claude Code data on disk. You do not need a database, a frontend toolchain, or containers to start developing locally.</p>
+<h2 id="before-you-install">Before You Install</h2>
+<ul>
+<li>Python <code>3.12</code> or newer</li>
+<li><code>uv</code> for dependency management and command execution</li>
+<li>Optional Claude Code data under <code>~/.claude</code> if you want to test against real sessions instead of fixtures</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> Use Python <code>3.12</code> if you want your local environment to match the repository's default <code>tox</code> setup exactly. The package allows <code>&gt;=3.12</code>, but <code>tox</code> only defines <code>py312</code>.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ccsinfo&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.2&quot;</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Claude Code Session Info CLI and Server&quot;</span>
+<span class="n">readme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span>
+<span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MIT&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.12&quot;</span>
+<span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Meni Yakove&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;myakove@gmail.com&quot;</span><span class="w"> </span><span class="p">}]</span>
+<span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;claude&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;claude-code&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;cli&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sessions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">]</span>
+<span class="n">classifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;Development Status :: 3 - Alpha&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Environment :: Console&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Intended Audience :: Developers&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;License :: OSI Approved :: MIT License&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Operating System :: OS Independent&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Programming Language :: Python :: 3&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Programming Language :: Python :: 3.12&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Programming Language :: Python :: 3.13&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Topic :: Software Development :: Libraries :: Python Modules&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;Typing :: Typed&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;typer&gt;=0.9.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;rich&gt;=13.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;orjson&gt;=3.9.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pydantic&gt;=2.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pendulum&gt;=3.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;fastapi&gt;=0.109.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;uvicorn[standard]&gt;=0.27.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;httpx&gt;=0.27.0&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">[project.optional-dependencies]</span>
+<span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;pytest&gt;=7.4.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pytest-cov&gt;=4.1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pytest-asyncio&gt;=0.21.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pytest-xdist&gt;=3.5.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;ruff&gt;=0.1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;mypy&gt;=1.5.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;tox&gt;=4.0.0&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">[project.scripts]</span>
+<span class="n">ccsinfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ccsinfo.cli.main:main&quot;</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">[tox]</span>
+<span class="na">envlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">py312</span>
+<span class="na">isolated_build</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+
+<span class="k">[testenv]</span>
+<span class="na">allowlist_externals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">uv</span>
+<span class="na">commands</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">uv sync --extra dev</span>
+<span class="w">    </span><span class="na">uv run pytest -n auto {posargs</span><span class="o">:</span><span class="s">tests}</span>
+</code></pre></div>
+
+<h2 id="uv-and-editable-installs"><code>uv</code> And Editable Installs</h2>
+<p><code>uv</code> is the repository's default workflow. Start with a full development sync:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>sync<span class="w"> </span>--extra<span class="w"> </span>dev
+uv<span class="w"> </span>run<span class="w"> </span>ccsinfo<span class="w"> </span>--version
+</code></pre></div>
+
+<p>That sync is already editable. The lockfile records the local package as <code>source = { editable = "." }</code>, so changes under <code>src/ccsinfo</code> are picked up immediately without a separate reinstall step.</p>
+<div class="highlight"><pre><span></span><code>[[package]]
+name = &quot;ccsinfo&quot;
+version = &quot;0.1.2&quot;
+source = { editable = &quot;.&quot; }
+dependencies = [
+    { name = &quot;fastapi&quot; },
+    { name = &quot;httpx&quot; },
+    { name = &quot;orjson&quot; },
+    { name = &quot;pendulum&quot; },
+    { name = &quot;pydantic&quot; },
+    { name = &quot;rich&quot; },
+    { name = &quot;typer&quot; },
+    { name = &quot;uvicorn&quot;, extra = [&quot;standard&quot;] },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = &quot;mypy&quot; },
+    { name = &quot;pytest&quot; },
+    { name = &quot;pytest-asyncio&quot; },
+    { name = &quot;pytest-cov&quot; },
+    { name = &quot;pytest-xdist&quot; },
+    { name = &quot;ruff&quot; },
+    { name = &quot;tox&quot; },
+]
+</code></pre></div>
+
+<h2 id="source-layout">Source Layout</h2>
+<p>This is a conventional <code>src/</code> layout project. The importable package lives in <code>src/ccsinfo</code>.</p>
+<ul>
+<li><code>src/ccsinfo/cli</code>: the Typer application, subcommands, and CLI state</li>
+<li><code>src/ccsinfo/core/parsers</code>: low-level readers for Claude Code JSON and JSONL files</li>
+<li><code>src/ccsinfo/core/services</code>: shared business logic used by both CLI and API</li>
+<li><code>src/ccsinfo/core/models</code>: Pydantic models returned by services and the API</li>
+<li><code>src/ccsinfo/server</code>: the FastAPI application and route handlers</li>
+<li><code>src/ccsinfo/utils</code>: path discovery and terminal formatting helpers</li>
+<li><code>tests</code>: unit and integration-style tests, including temporary <code>.claude</code> fixture builders</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> The top-level <code>ccsinfo/</code> directory in the repository is not the runtime package. The Python code you import and edit lives under <code>src/ccsinfo</code>.</p>
+</blockquote>
+<p>The CLI and server mirror the same main domains:</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Typer</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ccsinfo&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Claude Code Session Info CLI&quot;</span><span class="p">,</span>
+    <span class="n">no_args_is_help</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Add command groups</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">sessions</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sessions&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Session management&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">projects</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;projects&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Project management&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tasks&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Task management&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Statistics&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Search&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ccsinfo&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Claude Code Session Info API&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Include routers</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">sessions</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/sessions&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sessions&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">projects</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/projects&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;projects&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/tasks&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/stats&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stats&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/search&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;search&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">health</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;health&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+<div class="mermaid-diagram"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 933.609px; background-color: transparent;" viewBox="0 0 933.609375 686" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePath .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M137.68,62L137.68,66.167C137.68,70.333,137.68,78.667,172.428,88.175C207.177,97.683,276.674,108.366,311.423,113.708L346.171,119.05" id="my-svg-L_A_P_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_P_0" data-points="W3sieCI6MTM3LjY3OTY4NzUsInkiOjYyfSx7IngiOjEzNy42Nzk2ODc1LCJ5Ijo4N30seyJ4IjozNTAuMTI1LCJ5IjoxMTkuNjU3NDc0NzY4NDcwNDF9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M475.953,62L475.953,66.167C475.953,70.333,475.953,78.667,475.953,86.333C475.953,94,475.953,101,475.953,104.5L475.953,108" id="my-svg-L_B_P_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_P_0" data-points="W3sieCI6NDc1Ljk1MzEyNSwieSI6NjJ9LHsieCI6NDc1Ljk1MzEyNSwieSI6ODd9LHsieCI6NDc1Ljk1MzEyNSwieSI6MTEyfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M805.078,62L805.078,66.167C805.078,70.333,805.078,78.667,771.854,88.083C738.629,97.499,672.181,107.997,638.957,113.246L605.732,118.496" id="my-svg-L_C_P_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_P_0" data-points="W3sieCI6ODA1LjA3ODEyNSwieSI6NjJ9LHsieCI6ODA1LjA3ODEyNSwieSI6ODd9LHsieCI6NjAxLjc4MTI1LCJ5IjoxMTkuMTE5ODI1Mjk0MzQxMDZ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M475.953,166L475.953,170.167C475.953,174.333,475.953,182.667,475.953,190.333C475.953,198,475.953,205,475.953,208.5L475.953,212" id="my-svg-L_P_S_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P_S_0" data-points="W3sieCI6NDc1Ljk1MzEyNSwieSI6MTY2fSx7IngiOjQ3NS45NTMxMjUsInkiOjE5MX0seyJ4Ijo0NzUuOTUzMTI1LCJ5IjoyMTZ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M526.227,294L531.598,298.167C536.969,302.333,547.711,310.667,553.082,318.333C558.453,326,558.453,333,558.453,336.5L558.453,340" id="my-svg-L_S_CLI_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_CLI_0" data-points="W3sieCI6NTI2LjIyNjU2MjUsInkiOjI5NH0seyJ4Ijo1NTguNDUzMTI1LCJ5IjozMTl9LHsieCI6NTU4LjQ1MzEyNSwieSI6MzQ0fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M425.68,294L420.309,298.167C414.938,302.333,404.195,310.667,398.824,323.5C393.453,336.333,393.453,353.667,393.453,373C393.453,392.333,393.453,413.667,393.453,437C393.453,460.333,393.453,485.667,393.453,509C393.453,532.333,393.453,553.667,398.297,568.091C403.142,582.516,412.83,590.032,417.675,593.79L422.519,597.548" id="my-svg-L_S_API_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_API_0" data-points="W3sieCI6NDI1LjY3OTY4NzUsInkiOjI5NH0seyJ4IjozOTMuNDUzMTI1LCJ5IjozMTl9LHsieCI6MzkzLjQ1MzEyNSwieSI6MzcxfSx7IngiOjM5My40NTMxMjUsInkiOjQzNX0seyJ4IjozOTMuNDUzMTI1LCJ5Ijo1MTF9LHsieCI6MzkzLjQ1MzEyNSwieSI6NTc1fSx7IngiOjQyNS42Nzk2ODc1LCJ5Ijo2MDB9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M558.453,398L558.453,404.167C558.453,410.333,558.453,422.667,558.453,434.333C558.453,446,558.453,457,558.453,462.5L558.453,468" id="my-svg-L_CLI_HC_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CLI_HC_0" data-points="W3sieCI6NTU4LjQ1MzEyNSwieSI6Mzk4fSx7IngiOjU1OC40NTMxMjUsInkiOjQzNX0seyJ4Ijo1NTguNDUzMTI1LCJ5Ijo0NzJ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M558.453,550L558.453,554.167C558.453,558.333,558.453,566.667,553.609,574.591C548.764,582.516,539.076,590.032,534.231,593.79L529.387,597.548" id="my-svg-L_HC_API_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_HC_API_0" data-points="W3sieCI6NTU4LjQ1MzEyNSwieSI6NTUwfSx7IngiOjU1OC40NTMxMjUsInkiOjU3NX0seyJ4Ijo1MjYuMjI2NTYyNSwieSI6NjAwfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_A_P_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_P_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_P_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P_S_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_CLI_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_API_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(558.453125, 435)"><g class="label" data-id="L_CLI_HC_0" transform="translate(-99.90625, -12)"><foreignObject width="199.8125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>when `--server-url` is set</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_HC_API_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-A-0" data-look="classic" transform="translate(137.6796875, 35)"><rect class="basic label-container" style="" x="-129.6796875" y="-27" width="259.359375" height="54"/><g class="label" style="" transform="translate(-99.6796875, -12)"><rect/><foreignObject width="199.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>~/.claude/projects//.jsonl</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-P-1" data-look="classic" transform="translate(475.953125, 139)"><rect class="basic label-container" style="" x="-125.828125" y="-27" width="251.65625" height="54"/><g class="label" style="" transform="translate(-95.828125, -12)"><rect/><foreignObject width="191.65625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Parsers (`core/parsers`)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B-2" data-look="classic" transform="translate(475.953125, 35)"><rect class="basic label-container" style="" x="-158.59375" y="-27" width="317.1875" height="54"/><g class="label" style="" transform="translate(-128.59375, -12)"><rect/><foreignObject width="257.1875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>~/.claude/projects//.history.jsonl</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-C-4" data-look="classic" transform="translate(805.078125, 35)"><rect class="basic label-container" style="" x="-120.53125" y="-27" width="241.0625" height="54"/><g class="label" style="" transform="translate(-90.53125, -12)"><rect/><foreignObject width="181.0625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>~/.claude/tasks//*.json</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-S-7" data-look="classic" transform="translate(475.953125, 255)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Services (`core/services`)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-CLI-9" data-look="classic" transform="translate(558.453125, 371)"><rect class="basic label-container" style="" x="-92.2421875" y="-27" width="184.484375" height="54"/><g class="label" style="" transform="translate(-62.2421875, -12)"><rect/><foreignObject width="124.484375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Typer CLI (`cli`)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-API-11" data-look="classic" transform="translate(475.953125, 639)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>FastAPI routers (`server`)</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-HC-13" data-look="classic" transform="translate(558.453125, 511)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>HTTP client (`core/client`)</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div>
+
+<h2 id="local-claude-code-data">Local Claude Code Data</h2>
+<p>By default, <code>ccsinfo</code> is local-first. It looks for Claude Code data in your home directory, not inside the repository.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_claude_base_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the base Claude Code directory (~/.claude).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_projects_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the projects directory (~/.claude/projects).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tasks_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the tasks directory (~/.claude/tasks).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">encode_project_path</span><span class="p">(</span><span class="n">project_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a project path to Claude Code&#39;s directory name format.</span>
+
+<span class="sd">    Claude Code replaces:</span>
+<span class="sd">    - &#39;/&#39; with &#39;-&#39;</span>
+<span class="sd">    - &#39;.&#39; with &#39;-&#39;</span>
+
+<span class="sd">    Example: &#39;/home/user/project&#39; -&gt; &#39;-home-user-project&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">project_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_project_path</span><span class="p">(</span><span class="n">encoded_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a Claude Code directory name back to the original path.</span>
+<span class="sd">    ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">encoded_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;/.&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_project_dir</span><span class="p">(</span><span class="n">project_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the Claude data directory for a project path.&quot;&quot;&quot;</span>
+    <span class="n">encoded</span> <span class="o">=</span> <span class="n">encode_project_path</span><span class="p">(</span><span class="n">project_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_projects_dir</span><span class="p">()</span> <span class="o">/</span> <span class="n">encoded</span>
+</code></pre></div>
+
+<p>That detail matters when you inspect test data or API output: a "project ID" in this repository is usually the encoded directory name from <code>~/.claude/projects</code>, not a generated database key.</p>
+<blockquote>
+<p><strong>Note:</strong> If your machine does not have any Claude Code data yet, local list commands will simply return empty results. The application does not seed demo data for you.</p>
+</blockquote>
+<p>The tests intentionally model the same directory layout with temporary fixtures instead of touching your real home directory:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mock_claude_dir</span><span class="p">(</span>
+    <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">sample_session_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">sample_task_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a fully populated mock .claude directory.&quot;&quot;&quot;</span>
+    <span class="n">claude_dir</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+    <span class="c1"># Create projects directory with a sample project</span>
+    <span class="n">projects_dir</span> <span class="o">=</span> <span class="n">claude_dir</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+    <span class="n">project_dir</span> <span class="o">=</span> <span class="n">projects_dir</span> <span class="o">/</span> <span class="s2">&quot;-home-user-test-project&quot;</span>
+    <span class="n">project_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create a session file in the project</span>
+    <span class="n">session_file</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456.jsonl&quot;</span>
+    <span class="o">...</span>
+    <span class="c1"># Create tasks directory with a session&#39;s tasks</span>
+    <span class="n">tasks_dir</span> <span class="o">=</span> <span class="n">claude_dir</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+    <span class="n">session_tasks_dir</span> <span class="o">=</span> <span class="n">tasks_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456&quot;</span>
+    <span class="n">session_tasks_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">claude_dir</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Tip:</strong> When you add parser or service tests, follow this fixture pattern. It is easier to reason about than mocking every file read, and it matches the real runtime layout.</p>
+</blockquote>
+<h2 id="cli-and-server-workflows">CLI And Server Workflows</h2>
+<p>One codebase supports two development modes:</p>
+<ul>
+<li>Local mode: CLI commands read directly from <code>~/.claude</code></li>
+<li>Remote mode: the same CLI commands call the HTTP API when <code>--server-url</code> or <code>CCSINFO_SERVER_URL</code> is set</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main_callback</span><span class="p">(</span>
+    <span class="n">_version</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;--version&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show version information.&quot;</span><span class="p">,</span>
+        <span class="n">callback</span><span class="o">=</span><span class="n">version_callback</span><span class="p">,</span>
+        <span class="n">is_eager</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">server_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;--server-url&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+        <span class="n">envvar</span><span class="o">=</span><span class="s2">&quot;CCSINFO_SERVER_URL&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remote server URL (e.g., http://localhost:8080). If not set, reads local files.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Claude Code Session Info CLI.&quot;&quot;&quot;</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">server_url</span> <span class="o">=</span> <span class="n">server_url</span>
+</code></pre></div>
+
+<p>The command handlers really do switch between the local service layer and the HTTP client:</p>
+<div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">server_url</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">client</span><span class="p">:</span>
+    <span class="c1"># Remote mode - use HTTP client</span>
+    <span class="n">sessions_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_sessions</span><span class="p">(</span><span class="n">project_id</span><span class="o">=</span><span class="n">project</span><span class="p">,</span> <span class="n">active_only</span><span class="o">=</span><span class="n">active</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+    <span class="o">...</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Local mode - use services</span>
+    <span class="n">session_service</span> <span class="o">=</span> <span class="n">_get_session_service</span><span class="p">()</span>
+    <span class="n">sessions</span> <span class="o">=</span> <span class="n">session_service</span><span class="o">.</span><span class="n">list_sessions</span><span class="p">(</span><span class="n">project_id</span><span class="o">=</span><span class="n">project</span><span class="p">,</span> <span class="n">active_only</span><span class="o">=</span><span class="n">active</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Typical local development commands look like this:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list
+uv<span class="w"> </span>run<span class="w"> </span>ccsinfo<span class="w"> </span>serve<span class="w"> </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
+uv<span class="w"> </span>run<span class="w"> </span>ccsinfo<span class="w"> </span>--server-url<span class="w"> </span>http://127.0.0.1:8080<span class="w"> </span>sessions<span class="w"> </span>list
+</code></pre></div>
+
+<p>If you are working on the API layer, the FastAPI app exposes <code>sessions</code>, <code>projects</code>, <code>tasks</code>, <code>stats</code>, <code>search</code>, <code>health</code>, and <code>info</code> endpoints from the same shared service layer.</p>
+<h2 id="tests-typing-and-automation">Tests, Typing, And Automation</h2>
+<p>The repository's main automation is local. There is no checked-in <code>.github/workflows/</code> directory and no Dockerfile, so <code>tox</code>, <code>pytest</code>, and pre-commit are the practical source of truth for development checks.</p>
+<p><code>tox</code> is intentionally thin: it uses <code>uv</code> to sync the dev environment and then runs <code>pytest</code> with <code>xdist</code> (<code>-n auto</code>). The rest of the quality policy lives in <code>pyproject.toml</code> and <code>.pre-commit-config.yaml</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.ruff]</span>
+<span class="n">preview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span>
+<span class="n">fix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">output-format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;grouped&quot;</span>
+
+<span class="k">[tool.ruff.lint]</span>
+<span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;W&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;I&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;UP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PLC0415&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARG&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RUF059&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.ruff.format]</span>
+<span class="n">exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;.git&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.venv&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.mypy_cache&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.tox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;__pycache__&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.mypy]</span>
+<span class="n">check_untyped_defs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">disallow_any_generics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">disallow_incomplete_defs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">disallow_untyped_defs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">no_implicit_optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">show_error_codes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">warn_unused_ignores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">strict_equality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">extra_checks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">warn_unused_configs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">warn_redundant_casts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/PyCQA/flake8</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.3.0</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flake8</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--config=.flake8</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">additional_dependencies</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">[</span><span class="nv">git+https</span><span class="p p-Indicator">:</span><span class="nv">//github.com/RedHatQE/flake8-plugins.git</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">flake8-mutable</span><span class="p p-Indicator">]</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/Yelp/detect-secrets</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.5.0</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">detect-secrets</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.14.14</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff-format</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/gitleaks/gitleaks</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v8.30.0</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitleaks</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/mirrors-mypy</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.19.1</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypy</span>
+<span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(tests/)</span>
+</code></pre></div>
+
+<p>A practical loop is:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>sync<span class="w"> </span>--extra<span class="w"> </span>dev
+tox
+</code></pre></div>
+
+<blockquote>
+<p><strong>Warning:</strong> <code>.pre-commit-config.yaml</code> is present, but <code>pre-commit</code> itself is not part of the <code>dev</code> extra shown in <code>pyproject.toml</code>. Install the <code>pre-commit</code> tool separately if you want hooks on your machine.</p>
+</blockquote>
+<h2 id="environment-notes">Environment Notes</h2>
+<p>Most of the codebase is plain Python and file I/O, but active-session detection is more environment-specific. If you work on the "is this Claude session running right now?" behavior, the implementation shells out to <code>pgrep</code> and inspects Linux-style <code>/proc</code> paths.</p>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;pgrep&quot;</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;claude&quot;</span><span class="p">],</span>
+    <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="o">...</span>
+<span class="n">cmdline_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/proc/</span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">/cmdline&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">environ_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/proc/</span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">/environ&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">fd_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/proc/</span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">/fd&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="k">if</span> <span class="s2">&quot;.claude/tasks/&quot;</span> <span class="ow">in</span> <span class="n">target_str</span> <span class="ow">or</span> <span class="s2">&quot;.claude/projects/&quot;</span> <span class="ow">in</span> <span class="n">target_str</span><span class="p">:</span>
+    <span class="n">active_ids</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">uuid_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">target_str</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Warning:</strong> That part of the code is easiest to develop and debug on Linux. If you are working on parsers, services, models, or docs, you can ignore this and stick to fixture-based tests.</p>
+</blockquote>
+<p>This setup is intentionally lightweight: install with <code>uv</code>, work inside <code>src/ccsinfo</code>, use temporary <code>.claude</code> fixtures for repeatable tests, and only bring up the FastAPI server when you want to exercise the HTTP path.</p>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Architecture and Project Structure</a></li>
+<li><a href="#">Data Model and Storage</a></li>
+<li><a href="#">Testing and Quality Checks</a></li>
+<li><a href="#">Automation and CI</a></li>
+<li><a href="#">Installation</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="troubleshooting.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Troubleshooting</span>
+                </a>
+                
+                
+                <a href="testing-and-quality.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Testing and Quality Checks</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#before-you-install">Before You Install</a></li>
+<li><a href="#uv-and-editable-installs">uv And Editable Installs</a></li>
+<li><a href="#source-layout">Source Layout</a></li>
+<li><a href="#local-claude-code-data">Local Claude Code Data</a></li>
+<li><a href="#cli-and-server-workflows">CLI And Server Workflows</a></li>
+<li><a href="#tests-typing-and-automation">Tests, Typing, And Automation</a></li>
+<li><a href="#environment-notes">Environment Notes</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

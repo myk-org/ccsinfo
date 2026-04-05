@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with Projects - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link active" aria-current="page">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="working-with-projects">Working with Projects</h1>
+<p><code>ccsinfo</code> discovers projects automatically from Claude Code data stored under <code>~/.claude/projects</code>. A project is not something you register manually. If Claude Code has created a project directory with session files, <code>ccsinfo</code> can list it, inspect it, and summarize it.</p>
+<p>The test fixtures show the on-disk shape <code>ccsinfo</code> expects:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create projects directory with a sample project</span>
+<span class="n">projects_dir</span> <span class="o">=</span> <span class="n">claude_dir</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+<span class="n">project_dir</span> <span class="o">=</span> <span class="n">projects_dir</span> <span class="o">/</span> <span class="s2">&quot;-home-user-test-project&quot;</span>
+<span class="n">project_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create a session file in the project</span>
+<span class="n">session_file</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456.jsonl&quot;</span>
+<span class="k">with</span> <span class="n">session_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">sample_session_data</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>That storage layout drives the rest of the project workflow:</p>
+<ul>
+<li>browse all discovered projects</li>
+<li>inspect one project's metadata</li>
+<li>list that project's sessions to see activity</li>
+<li>summarize the project's overall stats</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> By default, the CLI reads local Claude Code files directly. If you point it at a running <code>ccsinfo</code> server, the same commands use the REST API instead.</p>
+</blockquote>
+<h2 id="how-project-ids-work">How Project IDs Work</h2>
+<p>Every project is identified by the encoded directory name Claude Code uses under <code>~/.claude/projects</code>. <code>ccsinfo</code> uses that encoded name as the project ID in CLI arguments, filters, and API paths.</p>
+<p>The encoding logic is defined here:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">encode_project_path</span><span class="p">(</span><span class="n">project_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a project path to Claude Code&#39;s directory name format.</span>
+
+<span class="sd">    Claude Code replaces:</span>
+<span class="sd">    - &#39;/&#39; with &#39;-&#39;</span>
+<span class="sd">    - &#39;.&#39; with &#39;-&#39;</span>
+
+<span class="sd">    Example: &#39;/home/user/project&#39; -&gt; &#39;-home-user-project&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">project_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_project_path</span><span class="p">(</span><span class="n">encoded_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a Claude Code directory name back to the original path.</span>
+
+<span class="sd">    Note: This is lossy - we cannot distinguish between original &#39;-&#39; and encoded &#39;/&#39; or &#39;.&#39;.</span>
+<span class="sd">    The path returned should be treated as approximate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Handle the pattern where /. becomes --</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">encoded_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;/.&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+
+<p>In practice, a path like <code>/home/user/project</code> becomes <code>-home-user-project</code>.</p>
+<blockquote>
+<p><strong>Warning:</strong> The displayed <code>path</code> is reconstructed from the encoded directory name. If the original path contained <code>-</code> or <code>.</code> characters, the decoded path can be approximate rather than exact.</p>
+<p><strong>Tip:</strong> <code>projects list</code> shortens long IDs in the table view. When you need the exact project ID for a follow-up command, use the full encoded directory name from <code>~/.claude/projects</code>.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>flowchart LR
+  A[~/.claude/projects/&lt;encoded-project&gt;] --&gt; B[Session .jsonl files]
+  B --&gt; C[Session parser]
+  C --&gt; D[Project service]
+  C --&gt; E[Session service]
+  D --&gt; F[projects list / projects show / projects stats]
+  E --&gt; G[sessions list --project]
+  F --&gt; H[CLI output]
+  G --&gt; H
+  D --&gt; I[/projects and /projects/{id}/stats]
+  E --&gt; J[/projects/{id}/sessions]
+</code></pre></div>
+
+<h2 id="browse-projects">Browse Projects</h2>
+<p>Start with the project commands:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>projects<span class="w"> </span>list
+ccsinfo<span class="w"> </span>projects<span class="w"> </span>show<span class="w"> </span>&lt;project-id&gt;
+ccsinfo<span class="w"> </span>projects<span class="w"> </span>stats<span class="w"> </span>&lt;project-id&gt;
+</code></pre></div>
+
+<p>Use them like this:</p>
+<ul>
+<li><code>ccsinfo projects list</code> gives you the full catalog of discoverable projects.</li>
+<li><code>ccsinfo projects show &lt;project-id&gt;</code> gives you the detail view for one project.</li>
+<li><code>ccsinfo projects stats &lt;project-id&gt;</code> gives you a compact summary of that project's activity.</li>
+</ul>
+<p><code>projects list</code> is ordered by most recent activity, so the projects you touched most recently appear first. The detail view is better when you need the full project ID, decoded path, and exact timestamp.</p>
+<p>If you prefer HTTP, these are the project endpoints:</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /projects</code></td>
+<td>List all projects</td>
+</tr>
+<tr>
+<td><code>GET /projects/{project_id}</code></td>
+<td>Fetch metadata for one project</td>
+</tr>
+<tr>
+<td><code>GET /projects/{project_id}/sessions</code></td>
+<td>List sessions for a project</td>
+</tr>
+<tr>
+<td><code>GET /projects/{project_id}/sessions/active</code></td>
+<td>List only active sessions for a project</td>
+</tr>
+<tr>
+<td><code>GET /projects/{project_id}/stats</code></td>
+<td>Fetch aggregate stats for a project</td>
+</tr>
+</tbody>
+</table>
+<p>Example requests:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://127.0.0.1:8080/projects
+curl<span class="w"> </span>http://127.0.0.1:8080/projects/&lt;project-id&gt;
+curl<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:8080/projects/&lt;project-id&gt;/sessions?limit=50&quot;</span>
+curl<span class="w"> </span>http://127.0.0.1:8080/projects/&lt;project-id&gt;/sessions/active
+curl<span class="w"> </span>http://127.0.0.1:8080/projects/&lt;project-id&gt;/stats
+</code></pre></div>
+
+<p>The project-session API returns up to 50 sessions by default and accepts values up to 500.</p>
+<h2 id="inspect-project-metadata">Inspect Project Metadata</h2>
+<p>A project's metadata is intentionally small and easy to scan:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>The encoded project directory name. Use this in CLI commands and API URLs.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>A human-friendly name derived from the last segment of the decoded path.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>The decoded project path string. Treat it as best-effort.</td>
+</tr>
+<tr>
+<td><code>session_count</code></td>
+<td>The number of stored session files <code>ccsinfo</code> found for that project directory.</td>
+</tr>
+<tr>
+<td><code>last_activity</code></td>
+<td>The newest timestamp found in that project's session data.</td>
+</tr>
+</tbody>
+</table>
+<p>This is the information you use to answer quick questions such as:</p>
+<ul>
+<li>Which repository or folder does this project correspond to?</li>
+<li>How much stored conversation history does it have?</li>
+<li>When was it last active?</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> <code>projects show</code> is the most useful command when you are matching an encoded ID back to a real project path.</p>
+</blockquote>
+<h2 id="follow-project-activity">Follow Project Activity</h2>
+<p>Project activity is session-based. On the CLI, that means you move from the <code>projects</code> commands to the <code>sessions</code> commands:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--active
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>show<span class="w"> </span>&lt;session-id&gt;
+</code></pre></div>
+
+<p>Use this flow when you want to answer questions like:</p>
+<ul>
+<li>What happened most recently in this project?</li>
+<li>Which sessions are still running?</li>
+<li>Which specific session should I inspect next?</li>
+</ul>
+<p>A project-filtered session list gives you:</p>
+<ul>
+<li>the session ID</li>
+<li>the project name</li>
+<li>the message count</li>
+<li>the last activity time</li>
+<li>whether the session appears active</li>
+</ul>
+<p>The <code>--project</code> filter expects the project ID, not the human-friendly project name.</p>
+<p>If you are using the API, the equivalent views are:</p>
+<ul>
+<li><code>GET /projects/{project_id}/sessions</code></li>
+<li><code>GET /projects/{project_id}/sessions/active</code></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> <code>--active</code> is a live-process filter. It shows sessions <code>ccsinfo</code> currently detects as running, not merely sessions with recent timestamps.</p>
+<p><strong>Tip:</strong> Think of <code>projects list</code> as the catalog, <code>projects show</code> as the metadata view, and <code>sessions list --project &lt;project-id&gt;</code> as the activity timeline.</p>
+</blockquote>
+<h2 id="understand-project-statistics">Understand Project Statistics</h2>
+<p>Use the stats view when you want a compact summary instead of a session-by-session timeline:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>projects<span class="w"> </span>stats<span class="w"> </span>&lt;project-id&gt;
+</code></pre></div>
+
+<p>That summary includes:</p>
+<ul>
+<li><code>project_id</code></li>
+<li><code>project_name</code></li>
+<li><code>session_count</code></li>
+<li><code>message_count</code></li>
+<li><code>last_activity</code></li>
+</ul>
+<p>The core aggregation logic is in <code>src/ccsinfo/core/services/project_service.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Calculate detailed stats</span>
+<span class="n">total_messages</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">last_activity</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">session</span> <span class="ow">in</span> <span class="n">get_project_sessions</span><span class="p">(</span><span class="n">project_dir</span><span class="p">):</span>
+    <span class="n">total_messages</span> <span class="o">+=</span> <span class="n">session</span><span class="o">.</span><span class="n">message_count</span>
+    <span class="n">session_last</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">last_timestamp</span>
+    <span class="k">if</span> <span class="n">session_last</span><span class="p">:</span>
+        <span class="n">session_dt</span> <span class="o">=</span> <span class="n">pendulum</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">session_last</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">last_activity</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">session_dt</span> <span class="o">&gt;</span> <span class="n">last_activity</span><span class="p">:</span>
+            <span class="n">last_activity</span> <span class="o">=</span> <span class="n">session_dt</span>
+
+<span class="k">return</span> <span class="n">ProjectStats</span><span class="p">(</span>
+    <span class="n">project_id</span><span class="o">=</span><span class="n">project_id</span><span class="p">,</span>
+    <span class="n">project_name</span><span class="o">=</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">session_count</span><span class="o">=</span><span class="n">project</span><span class="o">.</span><span class="n">session_count</span><span class="p">,</span>
+    <span class="n">message_count</span><span class="o">=</span><span class="n">total_messages</span><span class="p">,</span>
+    <span class="n">last_activity</span><span class="o">=</span><span class="n">last_activity</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>This is the practical meaning of each stat:</p>
+<ul>
+<li><code>session_count</code> tells you how many stored session files were found for the project.</li>
+<li><code>message_count</code> tells you how much conversation activity those sessions contain.</li>
+<li><code>last_activity</code> tells you the newest timestamp found across the project's sessions.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> In <code>ccsinfo</code>, <code>message_count</code> is a count of session message entries, not a token count. It reflects conversation volume, not model billing or token usage.</p>
+</blockquote>
+<p>Use project stats when you want a fast answer to questions like:</p>
+<ul>
+<li>Which project has the most conversation history?</li>
+<li>Which project has been active most recently?</li>
+<li>Is this a lightly used project or a busy one?</li>
+</ul>
+<p>When you need the story behind the numbers, go back to the filtered session list for that project.</p>
+<h2 id="use-local-or-server-mode">Use Local Or Server Mode</h2>
+<p>By default, the CLI reads local Claude Code files. If you set a server URL, the same project commands switch to HTTP calls.</p>
+<p>The configuration is wired into the CLI here:</p>
+<div class="highlight"><pre><span></span><code><span class="n">server_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+    <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">&quot;--server-url&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+    <span class="n">envvar</span><span class="o">=</span><span class="s2">&quot;CCSINFO_SERVER_URL&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remote server URL (e.g., http://localhost:8080). If not set, reads local files.&quot;</span><span class="p">,</span>
+<span class="p">),</span>
+</code></pre></div>
+
+<p>Start the built-in API server like this:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>serve
+</code></pre></div>
+
+<p>By default, it binds to <code>127.0.0.1:8080</code>. Once it is running, you can point the CLI at it:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CCSINFO_SERVER_URL</span><span class="o">=</span>http://127.0.0.1:8080<span class="w"> </span>ccsinfo<span class="w"> </span>projects<span class="w"> </span>list
+<span class="nv">CCSINFO_SERVER_URL</span><span class="o">=</span>http://127.0.0.1:8080<span class="w"> </span>ccsinfo<span class="w"> </span>projects<span class="w"> </span>show<span class="w"> </span>&lt;project-id&gt;
+<span class="nv">CCSINFO_SERVER_URL</span><span class="o">=</span>http://127.0.0.1:8080<span class="w"> </span>ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> Local mode and server mode expose the same project concepts. The difference is only where the data is read from.</p>
+</blockquote>
+<h2 id="recommended-workflow">Recommended Workflow</h2>
+<ol>
+<li>Run <code>ccsinfo projects list</code> to see every discoverable project.</li>
+<li>Use <code>ccsinfo projects show &lt;project-id&gt;</code> to inspect the project path, session count, and last activity.</li>
+<li>Use <code>ccsinfo sessions list --project &lt;project-id&gt;</code> to follow recent work in that project.</li>
+<li>Add <code>--active</code> when you only care about sessions that are currently running.</li>
+<li>Use <code>ccsinfo projects stats &lt;project-id&gt;</code> when you want a concise summary of the project's overall activity.</li>
+</ol>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Project IDs and Lookups</a></li>
+<li><a href="#">Working with Sessions</a></li>
+<li><a href="#">Using Statistics and Trends</a></li>
+<li><a href="#">Projects API</a></li>
+<li><a href="#">Data Model and Storage</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="sessions-guide.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Working with Sessions</span>
+                </a>
+                
+                
+                <a href="tasks-guide.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Working with Tasks</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#how-project-ids-work">How Project IDs Work</a></li>
+<li><a href="#browse-projects">Browse Projects</a></li>
+<li><a href="#inspect-project-metadata">Inspect Project Metadata</a></li>
+<li><a href="#follow-project-activity">Follow Project Activity</a></li>
+<li><a href="#understand-project-statistics">Understand Project Statistics</a></li>
+<li><a href="#use-local-or-server-mode">Use Local Or Server Mode</a></li>
+<li><a href="#recommended-workflow">Recommended Workflow</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

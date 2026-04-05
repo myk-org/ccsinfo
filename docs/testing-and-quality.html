@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing and Quality Checks - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link active" aria-current="page">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="testing-and-quality-checks">Testing and Quality Checks</h1>
+<p><code>ccsinfo</code> uses a layered quality workflow rather than one all-in-one script. <code>tox</code> is the repeatable test entry point, <code>pytest</code> runs the suite, <code>pytest-xdist</code> parallelizes it, <code>ruff</code> handles formatting and most linting, <code>mypy</code> enforces typing, and <code>pre-commit</code> bundles repository hygiene, <code>flake8</code>, and secret scanning.</p>
+<h2 id="at-a-glance">At a Glance</h2>
+<ul>
+<li><code>tox</code> runs the canonical automated test environment on Python 3.12.</li>
+<li><code>pytest</code> discovers tests under <code>tests/</code>.</li>
+<li><code>pytest-xdist</code> is enabled by default in tox via <code>-n auto</code>.</li>
+<li><code>ruff</code> formats code and runs the primary lint pass.</li>
+<li><code>mypy</code> uses strict settings for source code.</li>
+<li><code>flake8</code> still runs as an additional check inside <code>pre-commit</code>.</li>
+<li><code>pre-commit</code> also runs secret scanners before code is committed.</li>
+</ul>
+<div class="mermaid-diagram"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1357.27px; background-color: transparent;" viewBox="0 0 1357.265625 430" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePath .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M496.25,45.864L451.352,52.72C406.454,59.576,316.659,73.288,271.761,83.644C226.863,94,226.863,101,226.863,104.5L226.863,108" id="my-svg-L_Dev_Tox_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Dev_Tox_0" data-points="W3sieCI6NDk2LjI1LCJ5Ijo0NS44NjQ0MjUyNDk3NzkxOX0seyJ4IjoyMjYuODYzMjgxMjUsInkiOjg3fSx7IngiOjIyNi44NjMyODEyNSwieSI6MTEyfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M638.547,45.202L687.132,52.168C735.717,59.134,832.888,73.067,881.473,83.534C930.059,94,930.059,101,930.059,104.5L930.059,108" id="my-svg-L_Dev_PC_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Dev_PC_0" data-points="W3sieCI6NjM4LjU0Njg3NSwieSI6NDUuMjAxNjEzNTExMjcxOTZ9LHsieCI6OTMwLjA1ODU5Mzc1LCJ5Ijo4N30seyJ4Ijo5MzAuMDU4NTkzNzUsInkiOjExMn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M184.34,158.795L172.809,164.162C161.279,169.53,138.217,180.265,126.687,193.132C115.156,206,115.156,221,115.156,228.5L115.156,236" id="my-svg-L_Tox_UV_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Tox_UV_0" data-points="W3sieCI6MTg0LjMzOTg0Mzc1LCJ5IjoxNTguNzk0ODAzNjUwNzMyNn0seyJ4IjoxMTUuMTU2MjUsInkiOjE5MX0seyJ4IjoxMTUuMTU2MjUsInkiOjI0MH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M269.387,155.793L284.245,161.661C299.104,167.529,328.822,179.264,343.68,192.632C358.539,206,358.539,221,358.539,228.5L358.539,236" id="my-svg-L_Tox_Pytest_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Tox_Pytest_0" data-points="W3sieCI6MjY5LjM4NjcxODc1LCJ5IjoxNTUuNzkyOTAzOTcyMjMyOTJ9LHsieCI6MzU4LjUzOTA2MjUsInkiOjE5MX0seyJ4IjozNTguNTM5MDYyNSwieSI6MjQwfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M358.539,294L358.539,302.167C358.539,310.333,358.539,326.667,358.539,338.333C358.539,350,358.539,357,358.539,360.5L358.539,364" id="my-svg-L_Pytest_Tests_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Pytest_Tests_0" data-points="W3sieCI6MzU4LjUzOTA2MjUsInkiOjI5NH0seyJ4IjozNTguNTM5MDYyNSwieSI6MzQzfSx7IngiOjM1OC41MzkwNjI1LCJ5IjozNjh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M853.816,150.805L810.551,157.504C767.286,164.204,680.757,177.602,637.492,191.801C594.227,206,594.227,221,594.227,228.5L594.227,236" id="my-svg-L_PC_Ruff_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_PC_Ruff_0" data-points="W3sieCI6ODUzLjgxNjQwNjI1LCJ5IjoxNTAuODA1Mjg3NzA2NjA1NTV9LHsieCI6NTk0LjIyNjU2MjUsInkiOjE5MX0seyJ4Ijo1OTQuMjI2NTYyNSwieSI6MjQwfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M883.545,166L876.367,170.167C869.189,174.333,854.833,182.667,847.655,194.333C840.477,206,840.477,221,840.477,228.5L840.477,236" id="my-svg-L_PC_Flake8_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_PC_Flake8_0" data-points="W3sieCI6ODgzLjU0NDg0Njc1NDgwNzcsInkiOjE2Nn0seyJ4Ijo4NDAuNDc2NTYyNSwieSI6MTkxfSx7IngiOjg0MC40NzY1NjI1LCJ5IjoyNDB9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M986.941,166L995.719,170.167C1004.497,174.333,1022.053,182.667,1030.831,194.333C1039.609,206,1039.609,221,1039.609,228.5L1039.609,236" id="my-svg-L_PC_Mypy_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_PC_Mypy_0" data-points="W3sieCI6OTg2Ljk0MDczMDE2ODI2OTMsInkiOjE2Nn0seyJ4IjoxMDM5LjYwOTM3NSwieSI6MTkxfSx7IngiOjEwMzkuNjA5Mzc1LCJ5IjoyNDB9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1006.301,151.564L1046.186,158.137C1086.07,164.709,1165.84,177.855,1205.725,187.927C1245.609,198,1245.609,205,1245.609,208.5L1245.609,212" id="my-svg-L_PC_Secrets_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_PC_Secrets_0" data-points="W3sieCI6MTAwNi4zMDA3ODEyNSwieSI6MTUxLjU2NDA0MzUyNTA4NjMzfSx7IngiOjEyNDUuNjA5Mzc1LCJ5IjoxOTF9LHsieCI6MTI0NS42MDkzNzUsInkiOjIxNn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M594.227,294L594.227,302.167C594.227,310.333,594.227,326.667,622.559,340.816C650.891,354.966,707.555,366.931,735.887,372.914L764.219,378.897" id="my-svg-L_Ruff_Src_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Ruff_Src_0" data-points="W3sieCI6NTk0LjIyNjU2MjUsInkiOjI5NH0seyJ4Ijo1OTQuMjI2NTYyNSwieSI6MzQzfSx7IngiOjc2OC4xMzI4MTI1LCJ5IjozNzkuNzIzMzUwMjUzODA3MX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M840.477,294L840.477,302.167C840.477,310.333,840.477,326.667,840.477,338.333C840.477,350,840.477,357,840.477,360.5L840.477,364" id="my-svg-L_Flake8_Src_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Flake8_Src_0" data-points="W3sieCI6ODQwLjQ3NjU2MjUsInkiOjI5NH0seyJ4Ijo4NDAuNDc2NTYyNSwieSI6MzQzfSx7IngiOjg0MC40NzY1NjI1LCJ5IjozNjh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1039.609,294L1039.609,302.167C1039.609,310.333,1039.609,326.667,1019.123,340.183C998.636,353.699,957.663,364.399,937.177,369.748L916.691,375.098" id="my-svg-L_Mypy_Src_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Mypy_Src_0" data-points="W3sieCI6MTAzOS42MDkzNzUsInkiOjI5NH0seyJ4IjoxMDM5LjYwOTM3NSwieSI6MzQzfSx7IngiOjkxMi44MjAzMTI1LCJ5IjozNzYuMTA4NzEzNTYyNzEzM31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1245.609,318L1245.609,322.167C1245.609,326.333,1245.609,334.667,1245.609,342.333C1245.609,350,1245.609,357,1245.609,360.5L1245.609,364" id="my-svg-L_Secrets_Repo_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Secrets_Repo_0" data-points="W3sieCI6MTI0NS42MDkzNzUsInkiOjMxOH0seyJ4IjoxMjQ1LjYwOTM3NSwieSI6MzQzfSx7IngiOjEyNDUuNjA5Mzc1LCJ5IjozNjh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Dev_Tox_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Dev_PC_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Tox_UV_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Tox_Pytest_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Pytest_Tests_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_PC_Ruff_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_PC_Flake8_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_PC_Mypy_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_PC_Secrets_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Ruff_Src_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Flake8_Src_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Mypy_Src_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Secrets_Repo_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-Dev-0" data-look="classic" transform="translate(567.3984375, 35)"><rect class="basic label-container" style="" x="-71.1484375" y="-27" width="142.296875" height="54"/><g class="label" style="" transform="translate(-41.1484375, -12)"><rect/><foreignObject width="82.296875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Developer</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Tox-1" data-look="classic" transform="translate(226.86328125, 139)"><rect class="basic label-container" style="" x="-42.5234375" y="-27" width="85.046875" height="54"/><g class="label" style="" transform="translate(-12.5234375, -12)"><rect/><foreignObject width="25.046875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>tox</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-PC-3" data-look="classic" transform="translate(930.05859375, 139)"><rect class="basic label-container" style="" x="-76.2421875" y="-27" width="152.484375" height="54"/><g class="label" style="" transform="translate(-46.2421875, -12)"><rect/><foreignObject width="92.484375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>pre-commit</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-UV-5" data-look="classic" transform="translate(115.15625, 267)"><rect class="basic label-container" style="" x="-107.15625" y="-27" width="214.3125" height="54"/><g class="label" style="" transform="translate(-77.15625, -12)"><rect/><foreignObject width="154.3125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>uv sync --extra dev</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Pytest-7" data-look="classic" transform="translate(358.5390625, 267)"><rect class="basic label-container" style="" x="-86.2265625" y="-27" width="172.453125" height="54"/><g class="label" style="" transform="translate(-56.2265625, -12)"><rect/><foreignObject width="112.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>pytest -n auto</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Tests-9" data-look="classic" transform="translate(358.5390625, 395)"><rect class="basic label-container" style="" x="-52.2265625" y="-27" width="104.453125" height="54"/><g class="label" style="" transform="translate(-22.2265625, -12)"><rect/><foreignObject width="44.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>tests/</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Ruff-11" data-look="classic" transform="translate(594.2265625, 267)"><rect class="basic label-container" style="" x="-99.4609375" y="-27" width="198.921875" height="54"/><g class="label" style="" transform="translate(-69.4609375, -12)"><rect/><foreignObject width="138.921875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Ruff lint + format</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Flake8-13" data-look="classic" transform="translate(840.4765625, 267)"><rect class="basic label-container" style="" x="-96.7890625" y="-27" width="193.578125" height="54"/><g class="label" style="" transform="translate(-66.7890625, -12)"><rect/><foreignObject width="133.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Flake8 + plugins</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Mypy-15" data-look="classic" transform="translate(1039.609375, 267)"><rect class="basic label-container" style="" x="-52.34375" y="-27" width="104.6875" height="54"/><g class="label" style="" transform="translate(-22.34375, -12)"><rect/><foreignObject width="44.6875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>mypy</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Secrets-17" data-look="classic" transform="translate(1245.609375, 267)"><rect class="basic label-container" style="" x="-103.65625" y="-51" width="207.3125" height="102"/><g class="label" style="" transform="translate(-73.65625, -36)"><rect/><foreignObject width="147.3125" height="72"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>detect-private-key<br />detect-secrets<br />gitleaks</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Src-19" data-look="classic" transform="translate(840.4765625, 395)"><rect class="basic label-container" style="" x="-72.34375" y="-27" width="144.6875" height="54"/><g class="label" style="" transform="translate(-42.34375, -12)"><rect/><foreignObject width="84.6875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>src/ccsinfo</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Repo-25" data-look="classic" transform="translate(1245.609375, 395)"><rect class="basic label-container" style="" x="-103.625" y="-27" width="207.25" height="54"/><g class="label" style="" transform="translate(-73.625, -12)"><rect/><foreignObject width="147.25" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>repository content</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div>
+
+<h2 id="setup-and-quick-start">Setup and Quick Start</h2>
+<p>The tox definition is intentionally small and easy to reason about:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tox]</span>
+<span class="na">envlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">py312</span>
+<span class="na">isolated_build</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+
+<span class="k">[testenv]</span>
+<span class="na">allowlist_externals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">uv</span>
+<span class="na">commands</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">uv sync --extra dev</span>
+<span class="w">    </span><span class="na">uv run pytest -n auto {posargs</span><span class="o">:</span><span class="s">tests}</span>
+</code></pre></div>
+
+<p>The <code>dev</code> extra contains the core test and static-analysis tools that tox depends on:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[project.optional-dependencies]</span>
+<span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;pytest&gt;=7.4.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pytest-cov&gt;=4.1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pytest-asyncio&gt;=0.21.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;pytest-xdist&gt;=3.5.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;ruff&gt;=0.1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;mypy&gt;=1.5.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;tox&gt;=4.0.0&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>A practical starting point is:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>sync<span class="w"> </span>--extra<span class="w"> </span>dev
+tox
+</code></pre></div>
+
+<p>To narrow the tox run to one part of the suite, pass pytest arguments after <code>--</code>, for example <code>tox -- tests/test_parsers.py</code>.</p>
+<p>The project metadata declares Python <code>&gt;=3.12</code>, but tox currently standardizes on a single <code>py312</code> environment, so that is the canonical automated test target.</p>
+<blockquote>
+<p><strong>Note:</strong> <code>pre-commit</code> is configured in this repository, but it is not part of the <code>dev</code> extra shown above. <code>flake8</code> is also hook-managed rather than installed by <code>uv sync --extra dev</code>. In practice, that means tox is the built-in path for tests, while <code>pre-commit</code> must be available separately if you want hook-based runs.</p>
+</blockquote>
+<h2 id="pytest">Pytest</h2>
+<p>Pytest is configured in <code>pyproject.toml</code> rather than a separate <code>pytest.ini</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.pytest.ini_options]</span>
+<span class="n">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span>
+<span class="n">asyncio_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span>
+<span class="n">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-v&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--tb=short&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--strict-markers&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.coverage.run]</span>
+<span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src/ccsinfo&quot;</span><span class="p">]</span>
+<span class="n">branch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="k">[tool.coverage.report]</span>
+<span class="n">exclude_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;pragma: no cover&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;if TYPE_CHECKING:&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;if __name__ == .__main__.:&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;raise NotImplementedError&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>That configuration has a few practical consequences:</p>
+<ul>
+<li>Test discovery is limited to <code>tests/</code>.</li>
+<li>Runs are verbose by default, with shorter tracebacks.</li>
+<li>Unknown pytest markers are treated as errors because of <code>--strict-markers</code>.</li>
+<li>Coverage settings are ready to use, but coverage is not turned on by default by tox or by <code>addopts</code>.</li>
+</ul>
+<p>The checked-in suite is organized around project boundaries:</p>
+<ul>
+<li><code>tests/test_models.py</code> checks Pydantic models, enums, aliases, and helper properties.</li>
+<li><code>tests/test_parsers.py</code> checks JSON and JSONL parsing, malformed input handling, and iterator helpers.</li>
+<li><code>tests/test_services.py</code> covers service-layer behavior, including patched data sources.</li>
+<li><code>tests/test_utils_paths.py</code> checks path encoding, decoding, and filesystem helpers around <code>~/.claude</code>.</li>
+</ul>
+<p>The fixtures are designed to build realistic temporary Claude Code data layouts without touching a real home directory:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mock_claude_dir</span><span class="p">(</span>
+    <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">sample_session_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">sample_task_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a fully populated mock .claude directory.&quot;&quot;&quot;</span>
+    <span class="n">claude_dir</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+    <span class="c1"># Create projects directory with a sample project</span>
+    <span class="n">projects_dir</span> <span class="o">=</span> <span class="n">claude_dir</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+    <span class="n">project_dir</span> <span class="o">=</span> <span class="n">projects_dir</span> <span class="o">/</span> <span class="s2">&quot;-home-user-test-project&quot;</span>
+    <span class="n">project_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create a session file in the project</span>
+    <span class="n">session_file</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456.jsonl&quot;</span>
+    <span class="k">with</span> <span class="n">session_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">sample_session_data</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create tasks directory with a session&#39;s tasks</span>
+    <span class="n">tasks_dir</span> <span class="o">=</span> <span class="n">claude_dir</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+    <span class="n">session_tasks_dir</span> <span class="o">=</span> <span class="n">tasks_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456&quot;</span>
+    <span class="n">session_tasks_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create a task file</span>
+    <span class="n">task_file</span> <span class="o">=</span> <span class="n">session_tasks_dir</span> <span class="o">/</span> <span class="s2">&quot;1.json&quot;</span>
+    <span class="k">with</span> <span class="n">task_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">sample_task_data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">claude_dir</span>
+</code></pre></div>
+
+<p>A representative parser test shows the kind of failure handling the suite expects:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_parse_jsonl_skip_malformed_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that malformed lines are skipped by default.&quot;&quot;&quot;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;{&quot;a&quot;: 1}</span><span class="se">\n</span><span class="s1">not json</span><span class="se">\n</span><span class="s1">{&quot;b&quot;: 2}&#39;</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;test.jsonl&quot;</span>
+    <span class="n">file_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">parse_jsonl</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="k">assert</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_parse_jsonl_raise_on_malformed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that malformed lines raise when skip_malformed=False.&quot;&quot;&quot;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;{&quot;a&quot;: 1}</span><span class="se">\n</span><span class="s1">not json</span><span class="se">\n</span><span class="s1">{&quot;b&quot;: 2}&#39;</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;test.jsonl&quot;</span>
+    <span class="n">file_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">orjson</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">parse_jsonl</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">skip_malformed</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> <code>pytest-asyncio</code> is installed and <code>asyncio_mode = "auto"</code> is enabled, but the current checked-in suite is synchronous.</p>
+<p><strong>Tip:</strong> The current tests are a good fit for parallel execution because they lean on <code>tmp_path</code>, temporary files, and mocks instead of shared mutable global state.</p>
+</blockquote>
+<h3 id="coverage">Coverage</h3>
+<p><code>pytest-cov</code> is part of the <code>dev</code> extra, and coverage settings are already in <code>pyproject.toml</code>, but tox does not add <code>--cov</code> by default. If you want coverage output, run <code>pytest</code> directly with <code>pytest-cov</code> options rather than relying on the default tox command.</p>
+<h2 id="tox-and-xdist">Tox and xdist</h2>
+<p><code>tox</code> currently defines a single environment, <code>py312</code>, and always runs <code>pytest</code> with <code>-n auto</code>. That means parallel test execution is the default behavior whenever you use tox.</p>
+<p>This is the key xdist integration in the repo:</p>
+<div class="highlight"><pre><span></span><code><span class="na">commands</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">uv sync --extra dev</span>
+<span class="w">    </span><span class="na">uv run pytest -n auto {posargs</span><span class="o">:</span><span class="s">tests}</span>
+</code></pre></div>
+
+<p>In practice:</p>
+<ul>
+<li><code>-n auto</code> lets <code>pytest-xdist</code> choose a worker count automatically.</li>
+<li><code>{posargs:tests}</code> means tox forwards extra pytest arguments.</li>
+<li><code>tox -- tests/test_parsers.py</code> is a simple way to narrow a run while keeping the same tox-managed environment.</li>
+</ul>
+<blockquote>
+<p><strong>Warning:</strong> Because tox hardcodes <code>-n auto</code>, it is not the best entry point for debugging order-sensitive or timing-sensitive failures. For that kind of investigation, run <code>pytest</code> directly so you can control whether parallelism is enabled.</p>
+</blockquote>
+<h2 id="ruff-formatting-and-linting">Ruff Formatting and Linting</h2>
+<p>Ruff is the primary formatter and linter configured in the repository:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.ruff]</span>
+<span class="n">preview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span>
+<span class="n">fix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">output-format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;grouped&quot;</span>
+
+<span class="k">[tool.ruff.lint]</span>
+<span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;W&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;I&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;UP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PLC0415&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARG&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RUF059&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.ruff.format]</span>
+<span class="n">exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;.git&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.venv&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.mypy_cache&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.tox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;__pycache__&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>This setup means:</p>
+<ul>
+<li>Formatting and linting are both handled by Ruff.</li>
+<li>The line length target is <code>120</code>.</li>
+<li>Ruff is allowed to auto-fix many issues because <code>fix = true</code> is enabled.</li>
+<li>Import sorting is covered by <code>I</code>.</li>
+<li>Extra rule families such as <code>B</code> (bugbear), <code>UP</code> (pyupgrade), and <code>ARG</code> (unused arguments) are enabled in addition to the usual <code>E</code>, <code>F</code>, and <code>W</code> rules.</li>
+</ul>
+<p>Once the <code>dev</code> extra is installed, the common direct Ruff commands are:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>format<span class="w"> </span>.
+uv<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>check<span class="w"> </span>.
+</code></pre></div>
+
+<blockquote>
+<p><strong>Tip:</strong> Because the repo enables Ruff auto-fixes, a lint run can rewrite files. If Ruff touches a large set of files, run the tests again afterward.</p>
+</blockquote>
+<h2 id="mypy">mypy</h2>
+<p>Type checking is strict in this project. The main mypy settings make it clear that type annotations are part of the expected code quality bar, not an optional extra:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.mypy]</span>
+<span class="n">check_untyped_defs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">disallow_any_generics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">disallow_incomplete_defs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">disallow_untyped_defs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">no_implicit_optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">show_error_codes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">warn_unused_ignores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">strict_equality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">extra_checks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">warn_unused_configs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">warn_redundant_casts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+
+<p>Only a narrow override is applied, and it is limited to decorator-heavy CLI and router modules:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[[tool.mypy.overrides]]</span>
+<span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;ccsinfo.cli.commands.*&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;ccsinfo.cli.main&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;ccsinfo.server.routers.*&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">disallow_untyped_decorators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</code></pre></div>
+
+<p>The source itself is written in a style that benefits from strict checking. For example, the parser layer uses generic return types instead of falling back to untyped helpers:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">parse_jsonl</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="s2">&quot;BaseModel&quot;</span><span class="p">](</span>
+    <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">skip_malformed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">T</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</code></pre></div>
+
+<p>If you want to run mypy directly, a typical local command is:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mypy<span class="w"> </span>src
+</code></pre></div>
+
+<p>When mypy runs through <code>pre-commit</code>, it focuses on source code and brings in a few extra stub packages:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/mirrors-mypy</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.19.1</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypy</span>
+<span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(tests/)</span>
+<span class="w">      </span><span class="nt">additional_dependencies</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">[</span><span class="nv">types-requests</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">types-PyYAML</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">types-colorama</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">types-aiofiles</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> The pre-commit mypy hook excludes <code>tests/</code>, so the hook is intentionally narrower than an unrestricted project-wide type check.</p>
+</blockquote>
+<h2 id="flake8">Flake8</h2>
+<p>Ruff is the main linter, but <code>flake8</code> is still part of the repository’s quality story through <code>pre-commit</code>. The dedicated Flake8 config is small:</p>
+<div class="highlight"><pre><span></span><code>[flake8]
+max-line-length = 120
+extend-ignore = E203, E501, W503
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    build,
+    dist,
+    *.egg-info,
+</code></pre></div>
+
+<p>And the pre-commit hook adds plugin-based checks on top of base Flake8:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/PyCQA/flake8</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.3.0</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flake8</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--config=.flake8</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">additional_dependencies</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">[</span><span class="nv">git+https</span><span class="p p-Indicator">:</span><span class="nv">//github.com/RedHatQE/flake8-plugins.git</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">flake8-mutable</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<p>This is important for day-to-day use:</p>
+<ul>
+<li><code>flake8</code> is not listed in the project <code>dev</code> extra.</li>
+<li>The supported repo-defined way to run Flake8 is through <code>pre-commit</code>.</li>
+<li>If <code>pre-commit</code> reports a Flake8 failure even though Ruff is happy, the issue may be coming from the extra Flake8 plugins rather than overlapping style rules.</li>
+</ul>
+<p>A focused Flake8 run looks like this:</p>
+<div class="highlight"><pre><span></span><code>pre-commit<span class="w"> </span>run<span class="w"> </span>flake8<span class="w"> </span>--all-files
+</code></pre></div>
+
+<h2 id="pre-commit-hooks-and-secret-scanners">Pre-commit Hooks and Secret Scanners</h2>
+<p><code>pre-commit</code> is the broadest single quality gate in the repository. It combines repository hygiene, Python quality checks, and multiple secret scanners:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/pre-commit-hooks</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v6.0.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-added-large-files</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-docstring-first</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-executables-have-shebangs</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-symlinks</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">detect-private-key</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mixed-line-ending</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug-statements</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--markdown-linebreak-ext=md</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># Do not process Markdown files.</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">end-of-file-fixer</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-ast</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-builtin-literals</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-docstring-first</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-toml</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/PyCQA/flake8</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.3.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flake8</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--config=.flake8</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">additional_dependencies</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">[</span><span class="nv">git+https</span><span class="p p-Indicator">:</span><span class="nv">//github.com/RedHatQE/flake8-plugins.git</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">flake8-mutable</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/Yelp/detect-secrets</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.5.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">detect-secrets</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.14.14</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff-format</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/gitleaks/gitleaks</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v8.30.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitleaks</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/mirrors-mypy</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.19.1</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypy</span>
+<span class="w">        </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(tests/)</span>
+<span class="w">        </span><span class="nt">additional_dependencies</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">[</span><span class="nv">types-requests</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">types-PyYAML</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">types-colorama</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">types-aiofiles</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<p>In practical terms, <code>pre-commit</code> gives you three layers of protection:</p>
+<ul>
+<li>File hygiene checks catch common problems such as merge conflicts, trailing whitespace, missing end-of-file newlines, malformed AST/TOML, debug statements, and accidental large files.</li>
+<li>Python quality checks run Ruff, Flake8, and mypy together.</li>
+<li>Secret scanning is layered: <code>detect-private-key</code> looks for private keys, <code>detect-secrets</code> adds general secret detection, and <code>gitleaks</code> adds another credential-focused scan.</li>
+</ul>
+<p>A common local workflow is:</p>
+<div class="highlight"><pre><span></span><code>pre-commit<span class="w"> </span>install
+pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</code></pre></div>
+
+<blockquote>
+<p><strong>Warning:</strong> Secret-detection failures should be treated seriously. If a hook flags a key, token, or other credential-like string, remove it from the change or rotate it before proceeding.</p>
+</blockquote>
+<p>The repository also includes pre-commit.ci metadata:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">ci</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">autofix_prs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">autoupdate_commit_msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ci:</span><span class="nv"> </span><span class="s">[pre-commit.ci]</span><span class="nv"> </span><span class="s">pre-commit</span><span class="nv"> </span><span class="s">autoupdate&quot;</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> <code>autofix_prs: false</code> means pre-commit.ci will not push automatic fix commits if the repository is connected to that service. Local hook runs can still rewrite files when an auto-fixing hook supports it.</p>
+</blockquote>
+<h2 id="cicd-status">CI/CD Status</h2>
+<p>No checked-in GitHub Actions, GitLab CI, or similar pipeline files are present in this repository. The only CI-related configuration found in the codebase is the <code>ci:</code> section in <code>.pre-commit-config.yaml</code>.</p>
+<p>That means the documented quality gates in this repo are primarily local:</p>
+<ol>
+<li>Run <code>tox</code> for the project’s canonical test environment.</li>
+<li>Run <code>pre-commit run --all-files</code> if you want the full hook suite, including Flake8 and secret scanning.</li>
+<li>Run focused direct tools such as <code>uv run ruff check .</code> or <code>uv run mypy src</code> when you are iterating on a specific issue.</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> If you want a “before I commit” routine that matches the repository configuration closely, <code>tox</code> plus <code>pre-commit run --all-files</code> is the most complete combination available from the checked-in files.</p>
+</blockquote>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Development Setup</a></li>
+<li><a href="#">Automation and CI</a></li>
+<li><a href="#">Architecture and Project Structure</a></li>
+<li><a href="#">Data Model and Storage</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="development-setup.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Development Setup</span>
+                </a>
+                
+                
+                <a href="automation-and-ci.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Automation and CI</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#at-a-glance">At a Glance</a></li>
+<li><a href="#setup-and-quick-start">Setup and Quick Start</a></li>
+<li><a href="#pytest">Pytest</a><ul>
+<li><a href="#coverage">Coverage</a></li>
+</ul>
+</li>
+<li><a href="#tox-and-xdist">Tox and xdist</a></li>
+<li><a href="#ruff-formatting-and-linting">Ruff Formatting and Linting</a></li>
+<li><a href="#mypy">mypy</a></li>
+<li><a href="#flake8">Flake8</a></li>
+<li><a href="#pre-commit-hooks-and-secret-scanners">Pre-commit Hooks and Secret Scanners</a></li>
+<li><a href="#cicd-status">CI/CD Status</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+# ccsinfo
+
+> Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.
+
+## Overview
+
+- [Overview](overview.md): Introduce ccsinfo, its audience, and the core value of exploring Claude Code activity from local data or a remote service.
+- [Architecture and Project Structure](architecture-and-project-structure.md): Map the cli, core, server, utils, and tests packages, and show how parsers, services, and routers fit together.
+- [Data Model and Storage](data-model-and-storage.md): Describe the ~/.claude/projects and ~/.claude/tasks layouts, session JSONL files, prompt history files, and the encoded project path naming scheme.
+
+## Getting Started
+
+- [Installation](installation.md): Cover Python 3.12+ requirements, package installation, the ccsinfo entry point, and optional developer dependencies.
+- [Quickstart: Local CLI Mode](local-cli-quickstart.md): Walk through using ccsinfo directly against a local ~/.claude directory to list sessions, inspect messages, and view statistics.
+- [Quickstart: Remote Server Mode](remote-server-quickstart.md): Show how to start the FastAPI server with ccsinfo serve, verify it with health endpoints, and point CLI clients at it.
+
+## Configuration
+
+- [Configuration](configuration.md): Document the CCSINFO_SERVER_URL environment variable, the --server-url flag, and serve command host and port options.
+- [Project IDs and Lookups](project-ids-and-lookups.md): Explain dash-encoded project IDs, session lookup behavior, and why task lookups must be scoped by session ID.
+
+## Usage Guides
+
+- [Working with Sessions](sessions-guide.md): Cover listing sessions, filtering by project or active status, viewing session details, reading messages, and inspecting tool calls.
+- [Working with Projects](projects-guide.md): Show how to browse projects, inspect project metadata, and understand per-project activity and statistics.
+- [Working with Tasks](tasks-guide.md): Document task listing, status filtering, pending work views, task details, blocking relationships, and session-scoped task lookup.
+- [Searching Sessions, Messages, and History](search-guide.md): Explain full-text search across session metadata, message content, and prompt history stored in .history.jsonl files.
+- [Using Statistics and Trends](statistics-guide.md): Cover global totals, daily activity breakdowns, trend analysis, most active projects, and most used tools.
+- [JSON Output and Automation](json-output-and-automation.md): Show how major CLI commands support JSON output and how to integrate ccsinfo into scripts and other tooling.
+
+## API Reference
+
+- [API Overview](api-overview.md): Introduce the REST API, shared response models, common query parameters, and the relationship between CLI commands and HTTP endpoints.
+- [Sessions API](api-sessions.md): Reference session listing, active sessions, session detail, messages, tools, tasks, progress, and summary endpoints.
+- [Projects API](api-projects.md): Reference project listing, project detail, project sessions, active project sessions, and project statistics endpoints.
+- [Tasks API](api-tasks.md): Reference task listing, status filtering, pending tasks, and session-qualified task detail endpoints.
+- [Search API](api-search.md): Reference session, message, and prompt-history search endpoints and explain what fields each search mode covers.
+- [Stats and Health API](api-stats-and-health.md): Reference global stats, daily stats, trend analytics, health checks, and server info endpoints.
+
+## Operations
+
+- [Running the Server](server-operations.md): Cover running ccsinfo as a network-accessible FastAPI service, host and port choices, health checks, and remote client usage patterns.
+- [Active Session Detection](active-session-detection.md): Explain how ccsinfo infers active Claude sessions from running processes, the short-lived cache it uses, and platform-specific caveats.
+- [Troubleshooting](troubleshooting.md): Help users diagnose missing ~/.claude data, empty results, project ID confusion, task lookup issues, and local versus remote mode problems.
+
+## Development
+
+- [Development Setup](development-setup.md): Cover source layout, editable installs, uv-based workflows, and the developer environment expected by the repository.
+- [Testing and Quality Checks](testing-and-quality.md): Document pytest, tox, xdist-based test runs, Ruff formatting and linting, mypy, flake8, and pre-commit hooks including secret scanners.
+- [Automation and CI](automation-and-ci.md): Explain the current automation story around tox and pre-commit configuration, and note that no checked-in GitHub Actions or other CI pipeline files are present.

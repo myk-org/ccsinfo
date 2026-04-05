@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link active" aria-current="page">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="troubleshooting">Troubleshooting</h1>
+<p>If <code>ccsinfo</code> shows no data, odd project names, or missing tasks, the problem is usually one of these:</p>
+<ol>
+<li>You are in remote mode when you meant to read local files.</li>
+<li><code>ccsinfo</code> is reading a different user's <code>~/.claude</code>.</li>
+<li>You copied a shortened ID from table output instead of the full ID.</li>
+<li>You used the wrong search command for the kind of data you want.</li>
+<li>You looked up a task without the session it belongs to.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Most likely cause</th>
+<th>First thing to try</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>No projects found.</code></td>
+<td>Wrong <code>~/.claude</code> directory, or remote server has no data</td>
+<td>Confirm local vs remote mode, then check the user/home directory being read</td>
+</tr>
+<tr>
+<td><code>Project not found:</code></td>
+<td>You used a shortened or guessed project ID</td>
+<td>Run <code>ccsinfo projects list --json</code> and use the full <code>id</code></td>
+</tr>
+<tr>
+<td><code>Session not found:</code></td>
+<td>You copied the 12-character table ID</td>
+<td>Run <code>ccsinfo sessions list --json</code> and use the full session UUID</td>
+</tr>
+<tr>
+<td><code>Task not found:</code></td>
+<td>Missing or wrong <code>--session</code> value</td>
+<td>Re-run <code>ccsinfo tasks list --session &lt;full-session-id&gt;</code> and reuse that session ID</td>
+</tr>
+<tr>
+<td>Search returns nothing</td>
+<td>You searched the wrong index, or the message only contains tool calls</td>
+<td>Use <code>search messages</code> or <code>search history</code>; if needed inspect <code>sessions tools</code></td>
+</tr>
+<tr>
+<td><code>No active sessions.</code></td>
+<td>You are checking the wrong machine, wrong user, or a just-started session</td>
+<td>Confirm mode, then wait a few seconds and retry</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Tip:</strong> When you plan to copy an ID, prefer <code>--json</code>. The human-readable tables shorten project IDs and session IDs.</p>
+</blockquote>
+<h2 id="how-ccsinfo-finds-data">How <code>ccsinfo</code> Finds Data</h2>
+<p><code>ccsinfo</code> has two modes:</p>
+<ul>
+<li>Local mode reads files directly from <code>~/.claude</code></li>
+<li>Remote mode sends HTTP requests to a <code>ccsinfo</code> server</li>
+</ul>
+<div class="mermaid-diagram"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1270.53px; background-color: transparent;" viewBox="0 0 1270.53125 958" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePath .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M793.938,62L793.938,66.167C793.938,70.333,793.938,78.667,793.938,86.333C793.938,94,793.938,101,793.938,104.5L793.938,108" id="my-svg-L_A_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_B_0" data-points="W3sieCI6NzkzLjkzNzUsInkiOjYyfSx7IngiOjc5My45Mzc1LCJ5Ijo4N30seyJ4Ijo3OTMuOTM3NSwieSI6MTEyfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M696.846,316.909L656.596,339.257C616.345,361.606,535.845,406.303,495.594,434.151C455.344,462,455.344,473,455.344,478.5L455.344,484" id="my-svg-L_B_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_C_0" data-points="W3sieCI6Njk2Ljg0NjIyOTQ1MjI1ODEsInkiOjMxNi45MDg3Mjk0NTIyNTh9LHsieCI6NDU1LjM0Mzc1LCJ5Ijo0NTF9LHsieCI6NDU1LjM0Mzc1LCJ5Ijo0ODh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M379.375,527.594L339.758,534.162C300.141,540.729,220.906,553.865,181.289,563.932C141.672,574,141.672,581,141.672,584.5L141.672,588" id="my-svg-L_C_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_D_0" data-points="W3sieCI6Mzc5LjM3NSwieSI6NTI3LjU5Mzk3MjYwMjczOTh9LHsieCI6MTQxLjY3MTg3NSwieSI6NTY3fSx7IngiOjE0MS42NzE4NzUsInkiOjU5Mn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M455.344,542L455.344,546.167C455.344,550.333,455.344,558.667,455.344,566.333C455.344,574,455.344,581,455.344,584.5L455.344,588" id="my-svg-L_C_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_E_0" data-points="W3sieCI6NDU1LjM0Mzc1LCJ5Ijo1NDJ9LHsieCI6NDU1LjM0Mzc1LCJ5Ijo1Njd9LHsieCI6NDU1LjM0Mzc1LCJ5Ijo1OTJ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M531.313,526.667L575.083,533.389C618.854,540.111,706.396,553.556,750.167,563.778C793.938,574,793.938,581,793.938,584.5L793.938,588" id="my-svg-L_C_F_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_F_0" data-points="W3sieCI6NTMxLjMxMjUsInkiOjUyNi42NjcwMDUwNzYxNDIxfSx7IngiOjc5My45Mzc1LCJ5Ijo1Njd9LHsieCI6NzkzLjkzNzUsInkiOjU5Mn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M891.029,316.909L931.279,339.257C971.53,361.606,1052.03,406.303,1092.281,434.151C1132.531,462,1132.531,473,1132.531,478.5L1132.531,484" id="my-svg-L_B_G_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_G_0" data-points="W3sieCI6ODkxLjAyODc3MDU0Nzc0MTksInkiOjMxNi45MDg3Mjk0NTIyNTh9LHsieCI6MTEzMi41MzEyNSwieSI6NDUxfSx7IngiOjExMzIuNTMxMjUsInkiOjQ4OH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1132.531,542L1132.531,546.167C1132.531,550.333,1132.531,558.667,1132.531,566.333C1132.531,574,1132.531,581,1132.531,584.5L1132.531,588" id="my-svg-L_G_H_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_G_H_0" data-points="W3sieCI6MTEzMi41MzEyNSwieSI6NTQyfSx7IngiOjExMzIuNTMxMjUsInkiOjU2N30seyJ4IjoxMTMyLjUzMTI1LCJ5Ijo1OTJ9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1132.531,670L1132.531,674.167C1132.531,678.333,1132.531,686.667,1132.531,694.333C1132.531,702,1132.531,709,1132.531,712.5L1132.531,716" id="my-svg-L_H_I_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_H_I_0" data-points="W3sieCI6MTEzMi41MzEyNSwieSI6NjcwfSx7IngiOjExMzIuNTMxMjUsInkiOjY5NX0seyJ4IjoxMTMyLjUzMTI1LCJ5Ijo3MjB9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1132.531,798L1132.531,802.167C1132.531,806.333,1132.531,814.667,1132.531,822.333C1132.531,830,1132.531,837,1132.531,840.5L1132.531,844" id="my-svg-L_I_J_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_I_J_0" data-points="W3sieCI6MTEzMi41MzEyNSwieSI6Nzk4fSx7IngiOjExMzIuNTMxMjUsInkiOjgyM30seyJ4IjoxMTMyLjUzMTI1LCJ5Ijo4NDh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_A_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(455.34375, 451)"><g class="label" data-id="L_B_C_0" transform="translate(-10.8828125, -12)"><foreignObject width="21.765625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_D_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_E_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_F_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1132.53125, 451)"><g class="label" data-id="L_B_G_0" transform="translate(-12.9140625, -12)"><foreignObject width="25.828125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_G_H_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_H_I_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_I_J_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-A-0" data-look="classic" transform="translate(793.9375, 35)"><rect class="basic label-container" style="" x="-125.7734375" y="-27" width="251.546875" height="54"/><g class="label" style="" transform="translate(-95.7734375, -12)"><rect/><foreignObject width="191.546875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Run a ccsinfo command</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-B-1" data-look="classic" transform="translate(793.9375, 263)"><polygon points="151,0 302,-151 151,-302 0,-151" class="label-container" transform="translate(-150.5, 151)"/><g class="label" style="" transform="translate(-100, -36)"><rect/><foreignObject width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Is --server-url or CCSINFO_SERVER_URL set?</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-C-3" data-look="classic" transform="translate(455.34375, 515)"><rect class="basic label-container" style="" x="-75.96875" y="-27" width="151.9375" height="54"/><g class="label" style="" transform="translate(-45.96875, -12)"><rect/><foreignObject width="91.9375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Local mode</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-D-5" data-look="classic" transform="translate(141.671875, 631)"><rect class="basic label-container" style="" x="-133.671875" y="-39" width="267.34375" height="78"/><g class="label" style="" transform="translate(-103.671875, -24)"><rect/><foreignObject width="207.34375" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Read ~/.claude/projects//*.jsonl</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-E-7" data-look="classic" transform="translate(455.34375, 631)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Read ~/.claude/tasks//*.json</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-F-9" data-look="classic" transform="translate(793.9375, 631)"><rect class="basic label-container" style="" x="-158.59375" y="-39" width="317.1875" height="78"/><g class="label" style="" transform="translate(-128.59375, -24)"><rect/><foreignObject width="257.1875" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Read ~/.claude/projects//.history.jsonl</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-G-11" data-look="classic" transform="translate(1132.53125, 515)"><rect class="basic label-container" style="" x="-86.1015625" y="-27" width="172.203125" height="54"/><g class="label" style="" transform="translate(-56.1015625, -12)"><rect/><foreignObject width="112.203125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Remote mode</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-H-13" data-look="classic" transform="translate(1132.53125, 631)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Send HTTP request to ccsinfo server</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-I-15" data-look="classic" transform="translate(1132.53125, 759)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Server reads its own ~/.claude</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-J-17" data-look="classic" transform="translate(1132.53125, 899)"><rect class="basic label-container" style="" x="-130" y="-51" width="260" height="102"/><g class="label" style="" transform="translate(-100, -36)"><rect/><foreignObject width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Results come from the server host and user account</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div>
+
+<p>In <code>src/ccsinfo/cli/main.py</code>, remote mode is enabled only by <code>--server-url</code> or <code>CCSINFO_SERVER_URL</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">server_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+    <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">&quot;--server-url&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+    <span class="n">envvar</span><span class="o">=</span><span class="s2">&quot;CCSINFO_SERVER_URL&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remote server URL (e.g., http://localhost:8080). If not set, reads local files.&quot;</span><span class="p">,</span>
+<span class="p">),</span>
+</code></pre></div>
+
+<p>And in <code>src/ccsinfo/utils/paths.py</code>, local mode always starts from the current user's home directory:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_claude_base_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the base Claude Code directory (~/.claude).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_projects_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the projects directory (~/.claude/projects).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tasks_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the tasks directory (~/.claude/tasks).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Warning:</strong> In local mode, <code>ccsinfo</code> reads the <code>~/.claude</code> directory for the user running the command. If you run it with <code>sudo</code>, inside a container, over SSH, or from a service, it may be reading a different home directory than you expect.</p>
+</blockquote>
+<h2 id="missing-claude-data">Missing <code>~/.claude</code> Data</h2>
+<p>If <code>projects list</code>, <code>sessions list</code>, or <code>tasks list</code> comes back empty in local mode, start by checking whether the expected Claude Code files exist for the same user account that is running <code>ccsinfo</code>.</p>
+<p>The code expects these local locations:</p>
+<ul>
+<li><code>~/.claude/projects/&lt;encoded-project-id&gt;/&lt;session-id&gt;.jsonl</code></li>
+<li><code>~/.claude/projects/&lt;encoded-project-id&gt;/.history.jsonl</code></li>
+<li><code>~/.claude/tasks/&lt;session-id&gt;/&lt;task-id&gt;.json</code></li>
+</ul>
+<p>That layout also appears in the test fixture in <code>tests/conftest.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">project_dir</span> <span class="o">=</span> <span class="n">projects_dir</span> <span class="o">/</span> <span class="s2">&quot;-home-user-test-project&quot;</span>
+<span class="n">session_file</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456.jsonl&quot;</span>
+
+<span class="n">session_tasks_dir</span> <span class="o">=</span> <span class="n">tasks_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456&quot;</span>
+<span class="n">task_file</span> <span class="o">=</span> <span class="n">session_tasks_dir</span> <span class="o">/</span> <span class="s2">&quot;1.json&quot;</span>
+</code></pre></div>
+
+<p>If your data feels "partially missing", check these cases:</p>
+<ul>
+<li><code>projects list</code> only looks under <code>~/.claude/projects</code></li>
+<li><code>tasks list</code> only looks under <code>~/.claude/tasks</code></li>
+<li><code>search history</code> only sees projects that actually have a <code>.history.jsonl</code> file</li>
+<li>remote mode ignores your local machine entirely and reads the server's <code>~/.claude</code></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> It is normal for <code>search history</code> to return nothing if <code>.history.jsonl</code> does not exist, even when sessions are present.</p>
+</blockquote>
+<h2 id="empty-search-results">Empty Search Results</h2>
+<p>A common source of confusion is using the wrong search command.</p>
+<h3 id="search-sessions-does-not-search-message-text"><code>search sessions</code> does not search message text</h3>
+<p>In <code>src/ccsinfo/core/services/search_service.py</code>, session search only checks session metadata:</p>
+<div class="highlight"><pre><span></span><code><span class="n">searchable_fields</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">slug</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">cwd</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">git_branch</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">project_path</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>That means <code>ccsinfo search sessions "refactor parser"</code> will not find a prompt or reply unless that text also appears in the session ID, slug, working directory, branch, or decoded project path.</p>
+<p>Use these commands based on what you want:</p>
+<ul>
+<li><code>ccsinfo search sessions "&lt;query&gt;"</code> for session ID, project path, branch, slug, or working directory</li>
+<li><code>ccsinfo search messages "&lt;query&gt;"</code> for user/assistant text content</li>
+<li><code>ccsinfo search history "&lt;query&gt;"</code> for prompt history stored in <code>.history.jsonl</code></li>
+</ul>
+<h3 id="search-messages-only-indexes-text-blocks"><code>search messages</code> only indexes text blocks</h3>
+<p>In <code>src/ccsinfo/core/models/messages.py</code>, message text is built from <code>TextContent</code> blocks only:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="n">TextContent</span><span class="p">):</span>
+        <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+
+<p>That has two practical effects:</p>
+<ul>
+<li>tool calls are not searchable as message text</li>
+<li>a message with only tool-use content can exist, but still produce an empty text preview</li>
+</ul>
+<p>If <code>ccsinfo sessions messages &lt;session-id&gt;</code> shows <code>Content Preview</code> as <code>&lt;tool calls only&gt;</code>, that message will not be matched by <code>search messages</code>.</p>
+<p>When that happens:</p>
+<ul>
+<li>use <code>ccsinfo sessions tools &lt;full-session-id&gt;</code> to inspect tool activity</li>
+<li>use <code>ccsinfo search history</code> if you are looking for the original prompt text</li>
+<li>increase <code>--limit</code> if you expect more matches than the default output size</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> If you are looking for something you typed, <code>search history</code> is often the best first check. If you are looking for something Claude replied with, use <code>search messages</code>.</p>
+</blockquote>
+<h2 id="project-id-confusion">Project ID Confusion</h2>
+<p>Project IDs in <code>ccsinfo</code> are not plain project names. They are encoded directory names derived from the original project path.</p>
+<p>In <code>src/ccsinfo/utils/paths.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">encode_project_path</span><span class="p">(</span><span class="n">project_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a project path to Claude Code&#39;s directory name format.</span>
+
+<span class="sd">    Claude Code replaces:</span>
+<span class="sd">    - &#39;/&#39; with &#39;-&#39;</span>
+<span class="sd">    - &#39;.&#39; with &#39;-&#39;</span>
+
+<span class="sd">    Example: &#39;/home/user/project&#39; -&gt; &#39;-home-user-project&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">project_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_project_path</span><span class="p">(</span><span class="n">encoded_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a Claude Code directory name back to the original path.</span>
+
+<span class="sd">    Note: This is lossy - we cannot distinguish between original &#39;-&#39; and encoded &#39;/&#39; or &#39;.&#39;.</span>
+<span class="sd">    The path returned should be treated as approximate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Handle the pattern where /. becomes --</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">encoded_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;/.&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+
+<p>This explains several confusing behaviors:</p>
+<ul>
+<li>the project <code>id</code> is the encoded directory name, not the friendly project name</li>
+<li>the decoded <code>path</code> is approximate, not guaranteed exact</li>
+<li>projects with <code>-</code> or <code>.</code> in their path can look odd when decoded back</li>
+<li>the safest thing to use in commands is the full <code>id</code>, not the displayed <code>path</code></li>
+</ul>
+<p>A real example from <code>tests/test_utils_paths.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/home/user/.config/project&quot;</span>
+<span class="n">encoded</span> <span class="o">=</span> <span class="n">encode_project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">encoded</span> <span class="o">==</span> <span class="s2">&quot;-home-user--config-project&quot;</span>
+</code></pre></div>
+
+<h3 id="what-to-do">What to do</h3>
+<ul>
+<li>For <code>ccsinfo projects show</code>, use the exact <code>id</code></li>
+<li>For <code>ccsinfo sessions list --project</code>, use the same full project <code>id</code></li>
+<li>Do not manually reconstruct project IDs from the filesystem path</li>
+<li>If the project path shown by <code>ccsinfo</code> looks approximate, trust the <code>id</code> instead</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> <code>ccsinfo projects list</code> shortens long IDs in table output. Use <code>ccsinfo projects list --json</code> when you need a copyable full project ID.</p>
+</blockquote>
+<h2 id="task-lookup-issues">Task Lookup Issues</h2>
+<p>The most important rule is: task IDs are only unique within a session.</p>
+<p>That rule is enforced in <code>src/ccsinfo/server/routers/tasks.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{task_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">Task</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_task</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Session ID (required since task IDs are only unique within a session)&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Task</span><span class="p">:</span>
+</code></pre></div>
+
+<p>And task files are loaded from a session-specific directory in <code>src/ccsinfo/core/parsers/tasks.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">tasks_dir</span> <span class="o">=</span> <span class="n">get_tasks_directory</span><span class="p">()</span> <span class="o">/</span> <span class="n">session_id</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">tasks_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No tasks directory found for session </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">TaskCollection</span><span class="p">(</span><span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span> <span class="n">tasks</span><span class="o">=</span><span class="p">[])</span>
+</code></pre></div>
+
+<h3 id="what-this-means-in-practice">What this means in practice</h3>
+<ul>
+<li><code>ccsinfo tasks show &lt;task-id&gt;</code> is not enough</li>
+<li>you must also provide <code>--session &lt;full-session-id&gt;</code></li>
+<li>the same task ID, such as <code>1</code>, can appear in multiple sessions</li>
+<li><code>tasks list</code> and <code>tasks pending</code> do not show a session column, so duplicate task IDs are expected</li>
+</ul>
+<p>A reliable workflow is:</p>
+<ol>
+<li>Get the full session UUID with <code>ccsinfo sessions list --json</code></li>
+<li>Narrow tasks to that session with <code>ccsinfo tasks list --session &lt;full-session-id&gt;</code></li>
+<li>Show the specific task with <code>ccsinfo tasks show &lt;task-id&gt; --session &lt;full-session-id&gt;</code></li>
+</ol>
+<p>If you are using status filters, the valid values are:</p>
+<ul>
+<li><code>pending</code></li>
+<li><code>in_progress</code></li>
+<li><code>completed</code></li>
+</ul>
+<blockquote>
+<p><strong>Warning:</strong> If you see <code>Task not found</code> for a task ID that definitely exists, the wrong session ID is the first thing to check.</p>
+</blockquote>
+<h2 id="session-lookup-issues">Session Lookup Issues</h2>
+<p>There is one especially confusing edge case: the CLI help says a session ID "can be partial", but the current lookup path uses an exact filename match.</p>
+<p>In <code>src/ccsinfo/core/parsers/sessions.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">session_file</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">.jsonl&quot;</span>
+<span class="k">if</span> <span class="n">session_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">parse_session_file</span><span class="p">(</span><span class="n">session_file</span><span class="p">)</span>
+</code></pre></div>
+
+<p>That means the safest approach today is:</p>
+<ul>
+<li>use the full session UUID</li>
+<li>get it from <code>ccsinfo sessions list --json</code></li>
+<li>do not rely on the shortened 12-character table output</li>
+</ul>
+<p>This matters because the human-friendly tables show only part of the session ID:</p>
+<ul>
+<li><code>sessions list</code> shows the first 12 characters</li>
+<li><code>sessions active</code> shows the first 12 characters</li>
+<li>search result tables also show shortened session IDs</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> If you copied a session ID from a table and a follow-up command says <code>Session not found</code>, try the full UUID from <code>--json</code> before assuming the session is missing.</p>
+</blockquote>
+<h2 id="local-vs-remote-mode-problems">Local vs Remote Mode Problems</h2>
+<p>Remote mode is useful, but it is also the easiest way to accidentally query the wrong machine.</p>
+<p>Once <code>--server-url</code> or <code>CCSINFO_SERVER_URL</code> is set, commands use the HTTP client instead of local file parsing. There is no automatic fallback to your local <code>~/.claude</code>.</p>
+<blockquote>
+<p><strong>Warning:</strong> If a server URL is set, your local Claude data is ignored until you remove <code>--server-url</code> or unset <code>CCSINFO_SERVER_URL</code>.</p>
+</blockquote>
+<h3 id="starting-and-checking-a-server">Starting and checking a server</h3>
+<p>In <code>src/ccsinfo/cli/main.py</code>, the built-in server defaults to <code>127.0.0.1:8080</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</code></pre></div>
+
+<p>That means:</p>
+<ul>
+<li><code>ccsinfo serve</code> is reachable only from the same machine by default</li>
+<li>if you want network access from another machine, start it with <code>--host 0.0.0.0</code></li>
+</ul>
+<p>Useful checks:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>serve
+ccsinfo<span class="w"> </span>--server-url<span class="w"> </span>http://127.0.0.1:8080<span class="w"> </span>projects<span class="w"> </span>list
+curl<span class="w"> </span>http://127.0.0.1:8080/health
+curl<span class="w"> </span>http://127.0.0.1:8080/info
+</code></pre></div>
+
+<p>If you are troubleshooting a remote server, remember:</p>
+<ul>
+<li><code>/health</code> only tells you the API is up</li>
+<li><code>/info</code> also shows basic counts such as total sessions and total projects</li>
+<li>the server reads the <code>~/.claude</code> directory of the user account running the server process</li>
+</ul>
+<h3 id="why-remote-mode-can-look-like-missing-data">Why remote mode can look like "missing data"</h3>
+<p>In remote mode, these situations are common:</p>
+<ul>
+<li>the server is healthy, but its own <code>~/.claude</code> is empty</li>
+<li>the server is running as a different user than the one who has the Claude data</li>
+<li>the server is on another machine, so <code>sessions active</code> reflects that machine's active Claude processes, not yours</li>
+<li>a <code>show</code> command may report <code>not found</code> even when the real problem is connectivity or a server-side error</li>
+</ul>
+<p>If a remote <code>show</code> command says something is not found and that seems unlikely, verify the server first with <code>/health</code> and <code>/info</code>.</p>
+<h2 id="why-sessions-active-can-be-wrong-or-empty">Why <code>sessions active</code> Can Be Wrong or Empty</h2>
+<p>Active-session detection is different from reading saved session files.</p>
+<p>In local mode, <code>ccsinfo</code> looks for running <code>claude</code> processes and scans <code>/proc</code> for session UUIDs. That result is cached for 5 seconds.</p>
+<p>Practical consequences:</p>
+<ul>
+<li>a session can exist on disk but not appear in <code>sessions active</code></li>
+<li>a newly started or just-finished session can take a few seconds to appear or disappear</li>
+<li>if <code>claude</code> is running under another user, another container, or another machine, local active-session detection will not see it</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> If <code>sessions active</code> looks stale, wait a few seconds and retry before assuming the session tracker is broken.</p>
+</blockquote>
+<h2 id="when-data-looks-incomplete-instead-of-fully-missing">When Data Looks Incomplete Instead of Fully Missing</h2>
+<p><code>ccsinfo</code> is deliberately forgiving when it parses Claude files:</p>
+<ul>
+<li>malformed JSONL lines are skipped</li>
+<li>invalid task JSON files are ignored</li>
+<li>parsing continues instead of failing fast</li>
+</ul>
+<p>That is useful for resilience, but it also means corrupted files can show up as:</p>
+<ul>
+<li>missing messages</li>
+<li>missing history entries</li>
+<li>missing tasks</li>
+<li>lower-than-expected counts</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> If only part of a session or task list is missing, inspect the underlying files in <code>~/.claude</code> for malformed or partially written JSON.</p>
+</blockquote>
+<h2 id="useful-commands">Useful Commands</h2>
+<p>When you are troubleshooting, these are the most useful commands to keep handy:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get full, copyable project IDs</span>
+ccsinfo<span class="w"> </span>projects<span class="w"> </span>list<span class="w"> </span>--json
+
+<span class="c1"># Get full, copyable session IDs</span>
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list<span class="w"> </span>--json
+
+<span class="c1"># Check whether a specific session exists</span>
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>show<span class="w"> </span>&lt;full-session-id&gt;
+
+<span class="c1"># Inspect text messages in a session</span>
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>messages<span class="w"> </span>&lt;full-session-id&gt;
+
+<span class="c1"># Inspect tool-only activity in a session</span>
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>tools<span class="w"> </span>&lt;full-session-id&gt;
+
+<span class="c1"># List tasks for one known session</span>
+ccsinfo<span class="w"> </span>tasks<span class="w"> </span>list<span class="w"> </span>--session<span class="w"> </span>&lt;full-session-id&gt;
+
+<span class="c1"># Show one task from one session</span>
+ccsinfo<span class="w"> </span>tasks<span class="w"> </span>show<span class="w"> </span>&lt;task-id&gt;<span class="w"> </span>--session<span class="w"> </span>&lt;full-session-id&gt;
+
+<span class="c1"># Search by session metadata</span>
+ccsinfo<span class="w"> </span>search<span class="w"> </span>sessions<span class="w"> </span><span class="s2">&quot;&lt;query&gt;&quot;</span>
+
+<span class="c1"># Search by message text</span>
+ccsinfo<span class="w"> </span>search<span class="w"> </span>messages<span class="w"> </span><span class="s2">&quot;&lt;query&gt;&quot;</span>
+
+<span class="c1"># Search prompt history</span>
+ccsinfo<span class="w"> </span>search<span class="w"> </span><span class="nb">history</span><span class="w"> </span><span class="s2">&quot;&lt;query&gt;&quot;</span>
+</code></pre></div>
+
+<p>If you are using the API in remote mode, these are the most direct equivalents:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://127.0.0.1:8080/health
+curl<span class="w"> </span>http://127.0.0.1:8080/info
+curl<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:8080/sessions?limit=50&quot;</span>
+curl<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:8080/sessions/&lt;full-session-id&gt;/tasks&quot;</span>
+curl<span class="w"> </span><span class="s2">&quot;http://127.0.0.1:8080/tasks/&lt;task-id&gt;?session_id=&lt;full-session-id&gt;&quot;</span>
+</code></pre></div>
+
+<p>When in doubt, start with this checklist:</p>
+<ol>
+<li>Confirm whether you are in local mode or remote mode.</li>
+<li>Use <code>--json</code> to get full IDs.</li>
+<li>Use the full session UUID, not the shortened table display.</li>
+<li>Keep the session ID with any task ID you want to inspect.</li>
+<li>Use the right search command for the kind of content you want.</li>
+</ol>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Configuration</a></li>
+<li><a href="#">Project IDs and Lookups</a></li>
+<li><a href="#">Active Session Detection</a></li>
+<li><a href="#">Working with Tasks</a></li>
+<li><a href="#">Searching Sessions, Messages, and History</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="active-session-detection.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Active Session Detection</span>
+                </a>
+                
+                
+                <a href="development-setup.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Development Setup</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#how-ccsinfo-finds-data">How ccsinfo Finds Data</a></li>
+<li><a href="#missing-claude-data">Missing ~/.claude Data</a></li>
+<li><a href="#empty-search-results">Empty Search Results</a><ul>
+<li><a href="#search-sessions-does-not-search-message-text">search sessions does not search message text</a></li>
+<li><a href="#search-messages-only-indexes-text-blocks">search messages only indexes text blocks</a></li>
+</ul>
+</li>
+<li><a href="#project-id-confusion">Project ID Confusion</a><ul>
+<li><a href="#what-to-do">What to do</a></li>
+</ul>
+</li>
+<li><a href="#task-lookup-issues">Task Lookup Issues</a><ul>
+<li><a href="#what-this-means-in-practice">What this means in practice</a></li>
+</ul>
+</li>
+<li><a href="#session-lookup-issues">Session Lookup Issues</a></li>
+<li><a href="#local-vs-remote-mode-problems">Local vs Remote Mode Problems</a><ul>
+<li><a href="#starting-and-checking-a-server">Starting and checking a server</a></li>
+<li><a href="#why-remote-mode-can-look-like-missing-data">Why remote mode can look like "missing data"</a></li>
+</ul>
+</li>
+<li><a href="#why-sessions-active-can-be-wrong-or-empty">Why sessions active Can Be Wrong or Empty</a></li>
+<li><a href="#when-data-looks-incomplete-instead-of-fully-missing">When Data Looks Incomplete Instead of Fully Missing</a></li>
+<li><a href="#useful-commands">Useful Commands</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions API - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link active" aria-current="page">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="sessions-api">Sessions API</h1>
+<p>The Sessions API exposes Claude Code session history under the <code>/sessions</code> prefix. All endpoints on this page are read-only <code>GET</code> routes. Use them to list sessions across projects, see which sessions are active, inspect one session, retrieve normalized messages, flatten tool calls, read session-scoped task files, and fetch compact progress or summary views.</p>
+<h2 id="starting-the-api">Starting the API</h2>
+<p><code>ccsinfo</code> mounts the sessions router at <code>/sessions</code>, and the CLI starts Uvicorn on <code>127.0.0.1:8080</code> by default.</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ccsinfo&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Claude Code Session Info API&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Include routers</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">sessions</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/sessions&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sessions&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">projects</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/projects&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;projects&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/tasks&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/stats&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stats&quot;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/search&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;search&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If you use those defaults, the API base URL is <code>http://127.0.0.1:8080</code>.</p>
+<h2 id="quick-reference">Quick Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Use it for</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /sessions</code></td>
+<td>List sessions, optionally filtered</td>
+<td>Array of session summary objects</td>
+</tr>
+<tr>
+<td><code>GET /sessions/active</code></td>
+<td>List active sessions across all projects</td>
+<td>Array of active session summary objects</td>
+</tr>
+<tr>
+<td><code>GET /sessions/{session_id}</code></td>
+<td>Inspect one session's metadata</td>
+<td>One session detail object</td>
+</tr>
+<tr>
+<td><code>GET /sessions/{session_id}/messages</code></td>
+<td>Read normalized conversation messages</td>
+<td>Array of message objects</td>
+</tr>
+<tr>
+<td><code>GET /sessions/{session_id}/tools</code></td>
+<td>Read flattened tool calls</td>
+<td>Array of tool-call objects</td>
+</tr>
+<tr>
+<td><code>GET /sessions/{session_id}/tasks</code></td>
+<td>Read Claude Code tasks for the session</td>
+<td>Array of task objects</td>
+</tr>
+<tr>
+<td><code>GET /sessions/{session_id}/progress</code></td>
+<td>Get a combined session/task progress view</td>
+<td>One progress object</td>
+</tr>
+<tr>
+<td><code>GET /sessions/{session_id}/summary</code></td>
+<td>Get a compact single-session summary</td>
+<td>One session summary object</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-the-data-is-built">How The Data Is Built</h2>
+<p>The Sessions API is file-backed. Session endpoints read Claude Code JSONL files from <code>~/.claude/projects</code>, and session task data comes from JSON files under <code>~/.claude/tasks</code>. There is no separate database layer behind these routes.</p>
+<div class="mermaid-diagram"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1046.91px; background-color: transparent;" viewBox="0 0 1046.90625 302" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePath .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M185.453,151L189.62,151C193.786,151,202.12,151,209.786,151C217.453,151,224.453,151,227.953,151L231.453,151" id="my-svg-L_Client_API_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Client_API_0" data-points="W3sieCI6MTg1LjQ1MzEyNSwieSI6MTUxfSx7IngiOjIxMC40NTMxMjUsInkiOjE1MX0seyJ4IjoyMzUuNDUzMTI1LCJ5IjoxNTF9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M469.677,112L478.14,108.833C486.603,105.667,503.528,99.333,515.49,96.167C527.453,93,534.453,93,537.953,93L541.453,93" id="my-svg-L_API_SessionSvc_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_API_SessionSvc_0" data-points="W3sieCI6NDY5LjY3NzI2MjkzMTAzNDUsInkiOjExMn0seyJ4Ijo1MjAuNDUzMTI1LCJ5Ijo5M30seyJ4Ijo1NDUuNDUzMTI1LCJ5Ijo5M31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M417.565,190L434.713,202.833C451.861,215.667,486.157,241.333,509.015,254.167C531.872,267,543.292,267,549.001,267L554.711,267" id="my-svg-L_API_TaskSvc_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_API_TaskSvc_0" data-points="W3sieCI6NDE3LjU2NTE5Mzk2NTUxNzIsInkiOjE5MH0seyJ4Ijo1MjAuNDUzMTI1LCJ5IjoyNjd9LHsieCI6NTU4LjcxMDkzNzUsInkiOjI2N31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M691.518,66L701.916,60.833C712.314,55.667,733.11,45.333,747.062,40.167C761.013,35,768.12,35,771.673,35L775.227,35" id="my-svg-L_SessionSvc_SessionFiles_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_SessionSvc_SessionFiles_0" data-points="W3sieCI6NjkxLjUxNzkxNDg3MDY4OTcsInkiOjY2fSx7IngiOjc1My45MDYyNSwieSI6MzV9LHsieCI6Nzc5LjIyNjU2MjUsInkiOjM1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M715.648,267L722.025,267C728.401,267,741.154,267,752.608,267C764.063,267,774.219,267,779.297,267L784.375,267" id="my-svg-L_TaskSvc_TaskFiles_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_TaskSvc_TaskFiles_0" data-points="W3sieCI6NzE1LjY0ODQzNzUsInkiOjI2N30seyJ4Ijo3NTMuOTA2MjUsInkiOjI2N30seyJ4Ijo3ODguMzc1LCJ5IjoyNjd9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M691.518,120L701.916,125.167C712.314,130.333,733.11,140.667,747.008,145.833C760.906,151,767.906,151,771.406,151L774.906,151" id="my-svg-L_SessionSvc_ActiveCheck_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_SessionSvc_ActiveCheck_0" data-points="W3sieCI6NjkxLjUxNzkxNDg3MDY4OTcsInkiOjEyMH0seyJ4Ijo3NTMuOTA2MjUsInkiOjE1MX0seyJ4Ijo3NzguOTA2MjUsInkiOjE1MX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Client_API_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_API_SessionSvc_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_API_TaskSvc_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_SessionSvc_SessionFiles_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_TaskSvc_TaskFiles_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_SessionSvc_ActiveCheck_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-Client-0" data-look="classic" transform="translate(96.7265625, 151)"><rect class="basic label-container" style="" x="-88.7265625" y="-27" width="177.453125" height="54"/><g class="label" style="" transform="translate(-58.7265625, -12)"><rect/><foreignObject width="117.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Client or script</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-API-1" data-look="classic" transform="translate(365.453125, 151)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>FastAPI `/sessions` router</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-SessionSvc-3" data-look="classic" transform="translate(637.1796875, 93)"><rect class="basic label-container" style="" x="-91.7265625" y="-27" width="183.453125" height="54"/><g class="label" style="" transform="translate(-61.7265625, -12)"><rect/><foreignObject width="123.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Session service</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-TaskSvc-5" data-look="classic" transform="translate(637.1796875, 267)"><rect class="basic label-container" style="" x="-78.46875" y="-27" width="156.9375" height="54"/><g class="label" style="" transform="translate(-48.46875, -12)"><rect/><foreignObject width="96.9375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Task service</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-SessionFiles-7" data-look="classic" transform="translate(908.90625, 35)"><rect class="basic label-container" style="" x="-129.6796875" y="-27" width="259.359375" height="54"/><g class="label" style="" transform="translate(-99.6796875, -12)"><rect/><foreignObject width="199.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel markdown-node-label"><p>~/.claude/projects//.jsonl</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-TaskFiles-9" data-look="classic" transform="translate(908.90625, 267)"><rect class="basic label-container" style="" x="-120.53125" y="-27" width="241.0625" height="54"/><g class="label" style="" transform="translate(-90.53125, -12)"><rect/><foreignObject width="181.0625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel markdown-node-label"><p>~/.claude/tasks//*.json</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-ActiveCheck-11" data-look="classic" transform="translate(908.90625, 151)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Live `claude` process scan</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div>
+
+<p>The test fixtures are a good example of the on-disk input that the API parses before turning it into HTTP responses:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_session_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sample session JSONL data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">}],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:00:00Z&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-002&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parentMessageUuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi there!&quot;</span><span class="p">}],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:00:01Z&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_task_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sample task JSON data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;Test task&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A test task&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;blockedBy&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> The HTTP API normalizes parsed records into snake_case fields such as <code>parent_message_uuid</code>, <code>blocked_by</code>, and <code>active_form</code>.</p>
+<p><strong>Warning:</strong> Treat <code>project_id</code> as an opaque value from <code>GET /projects</code>. The path encoding is lossy, so constructing or reverse-engineering IDs from a filesystem path can be unreliable.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">encode_project_path</span><span class="p">(</span><span class="n">project_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a project path to Claude Code&#39;s directory name format.</span>
+
+<span class="sd">    Claude Code replaces:</span>
+<span class="sd">    - &#39;/&#39; with &#39;-&#39;</span>
+<span class="sd">    - &#39;.&#39; with &#39;-&#39;</span>
+
+<span class="sd">    Example: &#39;/home/user/project&#39; -&gt; &#39;-home-user-project&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">project_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_project_path</span><span class="p">(</span><span class="n">encoded_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a Claude Code directory name back to the original path.</span>
+
+<span class="sd">    Note: This is lossy - we cannot distinguish between original &#39;-&#39; and encoded &#39;/&#39; or &#39;.&#39;.</span>
+<span class="sd">    The path returned should be treated as approximate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Handle the pattern where /. becomes --</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">encoded_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;/.&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> Active status is computed from live <code>claude</code> processes and <code>/proc</code> inspection, not stored in the session file. The active-session lookup is cached for 5 seconds.</p>
+</blockquote>
+<h2 id="built-in-client-example">Built-In Client Example</h2>
+<p>The repository already contains a small HTTP client that calls the core session routes:</p>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># Sessions</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_sessions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">active_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">limit</span><span class="p">,</span> <span class="s2">&quot;active_only&quot;</span><span class="p">:</span> <span class="n">active_only</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">project_id</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;project_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project_id</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="s2">&quot;/sessions&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_dict</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/sessions/</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_session_messages</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">role</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">limit</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">role</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">role</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/sessions/</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">/messages&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_session_tools</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/sessions/</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">/tools&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_active_sessions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_list</span><span class="p">(</span><span class="s2">&quot;/sessions/active&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> The bundled <code>CCSInfoClient</code> covers listing, detail, messages, tools, and active sessions. If you need session <code>tasks</code>, <code>progress</code>, or <code>summary</code>, call those HTTP routes directly.</p>
+</blockquote>
+<h2 id="endpoint-reference">Endpoint Reference</h2>
+<h3 id="get-sessions"><code>GET /sessions</code></h3>
+<p>Lists sessions across all projects.</p>
+<ul>
+<li>Query <code>project_id</code> filters to a single project. Use the <code>id</code> field from <code>GET /projects</code>.</li>
+<li>Query <code>active_only</code> defaults to <code>false</code>.</li>
+<li>Query <code>limit</code> defaults to <code>50</code> and accepts values from <code>1</code> to <code>500</code>.</li>
+<li>Results are returned most-recent-first, sorted by <code>updated_at</code>.</li>
+<li>The route supports a limit, but not offset or cursor pagination.</li>
+<li>Each item uses the session summary shape described below.</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> If you want active sessions for one project, use <code>GET /sessions?project_id=&lt;id&gt;&amp;active_only=true</code>.</p>
+</blockquote>
+<h3 id="get-sessionsactive"><code>GET /sessions/active</code></h3>
+<p>Lists only sessions that are currently active.</p>
+<ul>
+<li>Returns the same summary shape as <code>GET /sessions</code>.</li>
+<li>Results are returned most-recent-first.</li>
+<li>This route does not expose <code>project_id</code> or <code>limit</code>.</li>
+<li>Use <code>GET /sessions</code> instead when you want active sessions plus a project filter or a bounded result set.</li>
+</ul>
+<h3 id="get-sessionssession_id"><code>GET /sessions/{session_id}</code></h3>
+<p>Returns full metadata for one session.</p>
+<ul>
+<li>Includes <code>file_path</code>, which is not present in the list and summary responses.</li>
+<li>This is metadata-only detail. Conversation content lives under <code>GET /sessions/{session_id}/messages</code>.</li>
+<li>Returns <code>404</code> with <code>{"detail":"Session not found"}</code> when the session does not exist.</li>
+</ul>
+<h3 id="get-sessionssession_idmessages"><code>GET /sessions/{session_id}/messages</code></h3>
+<p>Returns normalized conversation messages for one session.</p>
+<ul>
+<li>Query <code>role</code> is optional. The useful values are <code>user</code> and <code>assistant</code>, because those are the entry types the extractor keeps.</li>
+<li>Query <code>limit</code> defaults to <code>100</code> and accepts values from <code>1</code> to <code>500</code>.</li>
+<li>The route supports a limit, but not offset or cursor pagination.</li>
+<li>Each message includes top-level metadata plus a normalized <code>message</code> object when content blocks are present.</li>
+<li>When a message contains both text and tool-use blocks, they are preserved inside <code>message.content</code>.</li>
+<li>Returns <code>404</code> with <code>{"detail":"Session not found"}</code> when the session does not exist.</li>
+</ul>
+<h3 id="get-sessionssession_idtools"><code>GET /sessions/{session_id}/tools</code></h3>
+<p>Returns a flat list of tool calls found in the session.</p>
+<ul>
+<li>Each item contains <code>id</code>, <code>name</code>, and <code>input</code>.</li>
+<li>The list is flattened across the whole session rather than grouped by message.</li>
+<li>Use this endpoint when you care about tool usage and payloads more than full conversation context.</li>
+<li>Returns <code>404</code> with <code>{"detail":"Session not found"}</code> when the session does not exist.</li>
+</ul>
+<h3 id="get-sessionssession_idtasks"><code>GET /sessions/{session_id}/tasks</code></h3>
+<p>Returns Claude Code task records associated with the session.</p>
+<ul>
+<li>Data comes from <code>~/.claude/tasks/&lt;session_id&gt;/*.json</code>.</li>
+<li>Items use the task shape described below, including <code>status</code>, <code>blocked_by</code>, <code>blocks</code>, and <code>active_form</code>.</li>
+<li>This route delegates straight to task parsing rather than performing the upfront session lookup used by the other session-detail routes.</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> If you need to verify the session itself exists before reading tasks, call <code>GET /sessions/{session_id}</code> first.</p>
+</blockquote>
+<h3 id="get-sessionssession_idprogress"><code>GET /sessions/{session_id}/progress</code></h3>
+<p>Returns a small combined view of session activity and task progress.</p>
+<ul>
+<li>The response object contains <code>session_id</code>, <code>is_active</code>, <code>last_activity</code>, <code>message_count</code>, and <code>active_tasks</code>.</li>
+<li><code>active_tasks</code> includes only tasks whose <code>status</code> is <code>in_progress</code>.</li>
+<li><code>last_activity</code> is the session's <code>updated_at</code> value serialized to ISO 8601.</li>
+<li><code>active_tasks</code> reuses the same task object shape as <code>GET /sessions/{session_id}/tasks</code>.</li>
+<li>Returns <code>404</code> with <code>{"detail":"Session not found"}</code> when the session does not exist.</li>
+</ul>
+<h3 id="get-sessionssession_idsummary"><code>GET /sessions/{session_id}/summary</code></h3>
+<p>Returns a compact single-session summary.</p>
+<ul>
+<li>The shape matches the list items returned by <code>GET /sessions</code>.</li>
+<li>It omits <code>file_path</code>.</li>
+<li>Use it when you already know the session ID and only want the lightweight metadata fields.</li>
+<li>Returns <code>404</code> with <code>{"detail":"Session not found"}</code> when the session does not exist.</li>
+</ul>
+<h2 id="response-shapes">Response Shapes</h2>
+<h3 id="session-summary-object">Session Summary Object</h3>
+<p>Used by <code>GET /sessions</code>, <code>GET /sessions/active</code>, and <code>GET /sessions/{session_id}/summary</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Session identifier. In practice this is the session file stem and is typically UUID-like.</td>
+</tr>
+<tr>
+<td><code>project_path</code></td>
+<td>string</td>
+<td>Approximate decoded project path.</td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td>Last path component of <code>project_path</code>.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>string or <code>null</code></td>
+<td>First parseable timestamp in the session file.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>string or <code>null</code></td>
+<td>Last parseable timestamp in the session file.</td>
+</tr>
+<tr>
+<td><code>message_count</code></td>
+<td>integer</td>
+<td>Count of <code>user</code> and <code>assistant</code> entries in the session.</td>
+</tr>
+<tr>
+<td><code>is_active</code></td>
+<td>boolean</td>
+<td>Live active-session flag.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="session-detail-object">Session Detail Object</h3>
+<p><code>GET /sessions/{session_id}</code> returns the session summary fields plus:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_path</code></td>
+<td>string or <code>null</code></td>
+<td>Full path to the backing JSONL session file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="message-object">Message Object</h3>
+<p>Used by <code>GET /sessions/{session_id}/messages</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string</td>
+<td>Message identifier.</td>
+</tr>
+<tr>
+<td><code>parent_message_uuid</code></td>
+<td>string or <code>null</code></td>
+<td>Parent message link when present.</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>string or <code>null</code></td>
+<td>Parsed message timestamp.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>user</code> or <code>assistant</code></td>
+<td>Message type.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>object or <code>null</code></td>
+<td>Normalized message body.</td>
+</tr>
+</tbody>
+</table>
+<p>When <code>message</code> is present, it contains:</p>
+<table>
+<thead>
+<tr>
+<th>Nested field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message.role</code></td>
+<td><code>user</code> or <code>assistant</code></td>
+<td>Sender role.</td>
+</tr>
+<tr>
+<td><code>message.content</code></td>
+<td>array</td>
+<td>Typed content blocks.</td>
+</tr>
+</tbody>
+</table>
+<p>Content block types used by the session message extractor:</p>
+<table>
+<thead>
+<tr>
+<th>Block type</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td><code>text</code></td>
+</tr>
+<tr>
+<td><code>tool_use</code></td>
+<td><code>id</code>, <code>name</code>, <code>input</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tool-call-object">Tool Call Object</h3>
+<p>Used by <code>GET /sessions/{session_id}/tools</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Tool call identifier.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Tool name.</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>object</td>
+<td>Tool input payload.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="task-object">Task Object</h3>
+<p>Used by <code>GET /sessions/{session_id}/tasks</code> and inside <code>active_tasks</code> on the progress response.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Task identifier within the session.</td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>string</td>
+<td>Short task title.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>Longer task description.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>pending</code>, <code>in_progress</code>, or <code>completed</code></td>
+<td>Current task status.</td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td>string or <code>null</code></td>
+<td>Task owner if present.</td>
+</tr>
+<tr>
+<td><code>blocked_by</code></td>
+<td>array of strings</td>
+<td>Task IDs blocking this task.</td>
+</tr>
+<tr>
+<td><code>blocks</code></td>
+<td>array of strings</td>
+<td>Task IDs this task blocks.</td>
+</tr>
+<tr>
+<td><code>active_form</code></td>
+<td>string or <code>null</code></td>
+<td>Verb-style wording for the task when present.</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td>object</td>
+<td>Arbitrary task metadata.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>string or <code>null</code></td>
+<td>Creation time if available in the parsed model.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="progress-object">Progress Object</h3>
+<p>Used by <code>GET /sessions/{session_id}/progress</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session_id</code></td>
+<td>string</td>
+<td>Requested session ID.</td>
+</tr>
+<tr>
+<td><code>is_active</code></td>
+<td>boolean</td>
+<td>Same active-session flag used elsewhere.</td>
+</tr>
+<tr>
+<td><code>last_activity</code></td>
+<td>string or <code>null</code></td>
+<td>ISO 8601 version of the session's <code>updated_at</code>.</td>
+</tr>
+<tr>
+<td><code>message_count</code></td>
+<td>integer</td>
+<td>Same user-plus-assistant message count used on the session object.</td>
+</tr>
+<tr>
+<td><code>active_tasks</code></td>
+<td>array of task objects</td>
+<td>Only tasks whose status is <code>in_progress</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="practical-behavior-notes">Practical Behavior Notes</h2>
+<ul>
+<li>Session listings are file-backed and reflect what is currently on disk under <code>~/.claude</code>.</li>
+<li><code>message_count</code> is not a raw line count of the JSONL file. It counts only <code>user</code> and <code>assistant</code> entries.</li>
+<li><code>GET /sessions/{session_id}/tools</code> is intentionally flattened. It does not include surrounding assistant text or per-message grouping.</li>
+<li><code>GET /sessions/{session_id}/summary</code> is the lightest single-session metadata route when <code>file_path</code> is not needed.</li>
+</ul>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Working with Sessions</a></li>
+<li><a href="#">API Overview</a></li>
+<li><a href="#">Projects API</a></li>
+<li><a href="#">Tasks API</a></li>
+<li><a href="#">Active Session Detection</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="api-overview.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">API Overview</span>
+                </a>
+                
+                
+                <a href="api-projects.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Projects API</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#starting-the-api">Starting the API</a></li>
+<li><a href="#quick-reference">Quick Reference</a></li>
+<li><a href="#how-the-data-is-built">How The Data Is Built</a></li>
+<li><a href="#built-in-client-example">Built-In Client Example</a></li>
+<li><a href="#endpoint-reference">Endpoint Reference</a><ul>
+<li><a href="#get-sessions">GET /sessions</a></li>
+<li><a href="#get-sessionsactive">GET /sessions/active</a></li>
+<li><a href="#get-sessionssession_id">GET /sessions/{session_id}</a></li>
+<li><a href="#get-sessionssession_idmessages">GET /sessions/{session_id}/messages</a></li>
+<li><a href="#get-sessionssession_idtools">GET /sessions/{session_id}/tools</a></li>
+<li><a href="#get-sessionssession_idtasks">GET /sessions/{session_id}/tasks</a></li>
+<li><a href="#get-sessionssession_idprogress">GET /sessions/{session_id}/progress</a></li>
+<li><a href="#get-sessionssession_idsummary">GET /sessions/{session_id}/summary</a></li>
+</ul>
+</li>
+<li><a href="#response-shapes">Response Shapes</a><ul>
+<li><a href="#session-summary-object">Session Summary Object</a></li>
+<li><a href="#session-detail-object">Session Detail Object</a></li>
+<li><a href="#message-object">Message Object</a></li>
+<li><a href="#tool-call-object">Tool Call Object</a></li>
+<li><a href="#task-object">Task Object</a></li>
+<li><a href="#progress-object">Progress Object</a></li>
+</ul>
+</li>
+<li><a href="#practical-behavior-notes">Practical Behavior Notes</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

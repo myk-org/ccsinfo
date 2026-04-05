@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searching Sessions, Messages, and History - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link active" aria-current="page">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="searching-sessions-messages-and-history">Searching Sessions, Messages, and History</h1>
+<p><code>ccsinfo</code> has three different search commands because Claude Code data is stored in two different places: session JSONL files for conversations, and a separate <code>.history.jsonl</code> file for prompt history. The right search depends on what you remember.</p>
+<table>
+<thead>
+<tr>
+<th>Search</th>
+<th>Scans</th>
+<th>Does not scan</th>
+<th>Best when you remember</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ccsinfo search sessions &lt;query&gt;</code></td>
+<td>Session-level metadata</td>
+<td>Message bodies and prompt-history text</td>
+<td>a project name, branch, slug, or part of a session identifier</td>
+</tr>
+<tr>
+<td><code>ccsinfo search messages &lt;query&gt;</code></td>
+<td>Text from <code>user</code> and <code>assistant</code> messages</td>
+<td>Tool-call payloads and <code>.history.jsonl</code> prompts</td>
+<td>a phrase from the conversation itself</td>
+</tr>
+<tr>
+<td><code>ccsinfo search history &lt;query&gt;</code></td>
+<td>Prompt text stored in <code>.history.jsonl</code></td>
+<td>Assistant replies and session-level metadata</td>
+<td>something you typed, but not where you typed it</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Tip:</strong> If you only remember the wording and do not remember whether you typed it or Claude said it, run both <code>ccsinfo search history &lt;query&gt;</code> and <code>ccsinfo search messages &lt;query&gt;</code>.</p>
+</blockquote>
+<div class="mermaid-diagram"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1528.12px; background-color: transparent;" viewBox="0 0 1528.125 326" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePath .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M95.578,163L99.745,163C103.911,163,112.245,163,119.911,163C127.578,163,134.578,163,138.078,163L141.578,163" id="my-svg-L_U_CLI_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_U_CLI_0" data-points="W3sieCI6OTUuNTc4MTI1LCJ5IjoxNjN9LHsieCI6MTIwLjU3ODEyNSwieSI6MTYzfSx7IngiOjE0NS41NzgxMjUsInkiOjE2M31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M291.406,149.369L312.24,145.474C333.073,141.579,374.74,133.79,427.352,129.895C479.964,126,543.521,126,590.411,126C637.302,126,667.526,126,687.125,127.46C706.724,128.921,715.698,131.841,720.186,133.302L724.673,134.762" id="my-svg-L_CLI_S_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CLI_S_0" data-points="W3sieCI6MjkxLjQwNjI1LCJ5IjoxNDkuMzY4NzI4NTM1OTAxOH0seyJ4Ijo0MTYuNDA2MjUsInkiOjEyNn0seyJ4Ijo2MDcuMDc4MTI1LCJ5IjoxMjZ9LHsieCI6Njk3Ljc1LCJ5IjoxMjZ9LHsieCI6NzI4LjQ3NjM1MTM1MTM1MTQsInkiOjEzNn1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M291.406,176.631L312.24,180.526C333.073,184.421,374.74,192.21,415.74,196.105C456.74,200,497.073,200,517.24,200L537.406,200" id="my-svg-L_CLI_API_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CLI_API_0" data-points="W3sieCI6MjkxLjQwNjI1LCJ5IjoxNzYuNjMxMjcxNDY0MDk4Mn0seyJ4Ijo0MTYuNDA2MjUsInkiOjIwMH0seyJ4Ijo1NDEuNDA2MjUsInkiOjIwMH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M672.75,200L676.917,200C681.083,200,689.417,200,698.07,198.54C706.724,197.079,715.698,194.159,720.186,192.698L724.673,191.238" id="my-svg-L_API_S_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_API_S_0" data-points="W3sieCI6NjcyLjc1LCJ5IjoyMDB9LHsieCI6Njk3Ljc1LCJ5IjoyMDB9LHsieCI6NzI4LjQ3NjM1MTM1MTM1MTQsInkiOjE5MH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M837.899,136L852.437,121.167C866.974,106.333,896.05,76.667,914.087,61.833C932.125,47,939.125,47,942.625,47L946.125,47" id="my-svg-L_S_META_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_META_0" data-points="W3sieCI6ODM3Ljg5OTI0NTY4OTY1NTEsInkiOjEzNn0seyJ4Ijo5MjUuMTI1LCJ5Ijo0N30seyJ4Ijo5NTAuMTI1LCJ5Ijo0N31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M900.125,163L904.292,163C908.458,163,916.792,163,927.372,163C937.953,163,950.781,163,957.195,163L963.609,163" id="my-svg-L_S_MSG_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_MSG_0" data-points="W3sieCI6OTAwLjEyNSwieSI6MTYzfSx7IngiOjkyNS4xMjUsInkiOjE2M30seyJ4Ijo5NjcuNjA5Mzc1LCJ5IjoxNjN9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M837.899,190L852.437,204.833C866.974,219.667,896.05,249.333,916.108,264.167C936.167,279,947.208,279,952.729,279L958.25,279" id="my-svg-L_S_HIST_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_HIST_0" data-points="W3sieCI6ODM3Ljg5OTI0NTY4OTY1NTEsInkiOjE5MH0seyJ4Ijo5MjUuMTI1LCJ5IjoyNzl9LHsieCI6OTYyLjI1LCJ5IjoyNzl9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1210.125,47L1214.292,47C1218.458,47,1226.792,47,1238.797,49.933C1250.802,52.866,1266.478,58.732,1274.316,61.665L1282.155,64.598" id="my-svg-L_META_SESSIONFILES_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_META_SESSIONFILES_0" data-points="W3sieCI6MTIxMC4xMjUsInkiOjQ3fSx7IngiOjEyMzUuMTI1LCJ5Ijo0N30seyJ4IjoxMjg1LjkwMDg2MjA2ODk2NTYsInkiOjY2fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1192.641,163L1199.721,163C1206.802,163,1220.964,163,1235.883,160.067C1250.802,157.134,1266.478,151.268,1274.316,148.335L1282.155,145.402" id="my-svg-L_MSG_SESSIONFILES_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_MSG_SESSIONFILES_0" data-points="W3sieCI6MTE5Mi42NDA2MjUsInkiOjE2M30seyJ4IjoxMjM1LjEyNSwieSI6MTYzfSx7IngiOjEyODUuOTAwODYyMDY4OTY1NiwieSI6MTQ0fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1198,279L1204.188,279C1210.375,279,1222.75,279,1232.438,279C1242.125,279,1249.125,279,1252.625,279L1256.125,279" id="my-svg-L_HIST_HISTORYFILES_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_HIST_HISTORYFILES_0" data-points="W3sieCI6MTE5OCwieSI6Mjc5fSx7IngiOjEyMzUuMTI1LCJ5IjoyNzl9LHsieCI6MTI2MC4xMjUsInkiOjI3OX1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_U_CLI_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(607.078125, 126)"><g class="label" data-id="L_CLI_S_0" transform="translate(-43.875, -12)"><foreignObject width="87.75" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>local mode</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(416.40625, 200)"><g class="label" data-id="L_CLI_API_0" transform="translate(-100, -24)"><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>--server-url / CCSINFO_SERVER_URL</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_API_S_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_META_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_MSG_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_HIST_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_META_SESSIONFILES_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_MSG_SESSIONFILES_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_HIST_HISTORYFILES_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-U-0" data-look="classic" transform="translate(51.7890625, 163)"><rect class="basic label-container" style="" x="-43.7890625" y="-27" width="87.578125" height="54"/><g class="label" style="" transform="translate(-13.7890625, -12)"><rect/><foreignObject width="27.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>You</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-CLI-1" data-look="classic" transform="translate(218.4921875, 163)"><rect class="basic label-container" style="" x="-72.9140625" y="-27" width="145.828125" height="54"/><g class="label" style="" transform="translate(-42.9140625, -12)"><rect/><foreignObject width="85.828125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>ccsinfo CLI</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-S-3" data-look="classic" transform="translate(811.4375, 163)"><rect class="basic label-container" style="" x="-88.6875" y="-27" width="177.375" height="54"/><g class="label" style="" transform="translate(-58.6875, -12)"><rect/><foreignObject width="117.375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Search service</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-API-5" data-look="classic" transform="translate(607.078125, 200)"><rect class="basic label-container" style="" x="-65.671875" y="-27" width="131.34375" height="54"/><g class="label" style="" transform="translate(-35.671875, -12)"><rect/><foreignObject width="71.34375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>HTTP API</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-META-9" data-look="classic" transform="translate(1080.125, 47)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Session metadata search</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-MSG-11" data-look="classic" transform="translate(1080.125, 163)"><rect class="basic label-container" style="" x="-112.515625" y="-27" width="225.03125" height="54"/><g class="label" style="" transform="translate(-82.515625, -12)"><rect/><foreignObject width="165.03125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Message text search</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-HIST-13" data-look="classic" transform="translate(1080.125, 279)"><rect class="basic label-container" style="" x="-117.875" y="-27" width="235.75" height="54"/><g class="label" style="" transform="translate(-87.875, -12)"><rect/><foreignObject width="175.75" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Prompt history search</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-SESSIONFILES-15" data-look="classic" transform="translate(1390.125, 105)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Project `*.jsonl` session files</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-HISTORYFILES-19" data-look="classic" transform="translate(1390.125, 279)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Per-project `.history.jsonl` files</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div>
+
+<h2 id="run-search">Run Search</h2>
+<p>By default, the CLI reads local files under <code>~/.claude</code>. If you want the same commands to go through the server API instead, start the server with <code>ccsinfo serve</code> and point the CLI at it with <code>--server-url</code> or <code>CCSINFO_SERVER_URL</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+
+<span class="c1"># ...</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main_callback</span><span class="p">(</span>
+    <span class="c1"># ...</span>
+    <span class="n">server_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;--server-url&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+        <span class="n">envvar</span><span class="o">=</span><span class="s2">&quot;CCSINFO_SERVER_URL&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remote server URL (e.g., http://localhost:8080). If not set, reads local files.&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Claude Code Session Info CLI.&quot;&quot;&quot;</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">server_url</span> <span class="o">=</span> <span class="n">server_url</span>
+</code></pre></div>
+
+<p>The CLI and API line up directly:</p>
+<table>
+<thead>
+<tr>
+<th>CLI</th>
+<th>API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ccsinfo search sessions &lt;query&gt;</code></td>
+<td><code>GET /search?q=&lt;query&gt;&amp;limit=&lt;n&gt;</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo search messages &lt;query&gt;</code></td>
+<td><code>GET /search/messages?q=&lt;query&gt;&amp;limit=&lt;n&gt;</code></td>
+</tr>
+<tr>
+<td><code>ccsinfo search history &lt;query&gt;</code></td>
+<td><code>GET /search/history?q=&lt;query&gt;&amp;limit=&lt;n&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>All three API routes use <code>q</code> for the query. The API default <code>limit</code> is <code>50</code>, and the HTTP routes enforce <code>1</code> through <code>500</code>. The CLI also supports <code>--limit</code> and <code>--json</code>.</p>
+<h2 id="search-sessions">Search Sessions</h2>
+<p><code>ccsinfo search sessions &lt;query&gt;</code> is the broadest search. It does a case-insensitive match against session metadata, including the session identifier, slug, branch information, and stored path information. It returns session summaries, not conversation text.</p>
+<p>Use session search when:</p>
+<ul>
+<li>you remember a project or path fragment</li>
+<li>you remember a branch name or slug</li>
+<li>you want to find the right session before opening it</li>
+</ul>
+<p>Once you have the right match, follow up with <code>ccsinfo sessions show &lt;full-session-id&gt;</code> or <code>ccsinfo sessions messages &lt;full-session-id&gt; --json</code>.</p>
+<h2 id="search-message-text">Search Message Text</h2>
+<p><code>ccsinfo search messages &lt;query&gt;</code> reads the session files themselves. The test fixture shows the kind of JSONL entries it searches:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">}],</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:00:00Z&quot;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-002&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;parentMessageUuid&quot;</span><span class="p">:</span> <span class="s2">&quot;msg-001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi there!&quot;</span><span class="p">}],</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:00:01Z&quot;</span><span class="p">,</span>
+<span class="p">},</span>
+</code></pre></div>
+
+<p>When message search runs, it only scans <code>user</code> and <code>assistant</code> entries and only extracts text content. It then builds a context snippet around the match instead of returning the full message body:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">project_path</span><span class="p">,</span> <span class="n">session</span> <span class="ow">in</span> <span class="n">get_all_sessions</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">entry</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;assistant&quot;</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">text_content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">entry</span><span class="o">.</span><span class="n">message</span> <span class="ow">and</span> <span class="n">entry</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">text_content</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span> <span class="ow">and</span> <span class="n">content</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                        <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="n">text_content</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">query_lower</span> <span class="ow">in</span> <span class="n">text_content</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">text_content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">query_lower</span><span class="p">)</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">50</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text_content</span><span class="p">),</span> <span class="n">idx</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="o">+</span> <span class="mi">50</span><span class="p">)</span>
+            <span class="n">snippet</span> <span class="o">=</span> <span class="n">text_content</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">snippet</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span> <span class="o">+</span> <span class="n">snippet</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">text_content</span><span class="p">):</span>
+                <span class="n">snippet</span> <span class="o">=</span> <span class="n">snippet</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span>
+</code></pre></div>
+
+<p>That makes message search good for finding where a phrase appeared in a conversation, but not for dumping the whole conversation. If you need the complete exchange after a hit, use <code>ccsinfo sessions messages &lt;session-id&gt; --json</code>.</p>
+<blockquote>
+<p><strong>Warning:</strong> <code>search messages</code> only searches extracted text blocks from <code>user</code> and <code>assistant</code> messages. Tool-call payloads, tool results, and other non-text content are not part of message search.</p>
+</blockquote>
+<h2 id="search-prompt-history">Search Prompt History</h2>
+<p><code>ccsinfo search history &lt;query&gt;</code> is for finding what you asked, not what Claude answered. It searches the prompt text stored in each project's <code>.history.jsonl</code> file.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">search_prompts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">HistoryEntry</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search for prompts containing a query string.&quot;&quot;&quot;</span>
+    <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">HistoryEntry</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">search_query</span> <span class="o">=</span> <span class="n">query</span> <span class="k">if</span> <span class="n">case_sensitive</span> <span class="k">else</span> <span class="n">query</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">entry</span><span class="o">.</span><span class="n">prompt</span><span class="p">:</span>
+            <span class="n">prompt_text</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">prompt</span> <span class="k">if</span> <span class="n">case_sensitive</span> <span class="k">else</span> <span class="n">entry</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">search_query</span> <span class="ow">in</span> <span class="n">prompt_text</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_history_file</span><span class="p">(</span><span class="n">project_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the path to the history file for a project.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">&quot;.history.jsonl&quot;</span>
+</code></pre></div>
+
+<p>This is the best search when:</p>
+<ul>
+<li>you remember part of a prompt but not the session it came from</li>
+<li>you want to reuse an older prompt across projects</li>
+<li>you want the stored prompt text itself</li>
+</ul>
+<p>History search returns the project path, prompt text, timestamp, and the related session identifier. In table output the prompt preview is shortened; in JSON or API output the full stored prompt is returned.</p>
+<h2 id="practical-limits-and-behaviors">Practical Limits and Behaviors</h2>
+<p>All three searches are simple, case-insensitive substring scans over JSONL data. There is no fuzzy matching, stemming, or semantic ranking, so broad queries can produce noisy results. If you expect lots of hits, use a more specific phrase or raise <code>--limit</code>.</p>
+<p>Search also tolerates damaged files by skipping bad lines instead of failing the whole run:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="ow">not</span> <span class="n">file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;JSONL file not found: </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">file_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line_num</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">orjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">orjson</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">skip_malformed</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;Skipping malformed JSON at line </span><span class="si">%d</span><span class="s2"> in </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">line_num</span><span class="p">,</span>
+                    <span class="n">file_path</span><span class="p">,</span>
+                    <span class="n">e</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">raise</span>
+
+        <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">model</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">skip_malformed</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Skipping invalid data at line </span><span class="si">%d</span><span class="s2"> in </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="n">line_num</span><span class="p">,</span>
+                        <span class="n">file_path</span><span class="p">,</span>
+                        <span class="n">e</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">continue</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Tip:</strong> Use <code>--json</code> when you want full identifiers, want to script against results, or want the full prompt text from history search. The pretty tables shorten IDs and previews.</p>
+<p><strong>Note:</strong> Project paths are reconstructed from encoded directory names under <code>~/.claude/projects</code>, so treat them as best-effort labels rather than perfect originals.</p>
+<p><strong>Warning:</strong> Malformed JSONL lines are skipped rather than failing the whole search. That keeps the command usable, but it can also mean a damaged session or history file produces incomplete results instead of a hard error.</p>
+</blockquote>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Working with Sessions</a></li>
+<li><a href="#">Search API</a></li>
+<li><a href="#">Data Model and Storage</a></li>
+<li><a href="#">JSON Output and Automation</a></li>
+<li><a href="#">Troubleshooting</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="tasks-guide.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Working with Tasks</span>
+                </a>
+                
+                
+                <a href="statistics-guide.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Using Statistics and Trends</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#run-search">Run Search</a></li>
+<li><a href="#search-sessions">Search Sessions</a></li>
+<li><a href="#search-message-text">Search Message Text</a></li>
+<li><a href="#search-prompt-history">Search Prompt History</a></li>
+<li><a href="#practical-limits-and-behaviors">Practical Limits and Behaviors</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

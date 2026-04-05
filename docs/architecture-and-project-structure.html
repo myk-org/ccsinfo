@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture and Project Structure - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link active" aria-current="page">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="architecture-and-project-structure">Architecture and Project Structure</h1>
+<p><code>ccsinfo</code> is built around one simple idea: read Claude Code data from disk, normalize it into typed Python models, and expose it through either a command-line interface or a small HTTP API.</p>
+<p>If you only remember one thing from this page, remember this: <strong>the real behavior lives in <code>core.services</code></strong>. The CLI and the server are intentionally thin layers on top of that shared logic.</p>
+<h2 id="package-map">Package Map</h2>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>What it contains</th>
+<th>Why it exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/ccsinfo/cli</code></td>
+<td>Typer app, command groups, CLI state</td>
+<td>User-facing commands such as <code>sessions</code>, <code>projects</code>, <code>tasks</code>, <code>stats</code>, and <code>search</code></td>
+</tr>
+<tr>
+<td><code>src/ccsinfo/core/models</code></td>
+<td>Pydantic models for sessions, messages, tasks, projects, and stats</td>
+<td>Defines the typed data shape returned by services and the API</td>
+</tr>
+<tr>
+<td><code>src/ccsinfo/core/parsers</code></td>
+<td>Low-level readers for JSON and JSONL files</td>
+<td>Knows how Claude Code data is stored on disk</td>
+</tr>
+<tr>
+<td><code>src/ccsinfo/core/services</code></td>
+<td>Business logic and aggregation</td>
+<td>Turns raw parsed data into useful summaries, searches, and reports</td>
+</tr>
+<tr>
+<td><code>src/ccsinfo/server</code></td>
+<td>FastAPI app and route modules</td>
+<td>Exposes the same data through HTTP</td>
+</tr>
+<tr>
+<td><code>src/ccsinfo/utils</code></td>
+<td>Path helpers and Rich output helpers</td>
+<td>Keeps filesystem discovery and terminal formatting out of the business logic</td>
+</tr>
+<tr>
+<td><code>tests</code></td>
+<td>Fixtures and layer-focused tests</td>
+<td>Verifies parsers, models, services, and path handling</td>
+</tr>
+</tbody>
+</table>
+<h2 id="high-level-architecture">High-Level Architecture</h2>
+<p>At runtime, <code>ccsinfo</code> reads three kinds of Claude Code data:</p>
+<ul>
+<li>session transcripts in <code>~/.claude/projects/&lt;encoded-project&gt;/*.jsonl</code></li>
+<li>prompt history in <code>~/.claude/projects/&lt;encoded-project&gt;/.history.jsonl</code></li>
+<li>task files in <code>~/.claude/tasks/&lt;session-id&gt;/*.json</code></li>
+</ul>
+<p>Those files flow through parsers, then services, and finally out through the CLI or the API.</p>
+<div class="mermaid-diagram"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1404px; background-color: transparent;" viewBox="0 0 1404 259" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePath .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M268,138L272.167,138C276.333,138,284.667,138,292.333,138C300,138,307,138,310.5,138L314,138" id="my-svg-L_Files_Parsers_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Files_Parsers_0" data-points="W3sieCI6MjY4LCJ5IjoxMzh9LHsieCI6MjkzLCJ5IjoxMzh9LHsieCI6MzE4LCJ5IjoxMzh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M477.375,138L481.542,138C485.708,138,494.042,138,501.708,138C509.375,138,516.375,138,519.875,138L523.375,138" id="my-svg-L_Parsers_Services_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Parsers_Services_0" data-points="W3sieCI6NDc3LjM3NSwieSI6MTM4fSx7IngiOjUwMi4zNzUsInkiOjEzOH0seyJ4Ijo1MjcuMzc1LCJ5IjoxMzh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M768.212,99L785.935,90.333C803.657,81.667,839.102,64.333,860.324,55.667C881.547,47,888.547,47,892.047,47L895.547,47" id="my-svg-L_Services_Models_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Services_Models_0" data-points="W3sieCI6NzY4LjIxMjA1MzU3MTQyODYsInkiOjk5fSx7IngiOjg3NC41NDY4NzUsInkiOjQ3fSx7IngiOjg5OS41NDY4NzUsInkiOjQ3fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1149.391,47L1153.557,47C1157.724,47,1166.057,47,1173.752,48.059C1181.447,49.117,1188.503,51.235,1192.031,52.293L1195.559,53.352" id="my-svg-L_Models_CLI_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Models_CLI_0" data-points="W3sieCI6MTE0OS4zOTA2MjUsInkiOjQ3fSx7IngiOjExNzQuMzkwNjI1LCJ5Ijo0N30seyJ4IjoxMTk5LjM5MDYyNSwieSI6NTQuNTAxNzQyMzgxMDQyODk1fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M1077.144,86L1093.352,98C1109.56,110,1141.975,134,1163.281,148.233C1184.586,162.465,1194.782,166.93,1199.88,169.163L1204.978,171.395" id="my-svg-L_Models_API_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Models_API_0" data-points="W3sieCI6MTA3Ny4xNDQwMDMzNzgzNzgzLCJ5Ijo4Nn0seyJ4IjoxMTc0LjM5MDYyNSwieSI6MTU4fSx7IngiOjEyMDguNjQxOTI3MDgzMzMzMywieSI6MTczfV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M849.547,138L853.714,138C857.88,138,866.214,138,895.367,138C924.521,138,974.495,138,1024.469,138C1074.443,138,1124.417,138,1154.502,135.767C1184.586,133.535,1194.782,129.07,1199.88,126.837L1204.978,124.605" id="my-svg-L_Services_CLI_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Services_CLI_0" data-points="W3sieCI6ODQ5LjU0Njg3NSwieSI6MTM4fSx7IngiOjg3NC41NDY4NzUsInkiOjEzOH0seyJ4IjoxMDI0LjQ2ODc1LCJ5IjoxMzh9LHsieCI6MTE3NC4zOTA2MjUsInkiOjEzOH0seyJ4IjoxMjA4LjY0MTkyNzA4MzMzMzMsInkiOjEyM31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/><path d="M774.858,177L791.473,184.5C808.088,192,841.317,207,882.919,214.5C924.521,222,974.495,222,1024.469,222C1074.443,222,1124.417,222,1154.312,221.602C1184.207,221.204,1194.024,220.408,1198.933,220.01L1203.841,219.612" id="my-svg-L_Services_API_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Services_API_0" data-points="W3sieCI6Nzc0Ljg1Nzk3OTkxMDcxNDMsInkiOjE3N30seyJ4Ijo4NzQuNTQ2ODc1LCJ5IjoyMjJ9LHsieCI6MTAyNC40Njg3NSwieSI6MjIyfSx7IngiOjExNzQuMzkwNjI1LCJ5IjoyMjJ9LHsieCI6MTIwNy44MjgxMjUsInkiOjIxOS4yODgyMjE1MDQxNTAwNH1d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Files_Parsers_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Parsers_Services_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Services_Models_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Models_CLI_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Models_API_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Services_CLI_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Services_API_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="my-svg-flowchart-Files-0" data-look="classic" transform="translate(138, 138)"><rect class="basic label-container" style="" x="-130" y="-75" width="260" height="150"/><g class="label" style="" transform="translate(-100, -60)"><rect/><foreignObject width="200" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Claude Code data on disk<br />projects/*.jsonl<br />projects/.history.jsonl<br />tasks/*.json</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Parsers-1" data-look="classic" transform="translate(397.6875, 138)"><rect class="basic label-container" style="" x="-79.6875" y="-75" width="159.375" height="150"/><g class="label" style="" transform="translate(-49.6875, -60)"><rect/><foreignObject width="99.375" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>core.parsers<br />jsonl.py<br />sessions.py<br />history.py<br />tasks.py</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Services-2" data-look="classic" transform="translate(688.4609375, 138)"><rect class="basic label-container" style="" x="-161.0859375" y="-39" width="322.171875" height="78"/><g class="label" style="" transform="translate(-131.0859375, -24)"><rect/><foreignObject width="262.171875" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>core.services<br />session/project/task/stats/search</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-Models-3" data-look="classic" transform="translate(1024.46875, 47)"><rect class="basic label-container" style="" x="-124.921875" y="-39" width="249.84375" height="78"/><g class="label" style="" transform="translate(-94.921875, -24)"><rect/><foreignObject width="189.84375" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>core.models<br />Pydantic output models</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-CLI-4" data-look="classic" transform="translate(1297.6953125, 84)"><rect class="basic label-container" style="" x="-98.3046875" y="-39" width="196.609375" height="78"/><g class="label" style="" transform="translate(-68.3046875, -24)"><rect/><foreignObject width="136.609375" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>cli<br />Typer commands</p></span></div></foreignObject></g></g><g class="node default" id="my-svg-flowchart-API-5" data-look="classic" transform="translate(1297.6953125, 212)"><rect class="basic label-container" style="" x="-89.8671875" y="-39" width="179.734375" height="78"/><g class="label" style="" transform="translate(-59.8671875, -24)"><rect/><foreignObject width="119.734375" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>server<br />FastAPI routers</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div>
+
+<p>A practical way to trace any feature is:</p>
+<ol>
+<li>Find the user-facing command or route.</li>
+<li>Jump to the matching service in <code>core.services</code>.</li>
+<li>Follow that service into the parser that reads the underlying files.</li>
+</ol>
+<h2 id="the-data-layout-ccsinfo-expects">The Data Layout ccsinfo Expects</h2>
+<p>The test fixtures are a good way to see the expected Claude Code directory shape without guessing. The repository creates a miniature <code>.claude</code> tree like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mock_claude_dir</span><span class="p">(</span>
+    <span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">sample_session_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">sample_task_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a fully populated mock .claude directory.&quot;&quot;&quot;</span>
+    <span class="n">claude_dir</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+    <span class="c1"># Create projects directory with a sample project</span>
+    <span class="n">projects_dir</span> <span class="o">=</span> <span class="n">claude_dir</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+    <span class="n">project_dir</span> <span class="o">=</span> <span class="n">projects_dir</span> <span class="o">/</span> <span class="s2">&quot;-home-user-test-project&quot;</span>
+    <span class="n">project_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create a session file in the project</span>
+    <span class="n">session_file</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456.jsonl&quot;</span>
+    <span class="k">with</span> <span class="n">session_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">sample_session_data</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create tasks directory with a session&#39;s tasks</span>
+    <span class="n">tasks_dir</span> <span class="o">=</span> <span class="n">claude_dir</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+    <span class="n">session_tasks_dir</span> <span class="o">=</span> <span class="n">tasks_dir</span> <span class="o">/</span> <span class="s2">&quot;abc-123-def-456&quot;</span>
+    <span class="n">session_tasks_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create a task file</span>
+    <span class="n">task_file</span> <span class="o">=</span> <span class="n">session_tasks_dir</span> <span class="o">/</span> <span class="s2">&quot;1.json&quot;</span>
+    <span class="k">with</span> <span class="n">task_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">sample_task_data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">claude_dir</span>
+</code></pre></div>
+
+<p>That fixture highlights an important design decision:</p>
+<ul>
+<li>sessions and history are grouped by project</li>
+<li>tasks are grouped by session</li>
+</ul>
+<p>This is why project-focused views mostly start from <code>~/.claude/projects</code>, while task-focused views start from <code>~/.claude/tasks</code>.</p>
+<h3 id="encoded-project-paths">Encoded Project Paths</h3>
+<p>Claude Code stores project directories using an encoded version of the original path. <code>ccsinfo</code> centralizes that logic in <code>utils.paths</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">encode_project_path</span><span class="p">(</span><span class="n">project_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a project path to Claude Code&#39;s directory name format.</span>
+
+<span class="sd">    Claude Code replaces:</span>
+<span class="sd">    - &#39;/&#39; with &#39;-&#39;</span>
+<span class="sd">    - &#39;.&#39; with &#39;-&#39;</span>
+
+<span class="sd">    Example: &#39;/home/user/project&#39; -&gt; &#39;-home-user-project&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">project_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_project_path</span><span class="p">(</span><span class="n">encoded_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a Claude Code directory name back to the original path.</span>
+
+<span class="sd">    Note: This is lossy - we cannot distinguish between original &#39;-&#39; and encoded &#39;/&#39; or &#39;.&#39;.</span>
+<span class="sd">    The path returned should be treated as approximate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Handle the pattern where /. becomes --</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">encoded_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;/.&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Warning:</strong> Project IDs are encoded path strings, and <code>decode_project_path()</code> is intentionally lossy. The decoded path is useful for display and grouping, but it should not be treated as a perfect round-trip back to the original filesystem path.</p>
+</blockquote>
+<h2 id="the-core-package">The <code>core</code> Package</h2>
+<p>The <code>core</code> package is the center of the project. It is split into three layers:</p>
+<ul>
+<li><code>core.models</code>: typed outputs</li>
+<li><code>core.parsers</code>: file readers</li>
+<li><code>core.services</code>: the behavior shared by CLI and API</li>
+</ul>
+<h3 id="coremodels"><code>core.models</code></h3>
+<p>The models are all Pydantic-based and describe the stable shapes the rest of the project works with.</p>
+<p>The most important model groups are:</p>
+<ul>
+<li><code>sessions.py</code>: <code>SessionSummary</code>, <code>Session</code>, and <code>SessionDetail</code></li>
+<li><code>messages.py</code>: message blocks, tool calls, and tool results</li>
+<li><code>projects.py</code>: project metadata</li>
+<li><code>tasks.py</code>: task status, blockers, owner, and metadata</li>
+<li><code>stats.py</code>: global, daily, and per-project statistics</li>
+</ul>
+<p>This separation matters because the raw Claude Code files are not especially friendly to consume directly. The models give the rest of the codebase a predictable interface.</p>
+<p>A good example is task alias handling. On disk, task JSON uses names like <code>blockedBy</code> and <code>activeForm</code>, but the codebase exposes <code>blocked_by</code> and <code>active_form</code> consistently through the model layer.</p>
+<h3 id="coreparsers"><code>core.parsers</code></h3>
+<p>The parser layer understands Claude Code’s storage formats.</p>
+<p>Here is what each parser module does:</p>
+<ul>
+<li><code>jsonl.py</code> provides the generic JSON and JSONL reading utilities used everywhere else.</li>
+<li><code>sessions.py</code> parses transcript files, computes counts, exposes session metadata, and discovers whether a session is currently active.</li>
+<li><code>history.py</code> parses <code>.history.jsonl</code> and supports prompt search across projects.</li>
+<li><code>tasks.py</code> parses per-session task JSON files and groups them into <code>TaskCollection</code> objects.</li>
+</ul>
+<p>A few details are especially worth knowing:</p>
+<ul>
+<li><code>parse_jsonl()</code> skips malformed lines by default, so transcript parsing is intentionally resilient.</li>
+<li><code>sessions.py</code> ignores dot-prefixed JSONL files when scanning session files, which keeps <code>.history.jsonl</code> separate from transcript parsing.</li>
+<li><code>tasks.py</code> sorts tasks numerically when possible, so <code>1.json</code>, <code>2.json</code>, <code>10.json</code> come back in a sensible order.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Session “active” status is not stored in transcript files. It is computed at runtime by inspecting live <code>claude</code> processes and cached briefly in <code>core.parsers.sessions</code>, so active-state results are best-effort rather than permanent metadata.</p>
+</blockquote>
+<h3 id="coreservices"><code>core.services</code></h3>
+<p>Services are where raw parsed data becomes user-facing behavior.</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Main job</th>
+<th>Main dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SessionService</code></td>
+<td>Lists sessions, returns session detail, extracts messages and tool calls</td>
+<td><code>core.parsers.sessions</code>, <code>core.models.sessions</code>, <code>core.models.messages</code></td>
+</tr>
+<tr>
+<td><code>ProjectService</code></td>
+<td>Discovers projects and computes project-level stats</td>
+<td><code>core.parsers.sessions</code>, <code>utils.paths</code>, <code>core.models.projects</code>, <code>core.models.stats</code></td>
+</tr>
+<tr>
+<td><code>TaskService</code></td>
+<td>Reads and filters tasks by session or status</td>
+<td><code>core.parsers.tasks</code>, <code>core.models.tasks</code></td>
+</tr>
+<tr>
+<td><code>StatsService</code></td>
+<td>Computes totals, daily breakdowns, and usage trends</td>
+<td><code>core.parsers.sessions</code>, <code>core.models.stats</code></td>
+</tr>
+<tr>
+<td><code>SearchService</code></td>
+<td>Searches session metadata, message text, and prompt history</td>
+<td><code>core.parsers.sessions</code>, <code>core.parsers.history</code></td>
+</tr>
+</tbody>
+</table>
+<p>This is the layer to read first when you want to understand behavior. For example, <code>SessionService.list_sessions()</code> does not care whether the caller is the CLI or the API. It just iterates parsed sessions, filters them, sorts them, and returns summaries:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">project_path</span><span class="p">,</span> <span class="n">session</span> <span class="ow">in</span> <span class="n">get_all_sessions</span><span class="p">():</span>
+    <span class="c1"># Filter by project if specified</span>
+    <span class="k">if</span> <span class="n">project_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">decoded</span> <span class="o">=</span> <span class="n">decode_project_path</span><span class="p">(</span><span class="n">project_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">project_path</span> <span class="o">!=</span> <span class="n">decoded</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="c1"># Convert to summary</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session_to_summary</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">project_path</span><span class="p">)</span>
+
+    <span class="c1"># Filter active only</span>
+    <span class="k">if</span> <span class="n">active_only</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">summary</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="n">summaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Sort by updated_at descending (most recent first)</span>
+<span class="n">summaries</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span>
+    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">updated_at</span> <span class="ow">or</span> <span class="n">pendulum</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Apply limit</span>
+<span class="k">if</span> <span class="n">limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">summaries</span> <span class="o">=</span> <span class="n">summaries</span><span class="p">[:</span><span class="n">limit</span><span class="p">]</span>
+
+<span class="k">return</span> <span class="n">summaries</span>
+</code></pre></div>
+
+<p>That same pattern repeats across the service layer:</p>
+<ul>
+<li>search services read raw session/history data, then return compact search results</li>
+<li>stats services aggregate across all sessions</li>
+<li>project services reuse parsed sessions to compute project summaries</li>
+<li>task services convert parsed task JSON into typed <code>Task</code> objects</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Task IDs are only unique within a session. That is why single-task lookups require both a task ID and a session ID in the API and CLI.</p>
+</blockquote>
+<h2 id="the-server-package">The <code>server</code> Package</h2>
+<p>The server is a small FastAPI wrapper around the service layer. It lives in <code>src/ccsinfo/server</code> and is split into:</p>
+<ul>
+<li><code>app.py</code> for application setup</li>
+<li><code>routers/</code> for route groups:</li>
+<li><code>sessions.py</code></li>
+<li><code>projects.py</code></li>
+<li><code>tasks.py</code></li>
+<li><code>stats.py</code></li>
+<li><code>search.py</code></li>
+<li><code>health.py</code></li>
+</ul>
+<p>The route modules are intentionally thin. They validate request parameters, call the matching service, and return typed models or plain dictionaries. A sessions route looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">SessionSummary</span><span class="p">])</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_sessions</span><span class="p">(</span>
+    <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Filter by project&quot;</span><span class="p">),</span>
+    <span class="n">active_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Show only active sessions&quot;</span><span class="p">),</span>
+    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum results&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">SessionSummary</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;List all sessions.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">session_service</span><span class="o">.</span><span class="n">list_sessions</span><span class="p">(</span><span class="n">project_id</span><span class="o">=</span><span class="n">project_id</span><span class="p">,</span> <span class="n">active_only</span><span class="o">=</span><span class="n">active_only</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+</code></pre></div>
+
+<p>That same “thin router” pattern is used across the rest of <code>server/routers</code>.</p>
+<p>A few practical takeaways:</p>
+<ul>
+<li><code>/sessions</code>, <code>/projects</code>, <code>/tasks</code>, <code>/stats</code>, and <code>/search</code> mirror the project’s main user-facing concepts.</li>
+<li><code>health.py</code> adds <code>/health</code> and <code>/info</code> for health and lightweight instance metadata.</li>
+<li>The API surface is read-only in the current codebase.</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> Every route in the current repository is a <code>GET</code> endpoint. The server is designed for inspection, reporting, and remote access to Claude Code data, not for mutating it.</p>
+</blockquote>
+<h2 id="the-cli-package">The <code>cli</code> Package</h2>
+<p>The CLI is built with Typer and mirrors the same high-level concepts as the API: sessions, projects, tasks, stats, and search.</p>
+<p>The application composition is straightforward:</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Typer</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ccsinfo&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Claude Code Session Info CLI&quot;</span><span class="p">,</span>
+    <span class="n">no_args_is_help</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Add command groups</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">sessions</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sessions&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Session management&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">projects</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;projects&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Project management&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tasks&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Task management&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Statistics&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_typer</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Search&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Host to bind to (use 0.0.0.0 for network access)&quot;</span><span class="p">),</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Port to bind&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the API server.&quot;&quot;&quot;</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fastapi_app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This tells you almost everything you need to know about the CLI package:</p>
+<ul>
+<li><code>main.py</code> assembles the command tree</li>
+<li><code>commands/</code> holds one module per subject area</li>
+<li><code>serve</code> launches the same FastAPI app defined in <code>server/app.py</code></li>
+<li>presentation is handled with Rich tables, panels, and JSON helpers from <code>utils/formatters.py</code></li>
+</ul>
+<p>The command modules follow a consistent shape:</p>
+<ul>
+<li>accept Typer arguments and options</li>
+<li>call the relevant service logic</li>
+<li>render either rich terminal output or <code>--json</code></li>
+</ul>
+<p>That consistency is useful when you are learning the project. If you understand <code>sessions</code>, the <code>projects</code>, <code>tasks</code>, <code>stats</code>, and <code>search</code> command modules feel very similar.</p>
+<h2 id="the-utils-package">The <code>utils</code> Package</h2>
+<p><code>utils</code> is deliberately small, but it does important support work.</p>
+<p><code>utils.paths.py</code> is responsible for:</p>
+<ul>
+<li>locating <code>~/.claude</code></li>
+<li>finding the <code>projects</code> and <code>tasks</code> directories</li>
+<li>listing project/session/task files</li>
+<li>encoding and decoding project directory names</li>
+</ul>
+<p><code>utils.formatters.py</code> is responsible for:</p>
+<ul>
+<li>formatting timestamps and relative times</li>
+<li>creating Rich tables</li>
+<li>printing JSON cleanly</li>
+<li>showing CLI errors, warnings, and success messages</li>
+</ul>
+<p>The architectural benefit is that neither the service layer nor the parser layer needs to care about terminal presentation, and the CLI layer does not need to hard-code Claude Code path conventions.</p>
+<h2 id="the-tests-package">The <code>tests</code> Package</h2>
+<p>The test suite is focused on the layers where most behavior actually lives.</p>
+<table>
+<thead>
+<tr>
+<th>Test module</th>
+<th>What it verifies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tests/conftest.py</code></td>
+<td>reusable fixtures, including a fake <code>.claude</code> directory</td>
+</tr>
+<tr>
+<td><code>tests/test_parsers.py</code></td>
+<td>JSON/JSONL parsing behavior and malformed-line handling</td>
+</tr>
+<tr>
+<td><code>tests/test_models.py</code></td>
+<td>Pydantic models, aliases, enums, and computed properties</td>
+</tr>
+<tr>
+<td><code>tests/test_services.py</code></td>
+<td>service singletons, sorting, aggregation, and integration-style behavior</td>
+</tr>
+<tr>
+<td><code>tests/test_utils_paths.py</code></td>
+<td>Claude path discovery plus project path encode/decode rules</td>
+</tr>
+</tbody>
+</table>
+<p>One useful architectural signal is what is <em>not</em> here: most of the test coverage is below the CLI and router layer. That fits the rest of the codebase, because the CLI and server are intentionally thin and the core behavior is centralized in <code>core</code>.</p>
+<p>The repository’s main test runner is <code>tox</code>, and it drives <code>pytest</code> through <code>uv</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tox]</span>
+<span class="na">envlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">py312</span>
+<span class="na">isolated_build</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+
+<span class="k">[testenv]</span>
+<span class="na">allowlist_externals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">uv</span>
+<span class="na">commands</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">uv sync --extra dev</span>
+<span class="w">    </span><span class="na">uv run pytest -n auto {posargs</span><span class="o">:</span><span class="s">tests}</span>
+</code></pre></div>
+
+<p>Other quality tooling is configured in the root:</p>
+<ul>
+<li><code>pyproject.toml</code> defines the package entry point, strict mypy settings, Ruff settings, and pytest defaults.</li>
+<li><code>.pre-commit-config.yaml</code> runs Flake8, Ruff, MyPy, and secret-scanning hooks.</li>
+<li>There are no checked-in GitHub Actions workflow files in the current repository.</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> If you change behavior in <code>ccsinfo</code>, the best place to add tests is usually the matching parser, model, service, or utility module, because that is where the shared behavior lives.</p>
+</blockquote>
+<h2 id="how-the-pieces-fit-in-practice">How the Pieces Fit in Practice</h2>
+<p>Here is the simplest mental model for the whole project:</p>
+<ul>
+<li><code>cli</code> and <code>server</code> are the front doors.</li>
+<li><code>core.services</code> is the control room.</li>
+<li><code>core.parsers</code> knows how Claude Code stores data.</li>
+<li><code>core.models</code> defines what “good, normalized output” looks like.</li>
+<li><code>utils</code> handles filesystem conventions and terminal presentation.</li>
+<li><code>tests</code> are strongest around the shared core logic.</li>
+</ul>
+<p>If you are trying to orient yourself quickly:</p>
+<ul>
+<li>start in <code>cli</code> when you care about command names, arguments, and output formatting</li>
+<li>start in <code>server</code> when you care about route names and HTTP response shapes</li>
+<li>start in <code>core.services</code> when you care about actual behavior</li>
+<li>start in <code>core.parsers</code> when a field seems to be missing or misread from disk</li>
+<li>start in <code>utils.paths</code> when project names or paths look surprising</li>
+<li>start in <code>tests</code> when you want the shortest path to concrete examples of expected behavior</li>
+</ul>
+<p>That division is what makes <code>ccsinfo</code> easy to follow: one shared core, two thin interfaces, and a file-oriented parser layer underneath both.</p>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Overview</a></li>
+<li><a href="#">Data Model and Storage</a></li>
+<li><a href="#">Development Setup</a></li>
+<li><a href="#">Testing and Quality Checks</a></li>
+<li><a href="#">API Overview</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="overview.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Overview</span>
+                </a>
+                
+                
+                <a href="data-model-and-storage.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Data Model and Storage</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#package-map">Package Map</a></li>
+<li><a href="#high-level-architecture">High-Level Architecture</a></li>
+<li><a href="#the-data-layout-ccsinfo-expects">The Data Layout ccsinfo Expects</a><ul>
+<li><a href="#encoded-project-paths">Encoded Project Paths</a></li>
+</ul>
+</li>
+<li><a href="#the-core-package">The core Package</a><ul>
+<li><a href="#coremodels">core.models</a></li>
+<li><a href="#coreparsers">core.parsers</a></li>
+<li><a href="#coreservices">core.services</a></li>
+</ul>
+</li>
+<li><a href="#the-server-package">The server Package</a></li>
+<li><a href="#the-cli-package">The cli Package</a></li>
+<li><a href="#the-utils-package">The utils Package</a></li>
+<li><a href="#the-tests-package">The tests Package</a></li>
+<li><a href="#how-the-pieces-fit-in-practice">How the Pieces Fit in Practice</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Session Detection - ccsinfo</title>
+    <meta name="description" content="Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="alternate" type="text/plain" title="LLM Documentation Index" href="llms.txt">
+    <link rel="alternate" type="text/plain" title="LLM Full Documentation" href="llms-full.txt">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">ccsinfo</a>
+            <p class="sidebar-tagline">Inspect Claude Code sessions, tasks, prompt history, and usage statistics from a CLI or REST API.</p>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="search-input" placeholder="Search... (⌘K)" autocomplete="off" readonly>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Overview</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="overview.html"
+                           class="nav-link">
+                            Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="architecture-and-project-structure.html"
+                           class="nav-link">
+                            Architecture and Project Structure
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-model-and-storage.html"
+                           class="nav-link">
+                            Data Model and Storage
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Getting Started</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="installation.html"
+                           class="nav-link">
+                            Installation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="local-cli-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Local CLI Mode
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="remote-server-quickstart.html"
+                           class="nav-link">
+                            Quickstart: Remote Server Mode
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Configuration</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="configuration.html"
+                           class="nav-link">
+                            Configuration
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="project-ids-and-lookups.html"
+                           class="nav-link">
+                            Project IDs and Lookups
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Usage Guides</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="sessions-guide.html"
+                           class="nav-link">
+                            Working with Sessions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="projects-guide.html"
+                           class="nav-link">
+                            Working with Projects
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="tasks-guide.html"
+                           class="nav-link">
+                            Working with Tasks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="search-guide.html"
+                           class="nav-link">
+                            Searching Sessions, Messages, and History
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="statistics-guide.html"
+                           class="nav-link">
+                            Using Statistics and Trends
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="json-output-and-automation.html"
+                           class="nav-link">
+                            JSON Output and Automation
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">API Reference</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="api-overview.html"
+                           class="nav-link">
+                            API Overview
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-sessions.html"
+                           class="nav-link">
+                            Sessions API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-projects.html"
+                           class="nav-link">
+                            Projects API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-tasks.html"
+                           class="nav-link">
+                            Tasks API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-search.html"
+                           class="nav-link">
+                            Search API
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="api-stats-and-health.html"
+                           class="nav-link">
+                            Stats and Health API
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Operations</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="server-operations.html"
+                           class="nav-link">
+                            Running the Server
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="active-session-detection.html"
+                           class="nav-link active" aria-current="page">
+                            Active Session Detection
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="troubleshooting.html"
+                           class="nav-link">
+                            Troubleshooting
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-group">
+                <h3 class="nav-group-title">Development</h3>
+                <ul class="nav-group-pages">
+                    
+                    <li>
+                        <a href="development-setup.html"
+                           class="nav-link">
+                            Development Setup
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="testing-and-quality.html"
+                           class="nav-link">
+                            Testing and Quality Checks
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="automation-and-ci.html"
+                           class="nav-link">
+                            Automation and CI
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="top-bar-title">ccsinfo</a>
+            </div>
+            <div class="top-bar-spacer"></div>
+            <div class="top-bar-right">
+                <button class="top-bar-search-btn" id="search-trigger" aria-label="Search">
+                    <kbd>&#8984;K</kbd> Search
+                </button>
+                <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener" class="docsfy-badge" title="Generated with docsfy">
+                    ⚡ docs<span class="brand-accent">fy</span>
+                </a>
+                
+                <a href="https://github.com/myk-org/ccsinfo.git" target="_blank" rel="noopener noreferrer" class="top-bar-github" id="github-link" data-repo-url="https://github.com/myk-org/ccsinfo.git">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="github-stars" id="github-stars"></span>
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            
+            <article class="article">
+                <div class="article-body">
+                    <!-- SECURITY: |safe is intentional. Content is AI-generated markdown
+                         converted to HTML server-side by the markdown library, not
+                         user-supplied input. XSS risk is minimal and accepted since
+                         the AI generates the content, not end users. -->
+                    <h1 id="active-session-detection">Active Session Detection</h1>
+<p><code>ccsinfo</code> does not store a permanent "active" flag in session files. Instead, it infers activity live by matching each session's UUID against information it can discover from currently running Claude processes.</p>
+<p>In practice, that means:</p>
+<ul>
+<li>A session can be <strong>active</strong> even if it has not written a new message recently.</li>
+<li>A session can be <strong>inactive</strong> even if its JSONL file was updated recently, if the Claude process has already exited.</li>
+<li>The answer can lag briefly because <code>ccsinfo</code> keeps a short in-memory cache.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> <code>created_at</code> and <code>updated_at</code> come from timestamps inside the session file. <code>is_active</code> comes from a separate live process scan.</p>
+</blockquote>
+<h2 id="where-ccsinfo-looks">Where ccsinfo looks</h2>
+<p><code>ccsinfo</code> is built around Claude's local data under <code>~/.claude</code>. The paths are hard-coded in the project:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_claude_base_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the base Claude Code directory (~/.claude).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_projects_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the projects directory (~/.claude/projects).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;projects&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tasks_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the tasks directory (~/.claude/tasks).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_claude_base_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;tasks&quot;</span>
+</code></pre></div>
+
+<p>Those locations matter for active detection because <code>ccsinfo</code> uses both of them:</p>
+<ul>
+<li><code>~/.claude/projects/</code> for stored session JSONL files</li>
+<li><code>~/.claude/tasks/</code> as one of the places it inspects when looking at open file descriptors of running Claude processes</li>
+</ul>
+<h2 id="how-activity-is-inferred">How activity is inferred</h2>
+<p>Each parsed session asks a live detector whether its UUID is currently active:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if this session is currently active.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">is_session_active</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The detector works like this:</p>
+<ol>
+<li>Find running processes whose command line contains <code>claude</code>.</li>
+<li>For each matching PID, inspect process metadata.</li>
+<li>Extract any UUID-looking strings it can find.</li>
+<li>If one of those UUIDs matches a session ID, mark that session as active.</li>
+</ol>
+<p>Here is the core scan from the codebase:</p>
+<div class="highlight"><pre><span></span><code><span class="n">_active_sessions_cache</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_active_sessions_cache_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">_CACHE_TTL_SECONDS</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_active_session_ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all active session IDs from running Claude processes.</span>
+
+<span class="sd">    This function caches the result for a short time to avoid</span>
+<span class="sd">    repeated expensive pgrep calls.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_active_sessions_cache</span><span class="p">,</span> <span class="n">_active_sessions_cache_time</span>
+
+    <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="c1"># Return cached result if still valid</span>
+    <span class="k">if</span> <span class="n">_active_sessions_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="n">_active_sessions_cache_time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">_CACHE_TTL_SECONDS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_active_sessions_cache</span>
+
+    <span class="n">active_ids</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Use pgrep to find claude processes</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span><span class="s2">&quot;pgrep&quot;</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;claude&quot;</span><span class="p">],</span>
+            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+
+<p>And this is how UUIDs are gathered from each PID:</p>
+<div class="highlight"><pre><span></span><code>        <span class="c1"># UUID pattern for session IDs</span>
+        <span class="n">uuid_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[0-9a-f]</span><span class="si">{8}</span><span class="s2">-[0-9a-f]</span><span class="si">{4}</span><span class="s2">-[0-9a-f]</span><span class="si">{4}</span><span class="s2">-[0-9a-f]</span><span class="si">{4}</span><span class="s2">-[0-9a-f]</span><span class="si">{12}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="n">pids</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pid</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cmdline_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/proc/</span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">/cmdline&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">cmdline_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="n">cmdline</span> <span class="o">=</span> <span class="n">cmdline_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+                    <span class="c1"># Extract all UUIDs from cmdline</span>
+                    <span class="n">active_ids</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">uuid_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cmdline</span><span class="p">))</span>
+
+                <span class="c1"># Also check environment variables</span>
+                <span class="n">environ_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/proc/</span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">/environ&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">environ_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="n">environ</span> <span class="o">=</span> <span class="n">environ_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+                    <span class="n">active_ids</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">uuid_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">environ</span><span class="p">))</span>
+
+                <span class="c1"># Check file descriptors for session UUIDs</span>
+                <span class="n">fd_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/proc/</span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">/fd&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">fd_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">for</span> <span class="n">fd_link</span> <span class="ow">in</span> <span class="n">fd_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">target</span> <span class="o">=</span> <span class="n">fd_link</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+                            <span class="n">target_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+                            <span class="c1"># Look for ~/.claude/tasks/{UUID} or ~/.claude/projects/*/{UUID}.jsonl</span>
+                            <span class="k">if</span> <span class="s2">&quot;.claude/tasks/&quot;</span> <span class="ow">in</span> <span class="n">target_str</span> <span class="ow">or</span> <span class="s2">&quot;.claude/projects/&quot;</span> <span class="ow">in</span> <span class="n">target_str</span><span class="p">:</span>
+                                <span class="n">active_ids</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">uuid_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">target_str</span><span class="p">))</span>
+                        <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">PermissionError</span><span class="p">):</span>
+                            <span class="k">continue</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">PermissionError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">):</span>
+                <span class="k">continue</span>
+</code></pre></div>
+
+<p>A few important details fall out of this design:</p>
+<ul>
+<li><code>ccsinfo</code> is not guessing based on file timestamps alone.</li>
+<li>The match key is the <strong>session UUID</strong>, not the project name.</li>
+<li>The first process filter is broad (<code>pgrep -f claude</code>), but a session is only marked active after a UUID match is found.</li>
+</ul>
+<h2 id="data-flow">Data flow</h2>
+<div class="highlight"><pre><span></span><code>flowchart TD
+    A[User runs a session command or API request] --&gt; B[ccsinfo parses session JSONL files]
+    B --&gt; C[Session.is_active()]
+    C --&gt; D{Active ID cache younger than 5s?}
+    D -- Yes --&gt; E[Reuse cached set of session UUIDs]
+    D -- No --&gt; F[Run pgrep -f claude]
+    F --&gt; G[Inspect /proc/&lt;pid&gt;/cmdline]
+    G --&gt; H[Inspect /proc/&lt;pid&gt;/environ]
+    H --&gt; I[Inspect resolved /proc/&lt;pid&gt;/fd targets]
+    I --&gt; J[Extract UUIDs]
+    J --&gt; K[Store UUID set in cache]
+    E --&gt; L[Compare session UUID to active UUID set]
+    K --&gt; L
+    L --&gt; M[Expose is_active in CLI and API results]
+</code></pre></div>
+
+<h2 id="the-short-lived-cache">The short-lived cache</h2>
+<p>The active-session scan is cached in memory for <strong>5 seconds</strong>. This is one shared cache of active session IDs, not a separate cache per session.</p>
+<p>That helps in two ways:</p>
+<ul>
+<li>Listing many sessions does not run <code>pgrep</code> once per session.</li>
+<li>Repeated CLI or API calls within a few seconds stay fast.</li>
+</ul>
+<p>It also creates a few user-visible behaviors:</p>
+<ul>
+<li>A newly started or newly ended Claude session can take up to 5 seconds to show the new status.</li>
+<li>If a probe returns no active IDs, that empty result is also cached for up to 5 seconds.</li>
+<li>The <code>pgrep</code> lookup itself has a 5-second timeout, so refreshes are bounded instead of hanging indefinitely.</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> If a session just started or stopped, wait a few seconds and try again before assuming the status is wrong.</p>
+<p><strong>Note:</strong> There is no user-facing setting in the current codebase to tune the cache TTL or change the process-matching pattern. Both are hard-coded.</p>
+</blockquote>
+<h2 id="local-mode-vs-server-mode">Local mode vs server mode</h2>
+<p>The CLI can work either against local files or against a remote <code>ccsinfo</code> server. The switch is <code>--server-url</code> or <code>CCSINFO_SERVER_URL</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">server_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+    <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">&quot;--server-url&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+    <span class="n">envvar</span><span class="o">=</span><span class="s2">&quot;CCSINFO_SERVER_URL&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remote server URL (e.g., http://localhost:8080). If not set, reads local files.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>This matters for active detection:</p>
+<ul>
+<li>In local mode, <code>ccsinfo</code> checks the machine where you run the CLI.</li>
+<li>In server mode, the server performs the process scan and returns the result.</li>
+</ul>
+<blockquote>
+<p><strong>Warning:</strong> If you use <code>--server-url</code>, the <code>is_active</code> value describes the server host, not your local machine.</p>
+</blockquote>
+<h2 id="where-you-see-the-result">Where you see the result</h2>
+<p>The active flag is surfaced in both the CLI and the API.</p>
+<h3 id="cli">CLI</h3>
+<p>Use either of these commands:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>sessions<span class="w"> </span>active
+ccsinfo<span class="w"> </span>sessions<span class="w"> </span>list<span class="w"> </span>--active
+</code></pre></div>
+
+<p>If you are talking to a server instead of local files:</p>
+<div class="highlight"><pre><span></span><code>ccsinfo<span class="w"> </span>--server-url<span class="w"> </span>http://localhost:8080<span class="w"> </span>sessions<span class="w"> </span>active
+</code></pre></div>
+
+<h3 id="api">API</h3>
+<p>These routes expose active-session results:</p>
+<ul>
+<li><code>GET /sessions/active</code></li>
+<li><code>GET /sessions?active_only=true</code></li>
+<li><code>GET /projects/{project_id}/sessions/active</code></li>
+</ul>
+<h2 id="platform-specific-caveats">Platform-specific caveats</h2>
+<p><code>ccsinfo</code> currently depends on two platform behaviors:</p>
+<ul>
+<li><code>pgrep -f claude</code> must exist</li>
+<li>Linux-style <code>/proc/&lt;pid&gt;</code> inspection must be available</li>
+</ul>
+<p>That means support is best on Linux.</p>
+<blockquote>
+<p><strong>Warning:</strong> On systems without a usable <code>/proc</code> filesystem, active-session detection can fall back to reporting no active sessions.</p>
+</blockquote>
+<h3 id="linux">Linux</h3>
+<p>Linux is the best fit for the current implementation. <code>pgrep</code> and <code>/proc/&lt;pid&gt;</code> are both expected, so <code>ccsinfo</code> can inspect command lines, environments, and open file descriptors.</p>
+<h3 id="macos">macOS</h3>
+<p>macOS usually has <code>pgrep</code>, but it does not provide Linux-style <code>/proc/&lt;pid&gt;</code> files. In practice, that means <code>ccsinfo</code> may find Claude PIDs but still fail to extract session UUIDs, so active sessions can appear inactive.</p>
+<h3 id="windows">Windows</h3>
+<p>The current detector expects <code>pgrep</code> and <code>/proc</code>, so Windows does not match the implementation well. If the process scan cannot run, <code>ccsinfo</code> quietly returns an empty active-session set for that check.</p>
+<h3 id="containers-and-restricted-environments">Containers and restricted environments</h3>
+<p>Even on Linux, process visibility can be limited by PID namespaces, container boundaries, or permissions. <code>ccsinfo</code> skips unreadable PIDs and file descriptors, so the result can be partial rather than all-or-nothing.</p>
+<blockquote>
+<p><strong>Note:</strong> Detection failures are handled quietly in the current code. If <code>pgrep</code> is missing, times out, or <code>/proc</code> entries cannot be read, <code>ccsinfo</code> does not raise a user-facing error for session listings; it simply reports no matches for that probe.</p>
+</blockquote>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>If a session you expect to be active shows up as inactive, check these first:</p>
+<ol>
+<li>Wait at least 5 seconds and run the command again.</li>
+<li>Make sure you are checking the same machine that is running Claude.</li>
+<li>If you are using <code>--server-url</code> or <code>CCSINFO_SERVER_URL</code>, remember the server host is doing the detection.</li>
+<li>On macOS, Windows, or locked-down containers, the process scan may not be able to read the data it needs.</li>
+<li>If Claude's running process does not expose the session UUID in its command line, environment, or relevant open file paths, <code>ccsinfo</code> has nothing reliable to match.</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> If you want the most reliable results today, run <code>ccsinfo</code> locally on a Linux machine that is also running Claude.</p>
+</blockquote>
+<h2 id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="#">Working with Sessions</a></li>
+<li><a href="#">Sessions API</a></li>
+<li><a href="#">Quickstart: Local CLI Mode</a></li>
+<li><a href="#">Running the Server</a></li>
+<li><a href="#">Troubleshooting</a></li>
+</ul>
+                </div>
+            </article>
+            <nav class="page-nav">
+                
+                <a href="server-operations.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">Previous</span>
+                    <span class="page-nav-title">Running the Server</span>
+                </a>
+                
+                
+                <a href="troubleshooting.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next</span>
+                    <span class="page-nav-title">Troubleshooting</span>
+                </a>
+                
+            </nav>
+            
+            <aside class="toc-sidebar">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    <div class="toc">
+<ul>
+<li><a href="#where-ccsinfo-looks">Where ccsinfo looks</a></li>
+<li><a href="#how-activity-is-inferred">How activity is inferred</a></li>
+<li><a href="#data-flow">Data flow</a></li>
+<li><a href="#the-short-lived-cache">The short-lived cache</a></li>
+<li><a href="#local-mode-vs-server-mode">Local mode vs server mode</a></li>
+<li><a href="#where-you-see-the-result">Where you see the result</a><ul>
+<li><a href="#cli">CLI</a></li>
+<li><a href="#api">API</a></li>
+</ul>
+</li>
+<li><a href="#platform-specific-caveats">Platform-specific caveats</a><ul>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#containers-and-restricted-environments">Containers and restricted environments</a></li>
+</ul>
+</li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#related-pages">Related Pages</a></li>
+</ul>
+</div>
+
+                </div>
+            </aside>
+            
+
+        </main>
+
+        <footer class="page-footer">
+            
+            <span class="footer-version">Generated from version 0.1.2</span>
+            <span class="footer-sep">&middot;</span>
+            
+            Generated with <a href="https://github.com/myk-org/docsfy" target="_blank" rel="noopener">docs<span class="brand-accent">fy</span></a>
+            <span class="footer-sep">&middot;</span>
+            <span class="footer-llm">LLM-friendly: <a href="llms.txt">llms.txt</a> &middot; <a href="llms-full.txt">llms-full.txt</a></span>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script src="assets/theme.js"></script>
+    <script src="assets/search.js"></script>
+    <script src="assets/copy.js"></script>
+    <script src="assets/callouts.js"></script>
+    <script src="assets/scrollspy.js"></script>
+    <script src="assets/codelabels.js"></script>
+    <script src="assets/github.js"></script>
+    <script>
+(function() {
+    var toggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+            var expanded = sidebar.classList.contains('open');
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
+</script>
+<script>
+(function() {
+    var sidebar = document.querySelector('.sidebar-nav') || document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Restore scroll position
+    var saved = sessionStorage.getItem('sidebar-scroll');
+    if (saved) sidebar.scrollTop = parseInt(saved, 10);
+
+    // Save scroll position before navigating
+    sidebar.addEventListener('scroll', function() {
+        sessionStorage.setItem('sidebar-scroll', sidebar.scrollTop.toString());
+    });
+
+    // Also scroll active link into view if no saved position
+    if (!saved) {
+        var active = sidebar.querySelector('.nav-link.active');
+        if (active) {
+            active.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    }
+})();
+</script>
+</body>
+</html>

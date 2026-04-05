@@ -19,9 +19,14 @@ A CLI and REST API for viewing and analyzing Claude Code session data.
 ```bash
 # Install as a CLI tool
 uv tool install ccsinfo
+```
 
-# With chart support (terminal charts)
-uv tool install ccsinfo[charts]
+### Claude Code Skill
+
+To make the skill available to Claude Code, copy the `ccsinfo` folder to your skills directory:
+
+```bash
+cp -r ccsinfo ~/.claude/skills/
 ```
 
 ### From Source
@@ -362,19 +367,19 @@ curl http://localhost:8080/stats
 curl http://localhost:8080/health
 ```
 
-## Moltbot Skill
+## OpenClaw Skill
 
-A Moltbot skill is available for AI assistants to query Claude Code sessions remotely.
+An OpenClaw skill is available for AI assistants to query Claude Code sessions remotely.
 
-**Install via ClawdHub:**
+**Install via ClawHub:**
 
 ```bash
-clawdhub install ccsinfo
+clawhub install ccsinfo
 ```
 
-**Skill page:** https://clawdhub.com/myakove/ccsinfo
+**Skill page:** https://clawhub.ai/myakove/ccsinfo
 
-The skill allows AI assistants running in Moltbot to:
+The skill allows AI assistants running in OpenClaw to:
 - Query and analyze Claude Code session data via the ccsinfo REST API
 - View conversation history, tool calls, and tasks
 - Search sessions and track project statistics
@@ -384,7 +389,7 @@ The skill allows AI assistants running in Moltbot to:
 - ccsinfo server running (see Server Mode above)
 - `CCSINFO_SERVER_URL` environment variable set to your server
 
-**Example usage:** Ask your Moltbot assistant: *"Show my active Claude Code sessions"* or *"What were the recent tasks in my main project?"*
+**Example usage:** Ask your OpenClaw assistant: *"Show my active Claude Code sessions"* or *"What were the recent tasks in my main project?"*
 
 ## Development
 

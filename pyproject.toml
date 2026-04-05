@@ -50,7 +50,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "typer[all]>=0.9.0",
+  "typer>=0.9.0",
   "rich>=13.0.0",
   "orjson>=3.9.0",
   "pydantic>=2.0.0",
@@ -61,7 +61,6 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-charts = ["plotext>=5.2.0"]
 dev = [
   "pytest>=7.4.0",
   "pytest-cov>=4.1.0",
@@ -81,10 +80,6 @@ Repository = "https://github.com/myk-org/ccsinfo"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ccsinfo"]
-
-[[tool.mypy.overrides]]
-module = ["plotext.*"]
-ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = [
